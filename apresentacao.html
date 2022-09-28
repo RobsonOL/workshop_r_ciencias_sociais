@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="apresentacao_files/libs/clipboard/clipboard.min.js"></script>
+<script src="apresentacao_files/libs/quarto-html/tabby.min.js"></script>
+<script src="apresentacao_files/libs/quarto-html/popper.min.js"></script>
+<script src="apresentacao_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="apresentacao_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="apresentacao_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="apresentacao_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.637">
+
+  <meta name="author" content="Dr Robson Oliveira">
+  <title>Dados em Informações para as Ciências Sociais</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="apresentacao_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="apresentacao_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="apresentacao_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="apresentacao_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="apresentacao_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="apresentacao_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="apresentacao_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="apresentacao_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <link href="apresentacao_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+  <script src="apresentacao_files/libs/datatables-binding-0.23/datatables.js"></script>
+  <script src="apresentacao_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="apresentacao_files/libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="apresentacao_files/libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+  <script src="apresentacao_files/libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+  <link href="apresentacao_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+  <script src="apresentacao_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Dados em Informações para as Ciências Sociais</h1>
+  <p class="subtitle">Usando <strong>R</strong> na Análise Estatística</p>
+  <p class="author">Dr Robson Oliveira</p>
+  <p class="institute">IFPB</p>
+</section>
+
+<section>
+<section id="o-que-é-r" class="title-slide slide level1 center">
+<h1>O Que é R?</h1>
+
+<img data-src="img/R_logo.svg.png" width="600" class="r-stretch"></section>
+<section id="section" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+</section></section>
+<section id="o-que-vamos-apresentar" class="title-slide slide level1 center">
+<h1>O que vamos apresentar</h1>
+
+<img data-src="img/storytelling.png" width="117" class="r-stretch quarto-figure-center"></section>
+
+<section id="o-que-vamos-apresentar-1" class="title-slide slide level1 center">
+<h1>O que vamos apresentar</h1>
+
+<img data-src="img/data-science.png" width="300" class="r-stretch quarto-figure-center"></section>
+
+<section>
+<section id="pré-requisitos" class="title-slide slide level1 center">
+<h1>Pré-Requisitos</h1>
+
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div>
+<ol type="1">
+<li>Baixar e instalar <strong>R</strong> em <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a></li>
+</ol>
+</div>
+
+<img data-src="img/r_console.png" width="400" class="r-stretch quarto-figure-center"></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div>
+<ol start="2" type="1">
+<li>Instalar o RStudio: <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com</a></li>
+</ol>
+</div>
+
+<img data-src="img/rstudio.png" width="400" class="r-stretch quarto-figure-center"></section>
+<section id="section-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a><span class="co"># instalar um pacote:</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div>
+<ol start="3" type="1">
+<li>Instalar os pacotes necessários</li>
+</ol>
+</div>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href="#cb2-1"></a><span class="co"># instalar um pacote:</span></span>
+<span id="cb2-2" class="hljs-ln-code"><a href="#cb2-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb2-3" class="hljs-ln-code"><a href="#cb2-3"></a></span>
+<span id="cb2-4" class="hljs-ln-code"><a href="#cb2-4"></a><span class="co"># Só é preciso instalar um pacote uma única vez.</span></span>
+<span id="cb2-5" class="hljs-ln-code"><a href="#cb2-5"></a><span class="co"># Mas é preciso carregaro pacote sempre que iniciarmos o R:</span></span>
+<span id="cb2-6" class="hljs-ln-code"><a href="#cb2-6"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="img/tidyverse.png" width="173" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="o-básico" class="title-slide slide level1 center">
+<h1>O Básico</h1>
+
+</section>
+<section id="rodando-código-no-r" class="slide level2">
+<h2>Rodando Código no R</h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="rodando-código-no-r-1" class="slide level2">
+<h2>Rodando Código no R</h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">1</span> <span class="sc">/</span> <span class="dv">200</span> <span class="sc">*</span> <span class="dv">30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.15</code></pre>
+</div>
+</div>
+</section>
+<section id="rodando-código-no-r-2" class="slide level2">
+<h2>Rodando Código no R</h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">sqrt</span>(<span class="dv">49</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="criando-objetos-com--" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Criando objetos com <code>&lt;-</code></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb9-1" class="hljs-ln-code"><a href="#cb9-1"></a><span class="co"># podemos salvar o resultado de 3 * 4 como x</span></span>
+<span id="cb9-2" class="hljs-ln-code"><a href="#cb9-2"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="criando-objetos-com---1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Criando objetos com <code>&lt;-</code></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb10-1" class="hljs-ln-code"><a href="#cb10-1"></a><span class="co"># podemos salvar o resultado de 3 * 4 como x</span></span>
+<span id="cb10-2" class="hljs-ln-code"><a href="#cb10-2"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb10-3" class="hljs-ln-code"><a href="#cb10-3"></a></span>
+<span id="cb10-4" class="hljs-ln-code"><a href="#cb10-4"></a><span class="co"># para inspecionar o valor de `x` digitamos seu nome:</span></span>
+<span id="cb10-5" class="hljs-ln-code"><a href="#cb10-5"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+</section>
+<section id="chamando-funções" class="slide level2">
+<h2>Chamando Funções</h2>
+<p>R tem uma série de funções. Por exemplo, para criar uma sequência de números entre 1 e 10, usamos a função <code>seq()</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+</section>
+<section id="chamando-funções-1" class="slide level2">
+<h2>Chamando Funções</h2>
+<p>Sempre chamamos uma função da seguinte forma:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">nome_funcao</span>(<span class="at">argumento1 =</span> valor1, <span class="at">argumento2 =</span> valor2, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="chamando-funções-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Chamando Funções</h2>
+<p>Exemplos:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb15-1" class="hljs-ln-code"><a href="#cb15-1"></a><span class="co"># somar dois valores</span></span>
+<span id="cb15-2" class="hljs-ln-code"><a href="#cb15-2"></a><span class="fu">sum</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+</section>
+<section id="chamando-funções-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Chamando Funções</h2>
+<p>Exemplos:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># somar dois valores</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">sum</span>(<span class="dv">10</span>, <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># encontrar raiz quadrada</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">sqrt</span>(<span class="dv">49</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="criando-objetos-com---2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Criando objetos com <code>&lt;-</code></h2>
+<p>Sempre <strong>atribuimos</strong> da mesma forma:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb21-1" class="hljs-ln-code"><a href="#cb21-1"></a>nome_objeto <span class="ot">&lt;-</span> valor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="criando-objetos-com---3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Criando objetos com <code>&lt;-</code></h2>
+<p>Sempre <strong>atribuimos</strong> da mesma forma:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb22-1" class="hljs-ln-code"><a href="#cb22-1"></a>nome_objeto <span class="ot">&lt;-</span> valor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Dica: Podemos ler o código acima como “estamos salvando o valor como nome_objeto”.</p>
+</section>
+<section id="nome-de-objetos" class="slide level2">
+<h2>Nome de objetos</h2>
+<p>Nome de objetos precisam:</p>
+<ul>
+<li class="fragment"><p>Começar com letras</p></li>
+<li class="fragment"><p>Conter letras, números, <code>_</code> e <code>.</code></p></li>
+<li class="fragment"><p>Ser descritivo</p></li>
+<li class="fragment"><p>Recomendo separar palavras com <code>_</code>: <code>sequencia_entre_1_10</code></p></li>
+</ul>
+</section>
+<section id="nome-de-objetos-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Nome de objetos</h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1"></a><span class="co"># salvar a sequência de números como um objeto</span></span>
+<span id="cb23-2" class="hljs-ln-code"><a href="#cb23-2"></a>sequencia_entre_1_10 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="nome-de-objetos-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Nome de objetos</h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="#cb24-1"></a><span class="co"># salvar a sequência de números como um objeto</span></span>
+<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>sequencia_entre_1_10 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb24-3" class="hljs-ln-code"><a href="#cb24-3"></a></span>
+<span id="cb24-4" class="hljs-ln-code"><a href="#cb24-4"></a><span class="co"># somar todos os valores da sequência</span></span>
+<span id="cb24-5" class="hljs-ln-code"><a href="#cb24-5"></a><span class="fu">sum</span>(sequencia_entre_1_10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+</div>
+</section>
+<section id="banco-de-dados" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Banco de dados</h2>
+<p>Um tipo especial de objeto é o <code>data.frame</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb26-1" class="hljs-ln-code"><a href="#cb26-1"></a><span class="co"># mtcars é um banco de dados com informações de veículos:</span></span>
+<span id="cb26-2" class="hljs-ln-code"><a href="#cb26-2"></a>dados_carros <span class="ot">&lt;-</span> mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="banco-de-dados-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Banco de dados</h2>
+<p>Um tipo especial de objeto é o <code>data.frame</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb27-1" class="hljs-ln-code"><a href="#cb27-1"></a><span class="co"># mtcars é um banco de dados com informações de veículos:</span></span>
+<span id="cb27-2" class="hljs-ln-code"><a href="#cb27-2"></a>dados_carros <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb27-3" class="hljs-ln-code"><a href="#cb27-3"></a></span>
+<span id="cb27-4" class="hljs-ln-code"><a href="#cb27-4"></a><span class="co"># podemos inspecionar o data frame:</span></span>
+<span id="cb27-5" class="hljs-ln-code"><a href="#cb27-5"></a>dados_carros</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-c03d95f3f12628fa28b3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c03d95f3f12628fa28b3">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().container()).css({'font-size': '14pt'});\n}","columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="banco-de-dados-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Banco de dados</h2>
+<p>Para trabalharmos com dados no R, eles precisam estar em um formato <code>tidy</code>:</p>
+
+<img data-src="img/tidy-1.png" class="r-stretch"></section>
+<section id="exercícios" class="slide level2">
+<h2>Exercícios</h2>
+<p>Salve o 2022 como <code>ano_atual &lt;- 2022</code>, salve seu ano de nascimento como <code>ano_nascimento</code> e faça uma variável igual a <code>idade</code> como a subtração das duas.</p>
+</section></section>
+<section>
+<section id="importar-dados" class="title-slide slide level1 center">
+<h1>Importar Dados</h1>
+
+<img data-src="img/import_r.png" width="300" class="r-stretch quarto-figure-center"></section>
+<section id="section-7" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Importando dados de despesas municipais (Paraíba) usando a função <code>read_csv()</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb29-1" class="hljs-ln-code"><a href="#cb29-1"></a><span class="co"># importar o pacote</span></span>
+<span id="cb29-2" class="hljs-ln-code"><a href="#cb29-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-8" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Importando dados de despesas municipais (Paraíba) usando a função <code>read_csv()</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb30-1" class="hljs-ln-code"><a href="#cb30-1"></a><span class="co"># importar o pacote</span></span>
+<span id="cb30-2" class="hljs-ln-code"><a href="#cb30-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb30-3" class="hljs-ln-code"><a href="#cb30-3"></a></span>
+<span id="cb30-4" class="hljs-ln-code"><a href="#cb30-4"></a><span class="co"># salvar o arquivo csv como o objeto "despesas"</span></span>
+<span id="cb30-5" class="hljs-ln-code"><a href="#cb30-5"></a>despesas <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"dados/dados_despesas_paraiba.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-9" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Importando dados de despesas municipais (Paraíba) usando a função <code>read_csv()</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb31-1" class="hljs-ln-code"><a href="#cb31-1"></a><span class="co"># importar o pacote</span></span>
+<span id="cb31-2" class="hljs-ln-code"><a href="#cb31-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-3" class="hljs-ln-code"><a href="#cb31-3"></a></span>
+<span id="cb31-4" class="hljs-ln-code"><a href="#cb31-4"></a><span class="co"># salvar o arquivo csv como o objeto "despesas"</span></span>
+<span id="cb31-5" class="hljs-ln-code"><a href="#cb31-5"></a>despesas <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"dados/dados_despesas_paraiba.csv"</span>)</span>
+<span id="cb31-6" class="hljs-ln-code"><a href="#cb31-6"></a></span>
+<span id="cb31-7" class="hljs-ln-code"><a href="#cb31-7"></a><span class="co"># mostrar apenas as primeiras linhas do banco de dados:</span></span>
+<span id="cb31-8" class="hljs-ln-code"><a href="#cb31-8"></a>despesas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 355,142 × 6
+     ano municipio   conta      despesas_empenh… despesas_liquid… despesas_pagas
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+ 1  2005 Água Branca Abastecim…               0                NA             NA
+ 2  2005 Água Branca Ação Judi…               0                NA             NA
+ 3  2005 Água Branca Ação Legi…           27679.               NA             NA
+ 4  2005 Água Branca Administr…          734413.               NA             NA
+ 5  2005 Água Branca Administr…               0                NA             NA
+ 6  2005 Água Branca Administr…               0                NA             NA
+ 7  2005 Água Branca Administr…           72369.               NA             NA
+ 8  2005 Água Branca Administr…          615539.               NA             NA
+ 9  2005 Água Branca Agricultu…           98226.               NA             NA
+10  2005 Água Branca Álcool                   0                NA             NA
+# … with 355,132 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-7d8641ed2a8fc04896a1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7d8641ed2a8fc04896a1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399","400","401","402","403","404","405","406","407","408","409","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435","436","437","438","439","440","441","442","443","444","445","446","447","448","449","450","451","452","453","454","455","456","457","458","459","460","461","462","463","464","465","466","467","468","469","470","471","472","473","474","475","476","477","478","479","480","481","482","483","484","485","486","487","488","489","490","491","492","493","494","495","496","497","498","499","500","501","502","503","504","505","506","507","508","509","510","511","512","513","514","515","516","517","518","519","520","521","522","523","524","525","526","527","528","529","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","550","551","552","553","554","555","556","557","558","559","560","561","562","563","564","565","566","567","568","569","570","571","572","573","574","575","576","577","578","579","580","581","582","583","584","585","586","587","588","589","590","591","592","593","594","595","596","597","598","599","600","601","602","603","604","605","606","607","608","609","610","611","612","613","614","615","616","617","618","619","620","621","622","623","624","625","626","627","628","629","630","631","632","633","634","635","636","637","638","639","640","641","642","643","644","645","646","647","648","649","650","651","652","653","654","655","656","657","658","659","660","661","662","663","664","665","666","667","668","669","670","671","672","673","674","675","676","677","678","679","680","681","682","683","684","685","686","687","688","689","690","691","692","693","694","695","696","697","698","699","700","701","702","703","704","705","706","707","708","709","710","711","712","713","714","715","716","717","718","719","720","721","722","723","724","725","726","727","728","729","730","731","732","733","734","735","736","737","738","739","740","741","742","743","744","745","746","747","748","749","750","751","752","753","754","755","756","757","758","759","760","761","762","763","764","765","766","767","768","769","770","771","772","773","774","775","776","777","778","779","780","781","782","783","784","785","786","787","788","789","790","791","792","793","794","795","796","797","798","799","800","801","802","803","804","805","806","807","808","809","810","811","812","813","814","815","816","817","818","819","820","821","822","823","824","825","826","827","828","829","830","831","832","833","834","835","836","837","838","839","840","841","842","843","844","845","846","847","848","849","850","851","852","853","854","855","856","857","858","859","860","861","862","863","864","865","866","867","868","869","870","871","872","873","874","875","876","877","878","879","880","881","882","883","884","885","886","887","888","889","890","891","892","893","894","895","896","897","898","899","900","901","902","903","904","905","906","907","908","909","910","911","912","913","914","915","916","917","918","919","920","921","922","923","924","925","926","927","928","929","930","931","932","933","934","935","936","937","938","939","940","941","942","943","944","945","946","947","948","949","950","951","952","953","954","955","956","957","958","959","960","961","962","963","964","965","966","967","968","969","970","971","972","973","974","975","976","977","978","979","980","981","982","983","984","985","986","987","988","989","990","991","992","993","994","995","996","997","998","999","1000"],[2009,2008,2011,2012,2005,2007,2010,2010,2010,2011,2005,2009,2010,2005,2010,2005,2011,2016,2008,2012,2010,2008,2010,2006,2008,2008,2007,2007,2008,2012,2011,2008,2007,2006,2012,2006,2019,2010,2009,2006,2007,2007,2009,2007,2006,2007,2008,2011,2007,2010,2006,2008,2005,2018,2010,2005,2013,2008,2008,2018,2010,2008,2009,2018,2008,2012,2006,2012,2006,2005,2011,2010,2007,2007,2013,2006,2014,2012,2019,2016,2010,2007,2012,2018,2011,2008,2007,2007,2006,2007,2009,2007,2017,2007,2012,2017,2011,2009,2008,2005,2006,2010,2016,2009,2007,2013,2012,2005,2006,2009,2011,2006,2012,2005,2012,2011,2008,2006,2006,2006,2012,2006,2009,2009,2012,2007,2005,2019,2009,2008,2008,2008,2006,2012,2007,2006,2005,2009,2010,2011,2009,2005,2010,2012,2005,2006,2008,2016,2010,2018,2010,2009,2012,2010,2016,2008,2019,2006,2006,2007,2005,2012,2010,2007,2012,2019,2008,2009,2010,2007,2011,2005,2010,2005,2007,2005,2010,2011,2005,2019,2009,2012,2010,2017,2007,2011,2014,2020,2009,2020,2007,2009,2007,2009,2010,2011,2005,2016,2012,2010,2006,2011,2009,2006,2006,2008,2012,2007,2016,2007,2005,2006,2011,2008,2019,2006,2005,2006,2010,2018,2012,2012,2015,2012,2011,2008,2009,2005,2017,2011,2010,2014,2010,2020,2009,2014,2006,2009,2006,2007,2005,2012,2015,2010,2012,2010,2010,2005,2009,2011,2007,2005,2006,2007,2006,2020,2011,2012,2011,2006,2010,2005,2017,2017,2012,2008,2010,2011,2006,2018,2019,2011,2012,2015,2006,2012,2010,2020,2010,2006,2012,2009,2011,2010,2005,2008,2019,2006,2010,2007,2017,2018,2006,2010,2007,2005,2012,2007,2020,2005,2009,2008,2008,2006,2018,2009,2013,2012,2005,2007,2012,2006,2011,2012,2008,2007,2006,2015,2012,2005,2012,2005,2008,2006,2019,2007,2008,2009,2010,2012,2006,2010,2012,2007,2011,2009,2010,2010,2018,2011,2005,2010,2013,2008,2010,2010,2012,2019,2018,2012,2008,2005,2007,2012,2005,2007,2008,2010,2012,2008,2008,2011,2005,2008,2005,2007,2005,2007,2005,2006,2006,2016,2006,2007,2008,2013,2007,2008,2005,2007,2005,2010,2006,2006,2011,2006,2018,2011,2011,2019,2005,2008,2011,2010,2007,2019,2008,2006,2007,2010,2006,2007,2008,2007,2019,2010,2008,2017,2008,2018,2005,2019,2007,2010,2008,2009,2010,2017,2020,2012,2012,2015,2009,2011,2007,2010,2019,2006,2012,2009,2011,2005,2005,2005,2011,2016,2015,2020,2007,2007,2012,2005,2007,2007,2012,2012,2011,2006,2006,2006,2013,2010,2008,2013,2014,2020,2007,2012,2007,2008,2009,2010,2019,2006,2012,2008,2006,2006,2016,2007,2015,2014,2010,2013,2006,2009,2012,2006,2012,2006,2009,2016,2009,2009,2008,2008,2009,2011,2012,2012,2007,2014,2005,2009,2011,2006,2016,2011,2013,2017,2008,2008,2005,2013,2020,2006,2018,2005,2016,2016,2007,2009,2008,2009,2008,2012,2006,2008,2010,2009,2010,2008,2008,2015,2007,2013,2012,2012,2009,2005,2009,2012,2009,2011,2010,2006,2014,2011,2018,2006,2007,2006,2007,2008,2006,2007,2011,2017,2011,2005,2014,2010,2012,2007,2009,2007,2012,2017,2012,2006,2005,2010,2007,2012,2009,2018,2010,2012,2009,2009,2007,2009,2006,2012,2010,2007,2012,2005,2015,2009,2005,2008,2010,2012,2008,2008,2008,2011,2008,2020,2009,2016,2005,2008,2007,2012,2008,2011,2005,2009,2010,2019,2007,2010,2013,2010,2010,2006,2008,2009,2005,2010,2006,2009,2005,2020,2005,2005,2011,2010,2007,2009,2005,2008,2005,2012,2005,2005,2009,2005,2011,2011,2005,2007,2013,2009,2008,2008,2006,2005,2017,2012,2010,2011,2005,2010,2011,2018,2010,2014,2005,2009,2009,2017,2006,2016,2012,2008,2012,2006,2008,2007,2011,2011,2008,2011,2012,2010,2020,2008,2005,2012,2012,2006,2009,2006,2012,2019,2019,2006,2005,2020,2008,2011,2006,2007,2012,2006,2019,2020,2010,2010,2017,2006,2005,2012,2007,2008,2008,2006,2011,2010,2010,2009,2010,2010,2005,2006,2018,2012,2017,2007,2010,2008,2007,2019,2010,2009,2012,2011,2005,2006,2009,2012,2014,2018,2016,2008,2014,2008,2010,2012,2011,2006,2007,2005,2009,2005,2010,2016,2016,2008,2013,2009,2009,2005,2017,2011,2016,2009,2011,2008,2012,2018,2006,2017,2008,2018,2020,2011,2006,2006,2014,2006,2013,2009,2009,2012,2006,2009,2006,2005,2008,2007,2016,2012,2005,2017,2006,2006,2015,2011,2008,2012,2012,2008,2006,2017,2008,2013,2008,2010,2008,2010,2009,2009,2006,2008,2006,2007,2008,2011,2012,2006,2010,2005,2008,2008,2015,2012,2010,2016,2009,2011,2010,2007,2006,2011,2005,2011,2008,2005,2010,2010,2009,2008,2009,2013,2010,2012,2010,2008,2007,2011,2011,2006,2012,2012,2009,2018,2018,2009,2006,2009,2010,2005,2009,2015,2007,2014,2008,2005,2011,2011,2010,2011,2007,2007,2006,2013,2015,2005,2009,2006,2013,2015,2009,2009,2015,2006,2013,2008,2008,2008,2007,2008,2010,2009,2005,2015,2008,2009,2017,2008,2012,2011,2009,2005,2012,2006,2010,2010,2014,2007,2009,2007,2009,2009,2009,2011,2012,2018,2007,2012,2014,2011,2006,2009,2015,2006,2009,2009,2010,2007,2009,2012,2009,2010,2008,2009,2008,2015,2009,2009,2012,2005,2020,2005,2012,2018,2010,2009,2009,2020,2007,2010,2007,2011,2016,2010,2008,2011,2016,2005,2017,2010,2006,2016,2010,2008,2019,2005,2011,2010,2008,2014,2012,2009,2006,2007,2016,2008,2006,2011,2005,2007,2010,2006,2015,2007,2009,2014,2014,2007,2017,2011,2005,2014,2006,2013,2009,2009,2018,2020,2012,2009,2015,2005,2014,2007,2012,2012,2012,2018,2009,2006,2009,2007,2018,2008],["Areial","Soledade","Capim","Manaíra","Pedras de Fogo","Cruz do Espírito Santo","São Sebastião de Lagoa de Roça","Ingá","Brejo do Cruz","Olivedos","Paulista","Congo","Mãe d'Água","Aparecida","Sossêgo","Brejo dos Santos","Matinhas","Itapororoca","São Sebastião de Lagoa de Roça","São José dos Cordeiros","Belém do Brejo do Cruz","Uiraúna","Cuitegi","Catolé do Rocha","Pedras de Fogo","Conceição","Capim","Carrapateira","Curral de Cima","Casserengue","Baraúna","Caturité","Sossêgo","Nova Olinda","Nova Olinda","Arara","São José dos Ramos","Mogeiro","Emas","Barra de São Miguel","Puxinanã","Mataraca","Riacho de Santo Antônio","Santa Helena","Imaculada","São Sebastião de Lagoa de Roça","São João do Tigre","Serra Branca","Puxinanã","Bom Sucesso","Bananeiras","Alagoinha","Pedras de Fogo","Curral de Cima","Santa Teresinha","Várzea","Areial","Umbuzeiro","Gurinhém","Dona Inês","Juripiranga","Montadas","Zabelê","Taperoá","Serra da Raiz","Prata","Salgadinho","São Domingos","Princesa Isabel","Pocinhos","Cacimba de Areia","João Pessoa","Belém","Cacimbas","Gurinhém","Bananeiras","Juripiranga","Itapororoca","Alagoa Grande","Pirpirituba","Fagundes","Cajazeiras","Duas Estradas","Lucena","Araçagi","Itabaiana","Santo André","Caraúbas","Pocinhos","Mataraca","Sossêgo","Belém","São José dos Ramos","Jericó","Pedra Branca","São José do Sabugi","Zabelê","Picuí","Nova Floresta","Algodão de Jandaíra","Bananeiras","Bernardino Batista","Santa Luzia","Barra de São Miguel","Sobrado","Pirpirituba","Desterro","Aparecida","Duas Estradas","Barra de São Miguel","São João do Tigre","Riachão do Bacamarte","Bom Sucesso","Camalaú","Uiraúna","Olivedos","Nazarezinho","Igaracy","Alagoa Nova","Barra de Santa Rosa","Remígio","Pedro Régis","Brejo do Cruz","Serra da Raiz","Patos","Sobrado","Dona Inês","Solânea","Marizópolis","Pombal","Umbuzeiro","Juazeirinho","Baraúna","Algodão de Jandaíra","Lagoa de Dentro","Mulungu","Prata","Brejo do Cruz","Picuí","Caaporã","Mãe d'Água","Pedro Régis","Carrapateira","Sapé","Araçagi","Pilar","Marizópolis","Pedras de Fogo","Vieirópolis","Algodão de Jandaíra","Itapororoca","Juru","Parari","Igaracy","Borborema","Várzea","Belém do Brejo do Cruz","São Sebastião de Lagoa de Roça","Cuitegi","Pirpirituba","Assunção","Diamante","Umbuzeiro","Olivedos","Cruz do Espírito Santo","Maturéia","Alagoinha","Livramento","Juarez Távora","Boqueirão","Caraúbas","Areia de Baraúnas","São Vicente do Seridó","Água Branca","Baía da Traição","Boqueirão","Itapororoca","São José do Brejo do Cruz","Coremas","São José de Piranhas","Teixeira","Cuité de Mamanguape","Aguiar","Piancó","Brejo do Cruz","Sertãozinho","Monte Horebe","Guarabira","Coremas","Joca Claudino","Santa Teresinha","Serraria","Santa Cecília","Puxinanã","Natuba","Umbuzeiro","Remígio","Alagoa Nova","Santa Rita","Ibiara","Juarez Távora","Nova Floresta","Mulungu","Pedras de Fogo","Santo André","Umbuzeiro","Imaculada","Curral Velho","Manaíra","Cachoeira dos Índios","Lucena","Conceição","Cubati","Matinhas","Juazeirinho","Pilões","Barra de Santana","Damião","Malta","Pedro Régis","Mato Grosso","Esperança","Serra Redonda","Vista Serrana","Alagoinha","Pombal","Poço de José de Moura","Itaporanga","Arara","Frei Martinho","Lucena","Massaranduba","São Bentinho","Juru","Brejo dos Santos","Brejo dos Santos","Juazeirinho","São José de Espinharas","Puxinanã","São João do Cariri","Teixeira","Riacho dos Cavalos","Teixeira","Sobrado","São Bentinho","São Sebastião do Umbuzeiro","São Miguel de Taipu","Borborema","Santa Luzia","Alcantil","Capim","Pilar","Bonito de Santa Fé","João Pessoa","Alagoa Nova","Santa Rita","Mulungu","Santa Rita","Juru","Barra de Santa Rosa","São José de Espinharas","São Mamede","São Domingos do Cariri","Cacimba de Areia","Cabaceiras","Rio Tinto","Juarez Távora","Mãe d'Água","Lagoa","Logradouro","Aguiar","São José de Princesa","Barra de Santa Rosa","Cuitegi","Santa Luzia","Guarabira","Boa Ventura","Aparecida","Caturité","Gado Bravo","Bonito de Santa Fé","São Mamede","Catolé do Rocha","Juazeirinho","Logradouro","Duas Estradas","Nova Palmeira","Boa Vista","Cachoeira dos Índios","São José do Sabugi","São João do Rio do Peixe","João Pessoa","Areial","Caturité","Algodão de Jandaíra","Brejo dos Santos","Pedra Lavrada","Alagoinha","Pocinhos","Catolé do Rocha","Bernardino Batista","Assunção","Araçagi","Assunção","Curral Velho","Sossêgo","Malta","Maturéia","Imaculada","São José de Caiana","Brejo do Cruz","Emas","Campina Grande","Gurjão","Araruna","Barra de Santana","Jacaraú","Poço de José de Moura","São Sebastião de Lagoa de Roça","Areia de Baraúnas","Duas Estradas","São Bento","Poço de José de Moura","Aguiar","Cachoeira dos Índios","Igaracy","Santa Luzia","Sertãozinho","Princesa Isabel","Itatuba","Santa Teresinha","Caaporã","São Bento","Frei Martinho","São José de Caiana","Caaporã","Aparecida","Bernardino Batista","Alagoa Grande","Umbuzeiro","Passagem","São Bento","Barra de São Miguel","Santa Luzia","Serra Grande","Areia de Baraúnas","Juru","Imaculada","Pocinhos","Ibiara","Dona Inês","Borborema","São Domingos do Cariri","São José de Espinharas","Lagoa de Dentro","Quixabá","Curral de Cima","Barra de Santana","Riacho de Santo Antônio","Patos","Riachão do Poço","Princesa Isabel","São Mamede","São José da Lagoa Tapada","Coremas","Bonito de Santa Fé","Olivedos","Dona Inês","Aroeiras","Boqueirão","Barra de Santa Rosa","Puxinanã","Taperoá","Prata","Brejo do Cruz","Bernardino Batista","Lastro","Pedro Régis","Aguiar","Olho d'Água","Vista Serrana","São João do Rio do Peixe","Tenório","Amparo","Campina Grande","São Domingos do Cariri","Assunção","Juripiranga","Sobrado","Solânea","Cachoeira dos Índios","Água Branca","Condado","Coxixola","Duas Estradas","São João do Rio do Peixe","Bernardino Batista","Salgado de São Félix","Pedra Branca","Araçagi","Malta","Amparo","Campina Grande","Duas Estradas","Emas","Juripiranga","São José de Espinharas","Aparecida","Poço de José de Moura","Damião","Serra Grande","Matinhas","Santa Luzia","Serra Grande","São João do Cariri","Imaculada","Cabedelo","Dona Inês","Monte Horebe","Pedra Branca","Mamanguape","Serraria","Guarabira","Esperança","Juazeirinho","Junco do Seridó","Nazarezinho","Conde","Zabelê","Serraria","Cajazeiras","São José dos Cordeiros","Vista Serrana","Diamante","Santana dos Garrotes","Brejo do Cruz","Curral de Cima","Serra Redonda","Joca Claudino","São José de Espinharas","Pocinhos","Areia de Baraúnas","Santa Cecília","Boa Vista","São João do Tigre","Prata","Boa Ventura","Aguiar","Parari","Pedra Lavrada","Barra de Santana","Parari","Congo","Pilões","Emas","Puxinanã","Cuité","Monte Horebe","Cruz do Espírito Santo","Marcação","Igaracy","Santa Rita","Belém do Brejo do Cruz","Bom Jesus","Dona Inês","Marcação","Areia","Pitimbu","Borborema","Mamanguape","Condado","Baraúna","Junco do Seridó","Imaculada","Passagem","Remígio","Gurjão","Santa Cecília","Pedra Branca","Sumé","Ingá","Condado","Barra de São Miguel","São Sebastião de Lagoa de Roça","Olivedos","Taperoá","São José dos Ramos","Olivedos","Itabaiana","São João do Rio do Peixe","Arara","Picuí","São Domingos","São José de Princesa","Amparo","Pedra Lavrada","Prata","Caraúbas","Arara","Triunfo","São Vicente do Seridó","Bonito de Santa Fé","São José de Princesa","Coxixola","Alagoinha","Marcação","Monte Horebe","Lagoa de Dentro","Bernardino Batista","Diamante","Santa Inês","Riacho de Santo Antônio","Curral Velho","Pocinhos","Fagundes","São José de Princesa","Esperança","Vieirópolis","Arara","Cuité de Mamanguape","Serra Grande","Juarez Távora","Condado","São Mamede","Nova Olinda","Conceição","São José da Lagoa Tapada","Duas Estradas","Cacimbas","Itapororoca","Sossêgo","Teixeira","Riacho de Santo Antônio","Vieirópolis","São Domingos do Cariri","Imaculada","Itapororoca","Algodão de Jandaíra","Sousa","Prata","Pirpirituba","Vista Serrana","Caldas Brandão","Alagoa Nova","Mogeiro","Salgadinho","Sapé","Lastro","São José de Princesa","Sousa","Tavares","Matinhas","Campina Grande","Solânea","Emas","Nova Floresta","Alhandra","São Mamede","Lastro","Baía da Traição","Araruna","Frei Martinho","São João do Tigre","Marcação","Gurjão","Bonito de Santa Fé","São Domingos do Cariri","Fagundes","Juru","Princesa Isabel","São Bentinho","Frei Martinho","Lagoa Seca","Borborema","São João do Tigre","São Mamede","Jacaraú","Itaporanga","Riacho dos Cavalos","Santana de Mangueira","Alhandra","São João do Rio do Peixe","Bayeux","Várzea","Arara","Sousa","Serra Branca","Damião","Borborema","Baraúna","Riacho de Santo Antônio","Casserengue","São José de Caiana","Baraúna","Aguiar","Ibiara","Caaporã","Olivedos","Nova Floresta","Olivedos","Parari","Lucena","Jacaraú","Cubati","Serra Redonda","Juripiranga","Junco do Seridó","Sousa","Poço Dantas","São Sebastião de Lagoa de Roça","Pedra Lavrada","São José de Espinharas","São Bento","Imaculada","Mãe d'Água","Rio Tinto","Malta","Condado","Juripiranga","Bonito de Santa Fé","Bananeiras","Alagoinha","Cuitegi","Casserengue","Juru","Mãe d'Água","São José de Piranhas","Massaranduba","Vista Serrana","São José do Bonfim","Nova Palmeira","Gurinhém","São José de Espinharas","Boa Vista","Campina Grande","São José da Lagoa Tapada","São João do Rio do Peixe","São Domingos","Gurjão","Olivedos","Araruna","Prata","Quixabá","Lucena","Pilões","Araçagi","São José de Princesa","Itatuba","Serra Redonda","Itatuba","Algodão de Jandaíra","Princesa Isabel","Baraúna","Imaculada","Bonito de Santa Fé","Bom Sucesso","Santa Rita","Salgado de São Félix","Marcação","Carrapateira","Santana de Mangueira","Pirpirituba","Arara","Santana dos Garrotes","Igaracy","Riachão do Poço","Nova Floresta","Fagundes","Rio Tinto","Piancó","Diamante","Barra de Santa Rosa","Nazarezinho","Arara","Baía da Traição","Alhandra","Cajazeiras","Tavares","Duas Estradas","Itabaiana","Brejo dos Santos","Passagem","Santa Luzia","Alagoinha","Ibiara","Natuba","Umbuzeiro","Amparo","Monteiro","Jericó","Belém","Água Branca","Manaíra","São Domingos","Serra Redonda","Nova Olinda","Solânea","Duas Estradas","Vista Serrana","Brejo do Cruz","Junco do Seridó","Arara","Algodão de Jandaíra","Conceição","São José de Piranhas","Nazarezinho","Assunção","Sumé","Gado Bravo","Conceição","Manaíra","Cajazeirinhas","Cajazeiras","Alhandra","Araçagi","Areia de Baraúnas","Cuité de Mamanguape","Soledade","Borborema","Água Branca","São Vicente do Seridó","Congo","São Domingos","Taperoá","Pedro Régis","Poço de José de Moura","Serra da Raiz","São Domingos","Cacimba de Dentro","Araruna","Livramento","Prata","Riachão","Caraúbas","Umbuzeiro","Santa Teresinha","Serra Branca","Cacimba de Areia","Marizópolis","Lagoa Seca","Catingueira","Pitimbu","Bonito de Santa Fé","Mato Grosso","São João do Cariri","Cajazeiras","Logradouro","Itaporanga","Junco do Seridó","Zabelê","Coxixola","Itabaiana","Pirpirituba","São Miguel de Taipu","Caraúbas","Borborema","Maturéia","Ibiara","Condado","Arara","Algodão de Jandaíra","Pombal","São Francisco","Caldas Brandão","Itabaiana","São Bento","Pombal","Itaporanga","Quixabá","São José de Piranhas","Congo","Serra Redonda","Caiçara","Congo","Cuitegi","Cacimba de Areia","Araruna","Brejo dos Santos","Pedro Régis","Lagoa","Mato Grosso","Camalaú","Pedras de Fogo","Cacimba de Dentro","Caraúbas","Nova Palmeira","Santa Cecília","Montadas","Aguiar","Tavares","São Sebastião de Lagoa de Roça","Aroeiras","Cruz do Espírito Santo","Alhandra","Congo","Várzea","Sousa","Salgadinho","Bernardino Batista","Barra de Santana","Caraúbas","Bonito de Santa Fé","Cruz do Espírito Santo","Coremas","São Domingos do Cariri","Areia","Boa Ventura","Conceição","Boa Vista","Marcação","Caiçara","Alagoa Grande","Cacimba de Dentro","Juazeirinho","Itapororoca","Santa Cruz","Alcantil","Caaporã","Jericó","Junco do Seridó","São José da Lagoa Tapada","Caiçara","Santo André","Caldas Brandão","Coremas","Juripiranga","Monte Horebe","Cabaceiras","Alagoa Nova","Rio Tinto","Caaporã","Pedras de Fogo","São Miguel de Taipu","Juarez Távora","Água Branca","Bom Sucesso","Olivedos","Maturéia","Boa Ventura","Dona Inês","Curral Velho","Malta","Esperança","São João do Tigre","Casserengue","Esperança","Taperoá","Bernardino Batista","Santa Cruz","São Mamede","Brejo dos Santos","Jacaraú","Cuité","Sertãozinho","Borborema","São José do Bonfim","São José da Lagoa Tapada","Pirpirituba","Congo","Uiraúna","São Domingos do Cariri","Juru","Boa Ventura","São Domingos do Cariri","Borborema","Itabaiana","São José da Lagoa Tapada","Juripiranga","Mamanguape","Campina Grande","Bernardino Batista","São José dos Ramos","Congo","Monteiro","Nova Olinda","São João do Tigre","Olho d'Água","Amparo","Triunfo","Lagoa","São Bento","Condado","Maturéia","São Vicente do Seridó","Logradouro","Bayeux","Joca Claudino","Itabaiana","Belém","Pedra Branca","Tacima","Salgadinho","Aparecida","Curral Velho","Serra da Raiz","Carrapateira","Ibiara","Cacimbas","Lastro","Santa Teresinha","Coxixola","Imaculada","Soledade","Santa Cruz","São José dos Ramos","São José de Princesa","Lagoa","São Sebastião do Umbuzeiro","Maturéia","Santa Cruz","Boa Vista","Passagem","Uiraúna","Gurjão","Areia","Juarez Távora","Brejo do Cruz","Nova Palmeira","Lagoa Seca","Imaculada","Ibiara","Pedra Branca","São José do Brejo do Cruz","Santa Teresinha","Cajazeiras","Brejo dos Santos","Logradouro","Pilões","Guarabira","Tacima","Água Branca","São José de Piranhas","Itapororoca","Gurinhém","Lagoa","São José dos Cordeiros","São José do Sabugi","Bom Sucesso","Serraria","Itapororoca","Manaíra","Araruna","Santana dos Garrotes","Riachão do Bacamarte","Lagoa","Picuí","Arara","Coremas","Prata","Soledade","São João do Rio do Peixe","Assunção","Maturéia","Serraria","Santa Cruz","Esperança","Itabaiana","Catingueira","João Pessoa","Assunção","Pirpirituba","Carrapateira","Frei Martinho","Bom Jesus","Santa Inês","Curral Velho","Ibiara","Alhandra","Santa Cecília","Mamanguape","São Francisco","São Sebastião de Lagoa de Roça","Sapé","Duas Estradas","Esperança","Monteiro","Mari","Cabedelo","Emas","São João do Cariri","Ibiara","Santa Luzia","Cabaceiras","Conceição","Teixeira","Belém do Brejo do Cruz","Nova Olinda","Pilõezinhos","São João do Tigre","São José dos Ramos","Maturéia","Salgado de São Félix","Mogeiro","Sousa","Queimadas","Pedra Branca","Cabaceiras","Santa Luzia","Algodão de Jandaíra","Alhandra"],["Demais Subfunções 16","Patrimônio Cultural","Defesa da Ordem Jurídica","Educação Especial","Refinanciamento da Dívida Externa","Desporto Comunitário","Empregabilidade","Ensino Profissional","Serviços Financeiros","Demais Subfunções 17","Demais Subfunções 2","Organização Agrária","Trabalho","Habitação Urbana","Ensino Superior","Comunicações Postais","Administração Financeira","Promoção da Produção Agropecuária","Policiamento","Recursos Hídricos","Controle Ambiental","Atenção Básica","Colonização","Administração Geral","Demais Subfunções 5","Assistência Social","Vigilância Epidemiológica","Ação Judiciária","Demais Subfunções 23","Proteção ao Trabalhador","Informação e Inteligência","Saneamento Básico Rural","Demais Subfunções 27","Ensino Profissional","Habitação","Demais Subfunções 2","Previdência do Regime Estatutário","Demais Subfunções 15","Abastecimento","Encargos Especiais","Difusão Cultural","Administração de Receitas","Outros Encargos Especiais","Representação Juridica","Previdência Especial","Extensão Rural","Desenvolvimento Tecnológico","Administração de Receitas","Patrimônio Cultural","Energia","Desporto Comunitário","Desenvolvimento Científico","Comunicação Social","Administração Financeira","Controle Ambiental","Demais Subfunções 5","Administração","Difusão Cultural","Demais Subfunções 6","Segurança Pública","Total Geral da Despesa por Função","Desenvolvimento Científico","Policiamento","FU01 - Demais Subfunções","Desporto de Rendimento","Desenvolvimento Tecnológico","Ensino Profissional","Demais Subfunções 13","Colonização","Urbanismo","Planejamento e Orçamento","Mineração","Administração de Receitas","Ensino Fundamental","Educação","Promoção da Produção Vegetal","Assistência Social","Vigilância Epidemiológica","Educação","Desporto e Lazer","Demais Subfunções 2","Demais Subfunções 27","Promoção Industrial","Educação Infantil","Tecnologia da Informação","Habitação Urbana","Transporte Aéreo","Serviços Financeiros","Assistência Comunitária","Ciência e Tecnologia","Colonização","Cultura","Educação Infantil","Defesa da Ordem Jurídica","Demais Subfunções 4","Saúde","Meteorologia","Empregabilidade","Irrigação","Defesa Civil","Recursos Hídricos","Refinanciamento da Dívida Interna","Assistência Hospitalar e Ambulatorial","Habitação Rural","Álcool","Demais Subfunções Agricultura","Defesa Civil","Demais Subfunções 3","Difusão do Conhecimento Científico","Ensino Profissional","Defesa Sanitária Vegetal","Controle Externo","Urbanismo","Formação de Recursos Humanos","Ação Judiciária","Proteção ao Trabalhador","Planejamento e Orçamento","Relações Diplomáticas","Informação e Inteligência","Comunicações Postais","Demais Subfunções 25","Previdência Social","Previdência do Regime Estatutário","Demais Subfunções 18","Colonização","Saúde","Refinanciamento da Dívida Externa","Educação de Jovens e Adultos","Controle Externo","Infra-Estrutura Urbana","Administração","Demais Subfunções 19","Demais Subfunções 22","Ensino Médio","Despesas por Função","Comunicações","Transporte Ferroviário","Administração Geral","Administração Financeira","Defesa Terrestre","Lazer","Demais Subfunções 17","Defesa Civil","Relações Diplomáticas","Essencial à Justiça","Desporto de Rendimento","Ciência e Tecnologia","Transporte","Transportes Especiais","Administração Geral","Mineração","Defesa do Interesse Público","Lazer","Direitos da Cidadania","Cultura","Demais Subfunções 23","Promoção da Produção Agropecuária","Representação Juridica","Formação de Recursos Humanos","Urbanismo","Ação Judiciária","Relações de Trabalho","Demais Subfunções 11","Habitação Urbana","Cooperação Internacional","Transporte","Administração Geral","Defesa Sanitária Vegetal","Ação Legislativa","Atenção Básica","Administração de Receitas","Previdência Social","Irrigação","Colonização","Difusão do Conhecimento Científico","Proteção ao Trabalhador","Demais Subfunções 21","Administração","Organização Agrária","Vigilância Epidemiológica","Patrimônio Cultural","Ensino Profissional","Gestão Ambiental","FU04 - Demais Subfunções","Normatização e Fiscalização","Habitação","Ação Legislativa","Assistência à Criança e ao Adolescente","Defesa da Ordem Jurídica","Vigilância Sanitária","Desporto Comunitário","Habitação Rural","Relações de Trabalho","Outros Encargos Especiais","Comércio Exterior","Demais Subfunções 4","Refinanciamento da Dívida Interna","Educação Infantil","Energia Elétrica","Proteção ao Trabalhador","Difusão Cultural","Formação de Recursos Humanos","Transferências","Previdência Complementar","Ensino Médio","Gestão Ambiental","Demais Subfunções 25","Assistência Social","Trabalho","Normatização e Fiscalização","Demais Subfunções 18","Transferências","Educação","Demais Subfunções 14","Assistência Hospitalar e Ambulatorial","Judiciária","Previdência do Regime Estatutário","Defesa Terrestre","Comércio Exterior","Urbanismo","Meteorologia","Custódia e Reintegração Social","Assistência Hospitalar e Ambulatorial","Cultura","Abastecimento","Vigilância Sanitária","Demais Subfunções 26","Desporto e Lazer","Desporto Comunitário","Policiamento","Comunicação Social","Demais Subfunções Educação","Turismo","Serviços Urbanos","Promoção da Produção Animal","Serviços Urbanos","Difusão Cultural","Transporte Hidroviário","Informação e Inteligência","Demais Subfunções 8","Demais Subfunções 12","Extensão Rural","Demais Subfunções Comunicações","Suporte Profilático","Defesa Civil","Representação Juridica","Álcool","Direitos Humanos","Administração de Concessões","Defesa Naval","Promoção da Produção Vegetal","Administração de Concessões","Demais Subfunções 7","Relações Exteriores","Outros Encargos Especiais","Preservação e Conservação Ambiental","Despesas por Função","Habitação Rural","Infra-Estrutura Urbana","Serviços Financeiros","Extensão Rural","Demais Subfunções 24","Agricultura","Urbanismo","Demais Subfunções 24","Transferências","Demais Subfunções 13","Refinanciamento da Dívida Externa","Transferências","FU08 - Demais Subfunções","Atenção Básica","Administração de Receitas","Energia Elétrica","Ação Legislativa","Relações Diplomáticas","Administração Financeira","Recuperação Areas Degradadas","Saúde","Previdência do Regime Estatutário","Normatização e Fiscalização","Administração","Comunicações","Transporte Rodoviário","Trabalho","Assistência ao Idoso","Ciência e Tecnologia","Difusão Cultural","Defesa do Interesse Público","Comércio e Serviços","Saneamento","Vigilância Sanitária","Encargos Especiais","Vigilância Epidemiológica","Demais Subfunções 9","Lazer","Transporte Rodoviário","Administração de Receitas","Comunicações Postais","Desporto e Lazer","Alimentação e Nutrição","Alimentação e Nutrição","Previdência do Regime Estatutário","Organização Agrária","Comunicações Postais","Ensino Fundamental","Formação de Recursos Humanos","Demais Subfunções Educação","Legislativa","Demais Subfunções 2","Demais Subfunções 13","Cultura","Proteção ao Trabalhador","Habitação Rural","Ensino Superior","Formação de Recursos Humanos","Saneamento Básico Rural","Administração de Concessões","Saúde","Ensino Profissional","Refinanciamento da Dívida Externa","Planejamento e Orçamento","Demais Subfunções 20","Educação Especial","Serviço da Dívida Externa","Infraestrutura Urbana","Demais Subfunções 8","Energia Elétrica","Desporto de Rendimento","Alimentação e Nutrição","Ensino Superior","Administração de Receitas","Desporto e Lazer","Demais Subfunções 26","Previdência Social","Demais Subfunções 17","Promoção da Produção Animal","Demais Subfunções 27","Defesa Terrestre","Administração Financeira","Previdência do Regime Estatutário","Educação Infantil","Suporte Profilático","Educação Infantil","Segurança Pública","Encargos Especiais","Preservação Ambiental","Administração de Concessões","Educação Infantil","Serviço da Dívida Interna","Demais Subfunções 18","Habitação","Direitos da Cidadania","Difusão Cultural","Relações Diplomáticas","Demais Subfunções 15","Promoção da Produção Animal","Relações Diplomáticas","Saneamento","Petróleo","Demais Subfunções 26","Defesa do Interesse Público","Abastecimento","Ação Legislativa","Demais Subfunções 14","Relações Exteriores","Ordenamento Territorial","Ensino Superior","Transportes Coletivos Urbanos","Ensino Fundamental","Demais Subfunções 7","Administração de Concessões","Cultura","Essencial à Justiça","Saneamento","Encargos Especiais","Ação Legislativa","Legislativa","Previdência Básica","Ação Judiciária","Saúde","Transportes Coletivos Urbanos","Defesa do Interesse Público","Defesa Civil","Comércio Exterior","Preservação Ambiental","Demais Subfunções 9","Administração","Demais Subfunções 19","Empregabilidade","Ensino Superior","Serviço da Dívida Interna","Demais Subfunções 8","Assistência ao Idoso","Suporte Profilático","Desenvolvimento Tecnológico","Agricultura","Defesa Civil","Demais Subfunções 9","Transportes Coletivos Urbanos","Habitação Urbana","Ensino Profissional","Segurança Pública","Representação Juridica","Assistência Social","Refinanciamento da Dívida Interna","Comércio e Serviços","Despesas por Função","Atenção Básica","Energia","Educação de Jovens e Adultos","Recuperação Areas Degradadas","Ensino Fundamental","Demais Subfunções 25","Desporto de Rendimento","Educação Infantil","Demais Subfunções 11","Demais Subfunções 3","Desporto Comunitário","Infraestrutura Urbana","Demais Subfunções 8","Serviços Financeiros","Administração","Defesa da Ordem Jurídica","Recursos Hídricos","Petróleo","Transporte Rodoviário","Abastecimento","Saúde","Demais Subfunções 5","Relações de Trabalho","Direitos da Cidadania","Demais Subfunções 23","Direitos Humanos","Assistência à Criança","Ensino Superior","Ação Legislativa","Educação","FU13 - Demais Subfunções","Defesa Terrestre","Irrigação","Difusão do Conhecimento Científico","Defesa Nacional","Promoção da Produção Animal","Saneamento Básico Urbano","Ação Judiciária","Previdência Básica","Desp por Função Intra-Orçamentária","Previdência Social","Energia Elétrica","Assistência Comunitária","Legislativa","Promoção Industrial","Demais Subfunções 23","Administração Financeira","Administração","Vigilância Sanitária","Transportes Coletivos Urbanos","Demais Subfunções 16","Empregabilidade","Serviços Financeiros","Demais Subfunções 3","Saneamento Básico Urbano","FU28 - Demais Subfunções","Telecomunicações","Habitação Urbana","Difusão Cultural","Serviços Urbanos","Extensão Rural","Energia Elétrica","Assistência Hospitalar","Atenção Básica","Educação Infantil","Irrigação","Cultura","Demais Subfunções 16","Defesa Civil","Comunicações Postais","Transporte Aéreo","Educação Especial","Demais Subfunções 14","Ordenamento Territorial","Turismo","Defesa Naval","Cultura","Transportes Especiais","Demais Subfunções  1","Proteção ao Trabalhador","Ensino Superior","Educação","Indústria","Desporto de Rendimento","Previdência do Regime Estatutário","Serviços Urbanos","Recursos Hídricos","Administração Financeira","Conservação de Energia","Direitos da Cidadania","Administração de Concessões","Alimentação e Nutrição","Previdência Social","Alimentação e Nutrição","Defesa Sanitária Animal","Infra-Estrutura Urbana","Ensino Fundamental","Cultura","Normalização e Qualidade","FU15 - Demais Subfunções","Colonização","Difusão Cultural","Desporto Comunitário","Propriedade Industrial","Demais Subfunções 2","Demais Subfunções 20","Demais Subfunções 19","Defesa Naval","Previdência Básica","Transportes Coletivos Urbanos","Outros Encargos Especiais","Defesa Sanitária Vegetal","Assistência Social","Transporte","Planejamento e Orçamento","Reforma Agrária","Assistência Social","Telecomunicações","Saúde","Promoção Comercial","Refinanciamento da Dívida Interna","Normatização e Fiscalização","Comunicações Postais","Policiamento","Assistência ao Idoso","Administração Financeira","Telecomunicações","Administração de Concessões","Demais Subfunções 21","Encargos Especiais","Recursos Hídricos","Saúde","Atenção Básica","Comércio Exterior","Assistência Comunitária","Educação","Demais Subfunções 10","Promoção da Produção Vegetal","Planejamento e Orçamento","Administração Financeira","Administração Financeira","Demais Subfunções 24","Proteção ao Trabalhador","Assistência à Criança e ao Adolescente","Meteorologia","Defesa Civil","Assistência ao Idoso","Álcool","Planejamento e Orçamento","Total Geral da Despesa por Função","FU23 - Demais Subfunções","Demais Subfunções 3","Atenção Básica","Planejamento e Orçamento","Agricultura","Demais Subfunções 27","Defesa Sanitária Animal","Controle Ambiental","Ensino Médio","Demais Subfunções 28","Direitos da Cidadania","Comercialização","Comunicação Social","Demais Subfunções 24","Controle Interno","Assistência ao Deficiência","Proteção ao Trabalhador","Defesa Civil","Demais Subfunções 25","Encargos Especiais","Serviços Financeiros","Demais Subfunções Educação","Comercialização","Turismo","Saneamento","Vigilância Epidemiológica","Encargos Especiais","Promoção da Produção Animal","Desporto Comunitário","Demais Subfunções 22","Conservação de Energia","Demais Subfunções 20","Desporto e Lazer","Cultura","Legislativa","Demais Subfunções 22","Desenvolvimento Científico","Refinanciamento da Dívida Externa","Transporte Hidroviário","Administração","Comércio e Serviços","Indústria","Demais Subfunções 23","Desporto e Lazer","Direitos da Cidadania","Ensino Superior","Transporte","Urbanismo","Educação Especial","Infra-Estrutura Urbana","Saneamento","Transporte Rodoviário","Transferências","Assistência Social","Atenção Básica","Demais Subfunções 22","Despesas por Função","Educação","Saúde","Comercialização","Demais Subfunções 24","Reforma Agrária","Assistência Povos Indígenas","Promoção da Produção Animal","Saúde","Infra-Estrutura Urbana","Administração Financeira","Demais Subfunções 25","Demais Subfunções  1","Petróleo","Administração de Receitas","Promoção Industrial","Colonização","Transporte Hidroviário","Serviços Urbanos","Previdência Social","Alimentação e Nutrição","Demais Subfunções Saúde","Ensino Médio","Desporto Comunitário","Petróleo","Defesa Terrestre","Saneamento","Cultura","Ensino Superior","Relações Exteriores","Administração de Concessões","Relações Diplomáticas","Saneamento","Administração Geral","FU17 - Demais Subfunções","Comunicações Postais","Demais Subfunções Urbanismo","Defesa Nacional","Normalização e Qualidade","Administração Geral","FU28 - Demais Subfunções","Conservação de Energia","Ensino Fundamental","Serviço da Dívida Externa","Demais Subfunções 17","Demais Subfunções 22","Controle Ambiental","Demais Subfunções 21","Serviço da Dívida Interna","Demais Subfunções 21","Promoção da Produção Vegetal","Promoção da Produção Animal","Demais Subfunções 15","Demais Subfunções 27","Habitação","Administração Financeira","Previdência Social","Segurança Pública","Demais Subfunções 12","Preservação Ambiental","Comercialização","Assistência Hospitalar","Administração de Receitas","Formação de Recursos Humanos","Previdência Social","FU17 - Demais Subfunções","Previdência Complementar","Direitos da Cidadania","Refinanciamento da Dívida Interna","Recuperação Areas Degradadas","Demais Subfunções 21","Promoção Industrial","Lazer","Comunicações Postais","Meteorologia","Abastecimento","Educação de Jovens e Adultos","Previdência do Regime Estatutário","Proteção ao Trabalhador","Educação","Custódia e Reintegração Social","Demais Subfunções  1","Demais Subfunções 15","Demais Subfunções 13","Defesa Terrestre","Encargos Especiais","Assistência à Criança","Transporte Hidroviário","Serviço da Dívida Externa","Relações Diplomáticas","Indústria","Demais Subfunções 7","Recuperação Areas Degradadas","Transportes Especiais","Demais Subfunções 7","Ensino Fundamental","Assistência à Criança","Vigilância Epidemiológica","Comercialização","Educação Especial","Ensino Superior","Transportes Coletivos Urbanos","Urbanismo","Meteorologia","Demais Subfunções 15","Defesa Naval","Demais Subfunções 13","Assistência Comunitária","Desenvolvimento Tecnológico","Assistência ao Deficiência","Relações Exteriores","Promoção da Produção Agropecuária","Outros Encargos Especiais","Vigilância Sanitária","Transporte Ferroviário","Ação Legislativa","Demais Subfunções 12","Organização Agrária","Ação Judiciária","Demais Subfunções 24","Desenvolvimento Científico","Desporto Comunitário","Promoção Comercial","Habitação Rural","Defesa Nacional","Habitação Urbana","Ação Legislativa","Cultura","Refinanciamento da Dívida Interna","Ensino Fundamental","Educação","Defesa Naval","Demais Subfunções  1","Educação de Jovens e Adultos","Tecnologia da Informação","Assistência Social","Assistência Hospitalar","Demais Subfunções 4","Controle Ambiental","Desenvolvimento Tecnológico","Transporte Rodoviário","Previdência Básica","Despesas Exceto Intraorçamentárias","Empregabilidade","Encargos Especiais","Saúde","Assistência Hospitalar","Cultura","Transferências","Administração Financeira","Desporto de Rendimento","Infraestrutura Urbana","Fomento ao Trabalho","Gestão Ambiental","Demais Subfunções 3","Tecnologia da Informação","Defesa Sanitária Animal","Ação Judiciária","Saneamento","Administração","Demais Subfunções 25","Assistência Comunitária","Comunicações Postais","Educação Especial","Educação","Energia","Ensino Médio","Serviços Urbanos","Saneamento Básico Urbano","Conservação de Energia","Fomento ao Trabalho","Previdência Social","Relações de Trabalho","Custódia e Reintegração Social","Assistência à Criança e ao Adolescente","Energia","Atenção Básica","Patrimônio Cultural","Administração Geral","Comunicações Postais","Ação Legislativa","Transportes Coletivos Urbanos","Demais Subfunções 2","Tecnologia da Informação","Indústria","Administração Geral","Ensino Médio","Defesa Aérea","Informação e Inteligência","Trabalho","Formação de Recursos Humanos","Comunicação Social","Segurança Pública","Demais Subfunções 4","Atenção Básica","Transporte Rodoviário","Defesa Terrestre","Direitos Humanos","Cultura","Defesa Sanitária Vegetal","Reforma Agrária","Ação Legislativa","Infra-Estrutura Urbana","Transporte Hidroviário","Demais Subfunções 15","Cooperação Internacional","Difusão do Conhecimento Científico","Demais Subfunções 6","Promoção da Produção Vegetal","Defesa Naval","Defesa Terrestre","Direitos da Cidadania","Álcool","Demais Subfunções 7","Demais Subfunções Assistência Social","Demais Subfunções 16","Infra-Estrutura Urbana","Desporto Comunitário","Demais Subfunções 27","Promoção Comercial","Demais Subfunções 10","Assistência Hospitalar","Defesa do Interesse Público","Normatização e Fiscalização","Demais Subfunções 10","Serviços Urbanos","Habitação","Administração Geral","Demais Subfunções 4","Essencial à Justiça","Administração de Receitas","Promoção Industrial","Educação de Jovens e Adultos","Demais Subfunções 13","Ação Legislativa","Normalização e Qualidade","Assistência Social","Vigilância Sanitária","Assistência Povos Indígenas","Agricultura","Lazer","Demais Subfunções 17","Refinanciamento da Dívida Interna","Cooperação Internacional","Defesa Sanitária Animal","Recursos Hídricos","Assistência Comunitária","Agricultura","Demais Subfunções 9","Administração Geral","Defesa Aérea","Atenção Básica","Atenção Básica","Administração de Receitas","Ação Legislativa","Habitação","Refinanciamento da Dívida Interna","Assistência à Criança e ao Adolescente","Gestão Ambiental","Demais Subfunções 24","Agricultura","Mineração","Demais Subfunções 16","Formação de Recursos Humanos","Alimentação e Nutrição","Judiciária","Serviços Urbanos","Demais Subfunções 21","Defesa Nacional","Transporte","Demais Subfunções 8","Demais Subfunções 20","Comércio Exterior","Demais Subfunções 12","Fomento ao Trabalho","Colonização","Proteção ao Trabalhador","Serviço da Dívida Externa","Energia","Educação de Jovens e Adultos","Petróleo","Demais Subfunções 8","Refinanciamento da Dívida Interna","Outros Encargos Especiais","Demais Subfunções 19","Indústria","Demais Subfunções 12","Recuperação Areas Degradadas","Desporto Comunitário","Demais Subfunções 2","Assistência ao Idoso","Saúde","Demais Subfunções 8","Assistência Comunitária","Defesa Sanitária Vegetal","Preservação e Conservação Ambiental","Organização Agrária","Difusão do Conhecimento Científico","Defesa da Ordem Jurídica","Relações de Trabalho","Turismo","Extensão Rural","Defesa do Interesse Público","Tecnologia da Informação","Custódia e Reintegração Social","Demais Subfunções 10","Urbanismo","Legislativa","Agricultura","Encargos Especiais","Meteorologia","Urbanismo","Patrimônio Cultural","Saúde","Comercialização","Habitação","Assistência Hospitalar e Ambulatorial","Irrigação","Demais Subfunções 15","Outros Encargos Especiais","Administração","Defesa Sanitária Animal","Segurança Pública","Comercialização","Transportes Coletivos Urbanos","Infraestrutura Urbana","Demais Subfunções 22","Serviços Financeiros","Educação de Jovens e Adultos","Transporte","Custódia e Reintegração Social","Agricultura","Desporto Comunitário","Transporte Hidroviário","Previdência Básica","Demais Subfunções 6","Defesa Naval","Desporto e Lazer","Administração Geral","Desporto e Lazer","Alimentação e Nutrição","Empregabilidade","Administração","Demais Subfunções 5","Defesa da Ordem Jurídica","Normatização e Fiscalização","Comércio Exterior","Assistência Hospitalar e Ambulatorial","Defesa da Ordem Jurídica","Gestão Ambiental","Assistência Comunitária","Transporte Rodoviário","Saneamento Básico Urbano","Comércio Exterior","Demais Subfunções 17","Difusão Cultural","Demais Subfunções 13","Energia Elétrica","Desporto Comunitário","Habitação Urbana","Meteorologia","Turismo","Difusão do Conhecimento Científico","Vigilância Epidemiológica","Segurança Pública","Previdência Complementar","Promoção da Produção Vegetal","Vigilância Epidemiológica","Ensino Fundamental","Ação Legislativa","Encargos Especiais","Custódia e Reintegração Social","Administração Geral","Cultura","Produção Industrial","Difusão Cultural","Assistência Comunitária","Recuperação Areas Degradadas","Controle Ambiental","Serviço da Dívida Interna","Controle Interno","Educação Infantil","Assistência à Criança","Custódia e Reintegração Social","Saneamento","Serviços Urbanos","Educação de Jovens e Adultos"],[0,0,0,0,0,80904.04,0,0,0,0,0,0,0,0,0,0,0,316792.36,0,0,0,2278236.95,0,602216.49,0,580329.01,8307,0,0,0,0,0,0,0,0,0,697698.49,30050,947.5,32564.48,98361.64,0,51437.17,0,0,27313.15,0,0,0,0,110206.43,0,0,59002.05,0,0,1724441.68,0,0,3960,11472347.72,0,0,161904.32,0,0,0,0,0,770623.76,0,0,0,2450931.81,8044167.25,0,1096984.01,85514,28993111.65,26630,0,0,0,166307.01,0,0,0,0,869102.47,0,0,1915,378446.6,0,0,3748091.46,0,0,0,0,0,0,2119752.46,0,0,7955.3,0,0,0,0,0,0,1452945.76,0,0,0,0,0,0,0,0,0,486746,0,0,1495132.31,0,69322.74,0,2520768,2282224.26,0,0,0,7066288.95,0,0,1050568,262034.08,0,0,0,0,0,0,0,0,30381.65,0,3279489.53,0,0,0,0,140605,0,7956,0,0,117385.82,0,0,0,0,0,43720,1101872.14,0,368977.65,2161835.5,0,176085.47,0,0,0,0,0,1110416.99,0,1026581.91,0,0,0,4000,0,0,529612.08,559689.46,0,18725.33,0,0,0,0,0,0,506422.8,138998.49,0,57404.14,0,0,0,0,0,0,0,349040.11,118786.4,0,0,0,3817190.47,0,2261088.41,12371.39,0,0,0,1623356.54,0,0,1674549.03,0,38150,0,0,20320.41,17764,0,0,214708.83,0,2643895.87,0,945699.82,2340,0,0,218170.99,96980.25,0,184929.43,0,0,0,0,0,0,0,73766.8,0,0,0,238953.13,300,12190561.71,0,1826767.2,0,10494.9,0,106304.25,1681305.2,0,0,0,0,0,191672.81,3320550.39,0,0,599670.31,0,1103812.2,0,5900022.6,0,0,2938619.9,0,0,0,0,0,30475,0,0,0,84801.51,106718252.89,31694.07,0,0,0,0,0,311103.77,0,0,0,0,0,1443465.04,0,100187.93,471760.52,0,0,110784.6,0,0,22906,0,0,0,3528766.36,0,0,0,65271.41,0,0,267301.72,0,0,0,0,0,0,230698.41,0,83258.2,0,0,0,0,2052699.38,96822.86,0,0,125497.09,0,70709.89,0,0,1851.48,613471.95,0,208273.77,0,20268.05,0,0,811.6,0,40681.1,0,1176000.03,0,0,221774.57,0,0,0,0,0,3931562,0,0,146516.26,0,160000,398435,485558.5,301029.48,0,0,1179407.16,0,0,0,0,142975,0,1907069.48,0,0,14960,0,130182.76,2018.52,0,0,466105.47,0,0,0,0,0,0,0,122664.72,298506.67,0,7617028.2,3679327.47,0,134697.75,0,4910305.34,0,0,14098.98,0,0,13129.04,610340.48,0,0,2925264.03,0,166112,0,61630,41110.56,4105347.01,0,0,0,0,0,0,62238.65,989647.37,4042083.9,79527.35,0,0,0,0,0,0,0,650368.94,0,0,0,627959.77,503330.31,0,0,523751.61,2019566,204727.79,0,0,0,0,0,0,2491925.97,0,0,9110.82,47922.14,0,17136.85,2829.85,3124846.86,223982.7,0,136217.96,0,0,0,0,0,0,0,250,0,280596.7,0,0,0,0,7101605.13,0,0,3120223.41,278495.7,0,109995.73,0,65496.77,0,157957.35,1242006.23,0,0,0,974320.69,326149.83,0,48031.73,0,186638.07,6485,0,0,177232.57,0,0,0,0,0,0,350133.81,310984,0,0,675595.94,0,9400793.36,0,0,0,0,0,0,928454.61,0,0,0,499582.84,0,49929371.14,1049425.72,0,422936.45,1561229.23,0,5360.1,0,5192922.36,325061.25,0,0,321103.31,0,0,2144,0,0,48290891.83,19222.5,0,1892867.78,0,59070.09,0,0,0,12520,0,0,0,0,0,0,0,0,0,0,0,0,224509.29,0,0,92008.57,168323.9,291462.96,0,196841.92,0,0,11630.22,217997.13,563863.11,624643.32,0,0,0,0,3911083.47,0,0,0,0,135437.63,0,145799,1021166.39,0,38456.31,26119.01,223024.79,0,391605.36,1775344.46,0,10598772.06,1159328.17,17600256.61,0,0,0,0,0,2633684.84,152970.71,355051.28,0,0,0,0,0,0,0,55546.5,0,85936.11,42475153.04,0,17038.8,0,0,37928.42,118720,0,0,0,0,222,703341.17,722413.95,0,1804171.84,0,0,970357.45,1760670.7,0,3222660.9,0,0,0,0,0,0,0,164768.59,0,0,0,0,3423743.4,0,0,2026860.97,0,0,0,0,0,148051.94,151033.45,0,0,241126.67,0,0,0,0,0,0,130628.16,1447.8,0,0,8707957.32,0,0,0,0,0,0,112526,0,0,0,0,0,0,0,0,9173731.5,234087.94,166515.42,0,0,0,0,188257.77,0,138288.35,0,0,178935.57,0,0,0,88410.71,164703.82,3330,0,872005.97,0,0,0,0,0,26206.71,0,0,0,0,1408003.49,348528.93,259608.9,4494922.75,1581993.33,0,45034.27,130470.17,0,1499317.1,6586,31104.81,0,0,3157.9,169597.77,13470331.33,0,192749.79,6774599.01,110050.81,60618.5,0,120613.33,0,3388685.48,0,85894.78,0,0,0,0,0,596254,0,778628.39,0,0,4326480.44,4630,0,535779.24,197546.18,0,0,306502.5,0,0,835611.15,0,5512553.82,0,1255554.56,0,0,0,0,0,0,518047.59,67570.22,0,0,0,0,0,0,44469.97,5299943.28,2420.3,0,0,149534.37,0,0,0,0,0,298837.17,0,0,0,45435,0,0,0,0,0,215494.44,0,30688.26,196078.41,0,0,1237082.48,0,0,0,0,478634.44,15000,1534348.59,49613.86,0,0,0,0,0,576056.19,0,653604.9,0,0,489234.15,373364.24,0,218716.61,0,0,0,263447.45,88123.02,0,645996.98,0,896125.13,10896508.96,0,555346.81,67806.67,0,46685.19,0,0,1121853.31,0,0,0,47074,0,1721344.68,0,0,31561,0,50460.51,0,0,0,0,0,0,0,297477.93,0,106897.53,0,0,0,0,9157.91,0,35740.91,0,2598.34,2807391.89,0,323689.37,0,73627.76,0,0,0,0,70696.28,0,0,0,0,0,1056575.44,250472.38,362238.11,0,0,4289648.51,0,5885254.59,0,0,2346066.58,0,0,0,7363667.85,0,0,0,0,123103.46,0,0,0,2768.6,0,63791.64,6832.05,0,535148.69,0,0,189287.79,1183511.74,6958.24,43763.09,0,2581675.72,0,0,0,0,2497826.62,0,0,352913.76,86708.55,35343.4,0,0,202159,0,0,62438.05,265282.28,0,920237.56,0,0,7458694.67,0,191400,0,3475775.12,710906.36,1616692.03,0,329169.71,232066.34,0,95548.99,227358.38,0,0,0,61163.3,137530.42,8415,0,13950,102178.05,0],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,316792.36,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,697698.49,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,59002.05,null,null,1724441.68,null,null,3960,null,null,null,161904.32,null,null,null,null,null,null,null,null,null,null,7949765,null,1096984.01,null,28992812.54,26630,null,null,null,166307.01,null,null,null,null,null,null,null,null,371882.68,null,null,3744481.46,null,null,null,null,null,null,2118994.06,null,null,7955.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,69322.74,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,30381.65,null,3279489.53,null,null,null,null,140605,null,7956,null,null,null,null,null,null,null,null,43720,null,null,null,null,null,null,null,null,null,null,null,null,null,1026581.91,null,null,null,4000,null,null,529612.08,559689.46,null,18725.33,null,null,null,null,null,null,null,138998.49,null,null,null,null,null,null,null,null,null,null,118786.4,null,null,null,null,null,2259747.65,null,null,null,null,1545555.87,null,null,1674549.03,null,null,null,null,null,17764,null,null,214708.83,null,2643895.87,null,945699.82,null,null,null,null,null,null,184929.43,null,null,null,null,null,null,null,null,null,null,null,null,300,null,null,null,null,null,null,106304.25,1681305.2,null,null,null,null,null,191672.81,3306510.39,null,null,599670.31,null,null,null,5900022.6,null,null,null,null,null,null,null,null,30475,null,null,null,83841.51,99895148.59,null,null,null,null,null,null,311103.77,null,null,null,null,null,1443465.04,null,100187.93,null,null,null,null,null,null,null,null,null,null,3528766.36,null,null,null,null,null,null,240606.43,null,null,null,null,null,null,null,null,null,null,null,null,null,2052689.68,null,null,null,125497.09,null,null,null,null,1851.48,563228.83,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,146516.26,null,null,null,485558.5,null,null,null,null,null,null,null,null,null,null,1870946.92,null,null,14960,null,null,null,null,null,446216.47,null,null,null,null,null,null,null,null,298506.67,null,null,3679327.47,null,134697.75,null,4910305.34,null,null,null,null,null,13129.04,610340.48,null,null,2884864.03,null,null,null,null,41110.56,null,null,null,null,null,null,null,null,989647.37,4042083.9,79527.35,null,null,null,null,null,null,null,null,null,null,null,null,503330.31,null,null,523751.61,2019566,204727.79,null,null,null,null,null,null,2491925.97,null,null,null,null,null,17136.85,null,3110796.68,223982.7,null,136217.96,null,null,null,null,null,null,null,250,null,null,null,null,null,null,null,null,null,3120223.41,null,null,null,null,65496.77,null,157957.35,1242006.23,null,null,null,974320.69,326149.83,null,48031.73,null,177488.07,6485,null,null,null,null,null,null,null,null,null,null,null,null,null,657595.94,null,8630621,null,null,null,null,null,null,null,null,null,null,499582.84,null,49470969.43,null,null,null,null,null,null,null,null,325061.25,null,null,321103.31,null,null,null,null,null,null,19222.5,null,null,null,null,null,null,null,12520,null,null,null,null,null,null,null,null,null,null,null,null,222127.79,null,null,null,null,null,null,null,null,null,null,217997.13,null,624643.32,null,null,null,null,null,null,null,null,null,135437.63,null,null,1021166.39,null,null,null,null,null,null,null,null,null,null,17600256.61,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,41351917.4,null,null,null,null,null,101800,null,null,null,null,null,null,294673.53,null,1631466.75,null,null,null,1760670.7,null,3222660.9,null,null,null,null,null,null,null,null,null,null,null,null,3423743.4,null,null,null,null,null,null,null,null,148051.94,151033.45,null,null,241126.67,null,null,null,null,null,null,130628.16,1447.8,null,null,8707957.32,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,9173731.5,null,166515.42,null,null,null,null,188257.77,null,null,null,null,null,null,null,null,88410.71,164703.82,3330,null,872005.97,null,null,null,null,null,null,null,null,null,null,1408003.49,348528.93,null,4494922.75,null,null,null,130470.17,null,1494137.1,null,null,null,null,3157.9,null,13470331.33,null,192749.79,6719009.28,null,null,null,120613.33,null,3388685.48,null,null,null,null,null,null,null,null,null,778528.39,null,null,4297628.44,null,null,535779.24,null,null,null,null,null,null,835611.15,null,5249250.9,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2420.3,null,null,149534.37,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,215494.44,null,null,null,null,null,null,null,null,null,null,null,15000,1522732.37,null,null,null,null,null,null,576056.19,null,653604.9,null,null,null,null,null,null,null,null,null,263447.45,88123.02,null,null,null,896125.13,10413262.66,null,null,67806.67,null,46685.19,null,null,null,null,null,null,null,null,1721344.68,null,null,31561,null,null,null,null,null,null,null,null,null,297477.93,null,null,null,null,null,null,null,null,35740.91,null,null,2524825.08,null,null,null,73627.76,null,null,null,null,null,null,null,null,null,null,null,null,362238.11,null,null,null,null,5832051.13,null,null,2346066.58,null,null,null,7363667.85,null,null,null,null,123103.46,null,null,null,2768.6,null,63791.64,null,null,535148.69,null,null,188583.79,null,null,null,null,2577287.08,null,null,null,null,2497826.62,null,null,null,null,null,null,null,202159,null,null,10869,265282.28,null,919589.56,null,null,7230587.03,null,191400,null,null,710906.36,1616692.03,null,null,232066.34,null,94248.99,null,null,null,null,60582.04,null,null,null,null,102178.05,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,314762.37,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,696699.69,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,51202.05,null,null,1622261.29,null,null,3960,null,null,null,161904.32,null,null,null,null,null,null,null,null,null,null,7949765,null,1071573.43,null,28479527.48,26630,null,null,null,166307.01,null,null,null,null,null,null,null,null,347219.38,null,null,3561284.02,null,null,null,null,null,null,2113874.71,null,null,7955.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,64887.76,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,30381.65,null,3213053.26,null,null,null,null,135405,null,7956,null,null,null,null,null,null,null,null,43720,null,null,null,null,null,null,null,null,null,null,null,null,null,1026581.91,null,null,null,4000,null,null,529612.08,559689.46,null,17438.16,null,null,null,null,null,null,null,137663.99,null,null,null,null,null,null,null,null,null,null,118786.4,null,null,null,null,null,2075699.42,null,null,null,null,1544601.87,null,null,1581762.35,null,null,null,null,null,17764,null,null,186429.14,null,2359412.83,null,945699.82,null,null,null,null,null,null,182345.43,null,null,null,null,null,null,null,null,null,null,null,null,300,null,null,null,null,null,null,106304.25,1594500.7,null,null,null,null,null,187683.84,3289513.19,null,null,599670.31,null,null,null,5762441.42,null,null,null,null,null,null,null,null,28675,null,null,null,82529.53,96534235.4,null,null,null,null,null,null,311103.77,null,null,null,null,null,1425269.55,null,97932.93,null,null,null,null,null,null,null,null,null,null,3149306.75,null,null,null,null,null,null,240606.43,null,null,null,null,null,null,null,null,null,null,null,null,null,2030193.98,null,null,null,123993.09,null,null,null,null,1851.48,563228.83,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,134260.26,null,null,null,485558.5,null,null,null,null,null,null,null,null,null,null,1727348.69,null,null,14960,null,null,null,null,null,435519.4,null,null,null,null,null,null,null,null,298506.67,null,null,3404595.49,null,134697.75,null,4648550.19,null,null,null,null,null,13129.04,456360.68,null,null,2757624.9,null,null,null,null,41110.56,null,null,null,null,null,null,null,null,989647.27,4042083.9,79527.35,null,null,null,null,null,null,null,null,null,null,null,null,503330.31,null,null,509625.01,1573762.82,204727.79,null,null,null,null,null,null,2299230.97,null,null,null,null,null,17136.85,null,3022918.56,204624.53,null,136217.96,null,null,null,null,null,null,null,250,null,null,null,null,null,null,null,null,null,3120223.41,null,null,null,null,65496.77,null,143984.07,868625.07,null,null,null,974320.69,326149.83,null,48031.73,null,177128.07,6485,null,null,null,null,null,null,null,null,null,null,null,null,null,610780.88,null,8630621,null,null,null,null,null,null,null,null,null,null,499582.84,null,44683787.1,null,null,null,null,null,null,null,null,300461.25,null,null,314011.59,null,null,null,null,null,null,19222.5,null,null,null,null,null,null,null,12520,null,null,null,null,null,null,null,null,null,null,null,null,211596.49,null,null,null,null,null,null,null,null,null,null,217997.13,null,624643.32,null,null,null,null,null,null,null,null,null,130528.66,null,null,985279.14,null,null,null,null,null,null,null,null,null,null,16903529.71,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39750453.2,null,null,null,null,null,91800,null,null,null,null,null,null,294673.53,null,1631466.75,null,null,null,1760670.7,null,3191500.03,null,null,null,null,null,null,null,null,null,null,null,null,3214542.38,null,null,null,null,null,null,null,null,148051.94,151033.45,null,null,241126.67,null,null,null,null,null,null,130628.16,1447.8,null,null,8580621.52,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,8330873.65,null,166515.42,null,null,null,null,188257.77,null,null,null,null,null,null,null,null,80410.71,164703.82,3330,null,872005.97,null,null,null,null,null,null,null,null,null,null,1408003.49,314296.45,null,4344588.75,null,null,null,130470.17,null,1494137.1,null,null,null,null,3157.9,null,13194409.35,null,157759.41,6664734.43,null,null,null,114167.72,null,2994959.29,null,null,null,null,null,null,null,null,null,680007.55,null,null,4245304.24,null,null,461917.73,null,null,null,null,null,null,777911.67,null,5215267.36,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2420.3,null,null,149534.37,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,208142.7,null,null,null,null,null,null,null,null,null,null,null,15000,1421269.31,null,null,null,null,null,null,576056.19,null,559685.6,null,null,null,null,null,null,null,null,null,263447.45,88123.02,null,null,null,887449.57,9037453.39,null,null,67806.67,null,46685.19,null,null,null,null,null,null,null,null,1669023.61,null,null,31561,null,null,null,null,null,null,null,null,null,290476.52,null,null,null,null,null,null,null,null,35740.91,null,null,2389154.79,null,null,null,68427.76,null,null,null,null,null,null,null,null,null,null,null,null,343709.31,null,null,null,null,5820785.89,null,null,2277891.71,null,null,null,7362196.95,null,null,null,null,122925,null,null,null,2768.6,null,58243.64,null,null,489094.73,null,null,123162.33,null,null,null,null,2538980.03,null,null,null,null,2495999.18,null,null,null,null,null,null,null,151309,null,null,10869,265282.28,null,918042.56,null,null,7216363.8,null,191400,null,null,710906.36,1616692.03,null,null,224911.19,null,94248.99,null,null,null,null,60494.97,null,null,null,null,99945.16,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ano<\/th>\n      <th>municipio<\/th>\n      <th>conta<\/th>\n      <th>despesas_empenhadas<\/th>\n      <th>despesas_liquidadas<\/th>\n      <th>despesas_pagas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().container()).css({'font-size': '14pt'});\n}","columnDefs":[{"className":"dt-right","targets":[1,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</section></section>
+<section>
+<section id="transformação-de-dados" class="title-slide slide level1 center">
+<h1>Transformação de dados</h1>
+
+<img data-src="img/hex-dplyr.png" width="400" class="r-stretch quarto-figure-center"></section>
+<section id="verbos-do-dplyr" class="slide level2">
+<h2>Verbos do <code>dplyr</code></h2>
+<ul>
+<li class="fragment"><p><code>filter()</code> filtra apenas observações com valores específicos</p></li>
+<li class="fragment"><p><code>arrange()</code> reordena as linhas da base</p></li>
+<li class="fragment"><p><code>select()</code> seleciona apenas variáveis de interesse</p></li>
+<li class="fragment"><p><code>mutate()</code> cria novas variáveis como função das demais</p></li>
+<li class="fragment"><p><code>summarise()</code> cria estatísticas descritivas</p></li>
+</ul>
+</section>
+<section id="filtrar-dados-com-filter" class="slide level2">
+<h2>Filtrar dados com <code>filter</code></h2>
+
+<img data-src="img/filter.png" class="r-stretch"></section>
+<section id="funcionamento-da-função-filter" class="slide level2">
+<h2>Funcionamento da função <code>filter()</code></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">filter</span>(<span class="sc">&lt;</span>DADOS<span class="sc">&gt;</span>, <span class="sc">&lt;</span>REGRAS<span class="sc">&gt;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-11" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Se quisermos filtrar as despesas dos municípios para o ano de 2020:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb34-1" class="hljs-ln-code"><a href="#cb34-1"></a><span class="fu">filter</span>(despesas, ano <span class="sc">==</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8,416 × 6
+     ano municipio   conta      despesas_empenh… despesas_liquid… despesas_pagas
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+ 1  2020 Água Branca Ação Legi…          955491.          955491.        955491.
+ 2  2020 Água Branca Administr…         2817531.         2817531.       2817531.
+ 3  2020 Água Branca Administr…         1119820.         1119820.       1119820.
+ 4  2020 Água Branca Administr…         2912672.         2910913.       2910913.
+ 5  2020 Água Branca Agricultu…         1007174.         1007174.       1007174.
+ 6  2020 Água Branca Assistênc…          314001.          313501.        313501.
+ 7  2020 Água Branca Assistênc…          824082.          824082.        823932.
+ 8  2020 Água Branca Assistênc…         3673068.         3673068.       3635468.
+ 9  2020 Água Branca Assistênc…         1138083.         1137583.       1137433.
+10  2020 Água Branca Atenção B…         5688206.         5688206.       5677949.
+# … with 8,406 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-12" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Se quisermos filtrar as despesas dos municípios para o ano de 2020 e <strong>para o município de João Pessoa</strong>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb36-1" class="hljs-ln-code"><a href="#cb36-1"></a><span class="fu">filter</span>(despesas, ano <span class="sc">==</span> <span class="dv">2020</span>, municipio <span class="sc">==</span> <span class="st">"João Pessoa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 80 × 6
+     ano municipio   conta      despesas_empenh… despesas_liquid… despesas_pagas
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+ 1  2020 João Pessoa Administr…       274470039.       267409380.     266825012.
+ 2  2020 João Pessoa Administr…        24393906.        24393906.      24393906.
+ 3  2020 João Pessoa Administr…         5886106.         5886106.       5886085.
+ 4  2020 João Pessoa Administr…       576784503.       567150258.     566412083.
+ 5  2020 João Pessoa Assistênc…        10212105.         9658881.       9657681.
+ 6  2020 João Pessoa Assistênc…            8236.            8168.          8168.
+ 7  2020 João Pessoa Assistênc…              NA               NA             NA 
+ 8  2020 João Pessoa Assistênc…        18842495.        18424873.      18408734.
+ 9  2020 João Pessoa Assistênc…       322414670.       283332615.     282052325 
+10  2020 João Pessoa Assistênc…        30484971.        29514057.      29492558.
+# … with 70 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="pipe" class="slide level2">
+<h2>Pipe <code>|&gt;</code></h2>
+<p>O <em>pipe <code>|&gt;</code></em> é um operador que permite reescrever as expressões de outra forma. Dica: Leia o <em>pipe</em> como um <strong>ENTÃO</strong>:</p>
+
+<img data-src="img/pipe1.png" class="r-stretch"></section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># ao invés de escrever assim:</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">filter</span>(despesas, ano <span class="sc">==</span> <span class="dv">2020</span>, municipio <span class="sc">==</span> <span class="st">"João Pessoa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># escrevemos assim:</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>despesas <span class="sc">|&gt;</span> <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span>, municipio <span class="sc">==</span> <span class="st">"João Pessoa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 80 × 6
+     ano municipio   conta      despesas_empenh… despesas_liquid… despesas_pagas
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+ 1  2020 João Pessoa Administr…       274470039.       267409380.     266825012.
+ 2  2020 João Pessoa Administr…        24393906.        24393906.      24393906.
+ 3  2020 João Pessoa Administr…         5886106.         5886106.       5886085.
+ 4  2020 João Pessoa Administr…       576784503.       567150258.     566412083.
+ 5  2020 João Pessoa Assistênc…        10212105.         9658881.       9657681.
+ 6  2020 João Pessoa Assistênc…            8236.            8168.          8168.
+ 7  2020 João Pessoa Assistênc…              NA               NA             NA 
+ 8  2020 João Pessoa Assistênc…        18842495.        18424873.      18408734.
+ 9  2020 João Pessoa Assistênc…       322414670.       283332615.     282052325 
+10  2020 João Pessoa Assistênc…        30484971.        29514057.      29492558.
+# … with 70 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="função-select" class="slide level2">
+<h2>Função <code>select()</code></h2>
+
+<img data-src="img/select.png" class="r-stretch"></section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<p>Podemos selecionar apenas as variáveis desejadas, como ano, município, conta e valor (excluindo o nome do estado):</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>despesas <span class="sc">|&gt;</span> <span class="fu">select</span>(ano, municipio, conta, despesas_empenhadas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 355,142 × 4
+     ano municipio   conta                       despesas_empenhadas
+   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;                                     &lt;dbl&gt;
+ 1  2005 Água Branca Abastecimento                                0 
+ 2  2005 Água Branca Ação Judiciária                              0 
+ 3  2005 Água Branca Ação Legislativa                         27679.
+ 4  2005 Água Branca Administração                           734413.
+ 5  2005 Água Branca Administração de Concessões                  0 
+ 6  2005 Água Branca Administração de Receitas                    0 
+ 7  2005 Água Branca Administração Financeira                 72369.
+ 8  2005 Água Branca Administração Geral                     615539.
+ 9  2005 Água Branca Agricultura                              98226.
+10  2005 Água Branca Álcool                                       0 
+# … with 355,132 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-15" class="slide level2">
+<h2></h2>
+<p>Podemos usar o <code>|&gt;</code> para concatenar <code>filter()</code> e <code>select()</code>:</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">select</span>(municipio, despesas_empenhadas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 220 × 2
+   municipio     despesas_empenhadas
+   &lt;chr&gt;                       &lt;dbl&gt;
+ 1 Água Branca             10651712.
+ 2 Aguiar                   7059565.
+ 3 Alagoa Grande           20666011.
+ 4 Alagoa Nova             12241806.
+ 5 Alagoinha               10179579.
+ 6 Alcantil                 6765119.
+ 7 Alhandra                24493996.
+ 8 Amparo                   3787946.
+ 9 Aparecida                5900023.
+10 Araçagi                 12576494.
+# … with 210 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="função-arrange" class="slide level2">
+<h2>Função <code>arrange()</code></h2>
+
+<img data-src="img/arrange.png" class="r-stretch"></section>
+<section id="section-16" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb45-1" class="hljs-ln-code"><a href="#cb45-1"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb45-2" class="hljs-ln-code"><a href="#cb45-2"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb45-3" class="hljs-ln-code"><a href="#cb45-3"></a>  <span class="fu">select</span>(municipio, despesas_empenhadas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 220 × 2
+   municipio     despesas_empenhadas
+   &lt;chr&gt;                       &lt;dbl&gt;
+ 1 Água Branca             10651712.
+ 2 Aguiar                   7059565.
+ 3 Alagoa Grande           20666011.
+ 4 Alagoa Nova             12241806.
+ 5 Alagoinha               10179579.
+ 6 Alcantil                 6765119.
+ 7 Alhandra                24493996.
+ 8 Amparo                   3787946.
+ 9 Aparecida                5900023.
+10 Araçagi                 12576494.
+# … with 210 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-17" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb47-1" class="hljs-ln-code"><a href="#cb47-1"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb47-2" class="hljs-ln-code"><a href="#cb47-2"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb47-3" class="hljs-ln-code"><a href="#cb47-3"></a>  <span class="fu">select</span>(municipio, despesas_empenhadas) <span class="sc">|&gt;</span> </span>
+<span id="cb47-4" class="hljs-ln-code"><a href="#cb47-4"></a>  <span class="fu">arrange</span>(despesas_empenhadas) <span class="co"># ordem crescente</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 220 × 2
+   municipio                 despesas_empenhadas
+   &lt;chr&gt;                                   &lt;dbl&gt;
+ 1 Joca Claudino                        3157430.
+ 2 Coxixola                             3265783.
+ 3 Carrapateira                         3323506.
+ 4 São José do Brejo do Cruz            3410302.
+ 5 Zabelê                               3541968.
+ 6 São José do Bonfim                   3543451.
+ 7 Santo André                          3654349.
+ 8 São Domingos do Cariri               3710854.
+ 9 Caraúbas                             3766775.
+10 Amparo                               3787946.
+# … with 210 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-18" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb49-1" class="hljs-ln-code"><a href="#cb49-1"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb49-2" class="hljs-ln-code"><a href="#cb49-2"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span> <span class="sc">&amp;</span> conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb49-3" class="hljs-ln-code"><a href="#cb49-3"></a>  <span class="fu">select</span>(municipio, despesas_empenhadas) <span class="sc">|&gt;</span> </span>
+<span id="cb49-4" class="hljs-ln-code"><a href="#cb49-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(despesas_empenhadas)) <span class="co"># ordem decrescente</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 220 × 2
+   municipio      despesas_empenhadas
+   &lt;chr&gt;                        &lt;dbl&gt;
+ 1 João Pessoa             765849157.
+ 2 Campina Grande          405886878.
+ 3 Cabedelo                 70257925.
+ 4 Patos                    69975229.
+ 5 Santa Rita               69463831.
+ 6 Sousa                    58499401.
+ 7 Bayeux                   47621883.
+ 8 Guarabira                39262438.
+ 9 Cajazeiras               38091615.
+10 Monteiro                 37189917.
+# … with 210 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="função-mutate" class="slide level2">
+<h2>Função <code>mutate()</code></h2>
+
+<img data-src="img/mutate.png" class="r-stretch"></section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># a função abaixo cria uma variavel nova como a soma</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="co"># da variavel_1 e variavel_2</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>dados <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">variavel_nova =</span> variavel_1 <span class="sc">+</span> variavel_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-20" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Podemos criar uma variável chamada <code>restos_a_pagar_processadas</code> que são as dispesas liquidadas e não pagas.</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb52-1" class="hljs-ln-code"><a href="#cb52-1"></a><span class="co"># vamos filtrar apenas para gastos de saúde em 2020</span></span>
+<span id="cb52-2" class="hljs-ln-code"><a href="#cb52-2"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb52-3" class="hljs-ln-code"><a href="#cb52-3"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span>, conta <span class="sc">==</span> <span class="st">"Saúde"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-21" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Podemos criar uma variável chamada <code>restos_a_pagar_processadas</code> que são as dispesas liquidadas e não pagas.</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb53-1" class="hljs-ln-code"><a href="#cb53-1"></a><span class="co"># vamos filtrar apenas para gastos de saúde em 2020</span></span>
+<span id="cb53-2" class="hljs-ln-code"><a href="#cb53-2"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb53-3" class="hljs-ln-code"><a href="#cb53-3"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span>, conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb53-4" class="hljs-ln-code"><a href="#cb53-4"></a>  <span class="co"># e criar a variável de restos a pagar com mutate()</span></span>
+<span id="cb53-5" class="hljs-ln-code"><a href="#cb53-5"></a>  <span class="fu">mutate</span>(<span class="at">restos_a_pagar_processadas =</span> despesas_liquidadas <span class="sc">-</span> despesas_pagas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="section-22" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<p>Podemos criar uma variável chamada <code>restos_a_pagar_processadas</code> que são as dispesas liquidadas e não pagas.</p>
+<div class="cell">
+<details open="">
+<summary></summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb54-1" class="hljs-ln-code"><a href="#cb54-1"></a><span class="co"># vamos filtrar apenas para gastos de saúde em 2020</span></span>
+<span id="cb54-2" class="hljs-ln-code"><a href="#cb54-2"></a>despesas <span class="sc">|&gt;</span> </span>
+<span id="cb54-3" class="hljs-ln-code"><a href="#cb54-3"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2020</span>, conta <span class="sc">==</span> <span class="st">"Saúde"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-4" class="hljs-ln-code"><a href="#cb54-4"></a>  <span class="co"># e criar a variável de restos a pagar com mutate()</span></span>
+<span id="cb54-5" class="hljs-ln-code"><a href="#cb54-5"></a>  <span class="fu">mutate</span>(<span class="at">restos_a_pagar_processadas =</span> despesas_liquidadas <span class="sc">-</span> despesas_pagas) <span class="sc">|&gt;</span> </span>
+<span id="cb54-6" class="hljs-ln-code"><a href="#cb54-6"></a>  <span class="co"># para facilitar a visualização das informações, vamos usar select e arrange:</span></span>
+<span id="cb54-7" class="hljs-ln-code"><a href="#cb54-7"></a>  <span class="fu">select</span>(municipio, restos_a_pagar_processadas) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(restos_a_pagar_processadas))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 220 × 2
+   municipio       restos_a_pagar_processadas
+   &lt;chr&gt;                                &lt;dbl&gt;
+ 1 Campina Grande                   20262693.
+ 2 Bayeux                            5360486.
+ 3 Cabedelo                          4011032.
+ 4 Patos                             3542946.
+ 5 Piancó                            2487771.
+ 6 Cajazeiras                        2093749.
+ 7 Princesa Isabel                   1874255.
+ 8 Monteiro                          1499373.
+ 9 João Pessoa                       1433962.
+10 São Bento                         1308499.
+# … with 210 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="htmlwidget-23e966c2813796bd52a3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-23e966c2813796bd52a3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220"],["Campina Grande","Bayeux","Cabedelo","Patos","Piancó","Cajazeiras","Princesa Isabel","Monteiro","João Pessoa","São Bento","Conceição","Pitimbu","Juru","Fagundes","Ingá","Natuba","Itaporanga","Cacimba de Dentro","Sousa","Santa Rita","Alagoa Grande","Sapé","Cubati","Belém do Brejo do Cruz","Alhandra","Rio Tinto","Cruz do Espírito Santo","Baía da Traição","Mamanguape","Remígio","Coremas","Joca Claudino","Barra de São Miguel","Alagoa Nova","Caaporã","Santa Cruz","Caturité","São Vicente do Seridó","Ibiara","Serra Branca","São João do Rio do Peixe","Mogeiro","Soledade","Umbuzeiro","Araruna","Riacho dos Cavalos","Diamante","Sumé","Casserengue","São José dos Ramos","Itapororoca","Itatuba","Tavares","Parari","Mari","Lastro","Olho d'Água","Jacaraú","Sobrado","Santa Helena","Pombal","Queimadas","Passagem","Esperança","Bonito de Santa Fé","Carrapateira","Pedra Lavrada","Brejo dos Santos","Curral de Cima","Boqueirão","Alagoinha","Juripiranga","Cacimba de Areia","Nova Olinda","São José de Piranhas","Emas","Imaculada","Lucena","Monte Horebe","Matinhas","São João do Cariri","Pedro Régis","Marizópolis","Poço Dantas","Serra da Raiz","Cachoeira dos Índios","Desterro","Santa Inês","Itabaiana","Santa Teresinha","Marcação","Puxinanã","Cuité","Lagoa de Dentro","São José do Sabugi","Santa Cecília","Cacimbas","Boa Ventura","Assunção","Pilões","Curral Velho","Cuité de Mamanguape","São José de Espinharas","Mato Grosso","Aparecida","Poço de José de Moura","Livramento","Várzea","Mulungu","Gurinhém","Tacima","Pedras de Fogo","Triunfo","Igaracy","Areia de Baraúnas","Caldas Brandão","Nova Palmeira","São Miguel de Taipu","Picuí","Nova Floresta","São José dos Cordeiros","Dona Inês","Salgado de São Félix","Zabelê","Juazeirinho","Areial","Riachão","Frei Martinho","Belém","Cabaceiras","Serra Redonda","Nazarezinho","Camalaú","Pocinhos","Lagoa Seca","São Sebastião do Umbuzeiro","Quixabá","Lagoa","Bom Jesus","Brejo do Cruz","Damião","Cuitegi","Cajazeirinhas","Condado","Riacho de Santo Antônio","Ouro Velho","Água Branca","Santa Luzia","Riachão do Poço","Areia","Serraria","Borborema","Pedra Branca","Sossêgo","Boa Vista","Duas Estradas","Conde","Olivedos","São José da Lagoa Tapada","Bananeiras","São José de Princesa","Jericó","Riachão do Bacamarte","Paulista","Pirpirituba","São Sebastião de Lagoa de Roça","Taperoá","Coxixola","Serra Grande","Catingueira","Alcantil","Amparo","Maturéia","Santana dos Garrotes","Sertãozinho","Logradouro","São Bentinho","Tenório","São João do Tigre","Catolé do Rocha","Santo André","Caiçara","Teixeira","Prata","Vieirópolis","Mataraca","Barra de Santa Rosa","Montadas","Solânea","Capim","São Domingos","Massaranduba","Bernardino Batista","Aroeiras","Aguiar","Mãe d'Água","Salgadinho","Santana de Mangueira","Malta","Barra de Santana","Uiraúna","Bom Sucesso","Juarez Távora","Pilõezinhos","Gurjão","São José do Brejo do Cruz","São Mamede","Vista Serrana","Araçagi","Baraúna","Caraúbas","Congo","Gado Bravo","Guarabira","Junco do Seridó","Manaíra","São Domingos do Cariri","São Francisco","São José de Caiana","São José do Bonfim"],[20262692.6,5360485.63,4011031.72,3542946.18,2487770.58,2093749.39,1874255.01,1499372.88,1433961.89999998,1308498.67,1211639.24,1165148.98,1085356.07,1083257.75,1057555,1048332.15,1037985.8,1024480,938124.109999999,924918.890000001,915646.98,827289.779999997,776897.62,749669.87,709585.239999998,696726.899999999,630345.780000001,612699.98,603334.289999999,580696.09,579073.050000001,544994.6,535950.54,529640.84,513229.870000001,497603.2,495303.96,460233.58,449619.24,447325.41,431090.66,428702.98,426368.319999998,389814.66,382355.870000001,380746.37,377602.029999999,371672.32,355030.93,354779.59,351019.67,344728.600000001,342673,328850.010000001,315034.800000001,311755.66,311009.55,308811.18,305523.44,305098.85,296034.440000001,291921.18,291258.18,286605.330000002,285022.42,279896.72,278757.28,268944.46,262055.52,260224.84,251048.25,249718.16,248578.970000001,244772.810000001,241144.379999999,237555.399999999,233567.030000001,232592.85,224649.25,224227.14,223281.1,222252.970000001,214468.460000001,213947.060000001,207705.38,203620.01,200921.65,196099.640000001,194063.18,193834.239999999,193215.66,191940.060000001,181727.779999999,172209.17,171575.87,169615.52,166843.08,160133.83,159575.28,157770.23,156991.18,156730.73,155985.850000001,152022.649999999,137581.18,129467.98,126797.98,123229.05,119240.960000001,119141.120000001,106113.48,105679.57,105122.5,101856.74,100246.82,93734.2000000002,91194.8500000001,88475,87971.5999999996,86569.6200000001,85968.8600000003,85022.0499999998,84093.2699999996,83981.54,82108.5,80673.54,78601.5800000001,78415.6899999999,75505.2400000002,74239.8399999999,74008.8500000006,72959.0499999998,70318.29,70075.9100000001,66923.4800000004,65101.4099999997,64528.1399999997,63946.9500000002,59164.04,58350.9100000001,57061.3999999999,55340.3499999996,55091.3900000006,54274.8500000006,50424,49181.1899999995,47856.9100000001,46906,45533.5500000007,45504.6899999995,44941.2400000002,44413.46,43598.2800000003,41933.7200000002,40925.9400000004,38307.8700000001,37479.6499999985,37138.3600000003,34367.6699999999,33155.5700000003,28978.1000000001,25737.0800000001,24179.1500000004,23868.9900000002,23308.5999999996,23003.1099999994,21083.8200000003,20700.0600000001,18367.2000000002,18248.4699999997,17706.29,15900,15808.0500000007,13716.1900000004,12177,11265.2400000002,10818.6199999992,10405.6099999994,9939.3200000003,9223.3200000003,8588.33000000007,8299.90000000037,8292.90000000037,7443.33000000007,7157.5,6750.41999999993,6435.18000000156,4880,4350,4262.23000000045,4200.54000000004,3681.40000000037,3337.95000000019,3135,2813.96999999974,2759.99000000022,2469.89999999991,2052.95000000019,1800,1795.46999999974,1636.16999999993,1440,1192.14999999944,800,720,4.75,1.34999999962747,0.100000000558794,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>municipio<\/th>\n      <th>restos_a_pagar_processadas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"initComplete":"function(settings, json) {\n$(this.api().table().container()).css({'font-size': '14pt'});\n}","columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+</section></section>
+<section>
+<section id="visualização" class="title-slide slide level1 center" data-auto-animate="true">
+<h1 data-id="quarto-animate-title">Visualização</h1>
+
+</section>
+<section id="section-24" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+
+<img data-src="img/ggplot.png" width="400" class="r-stretch quarto-figure-center"></section>
+<section id="section-25" class="slide level2">
+<h2></h2>
+</section>
+<section id="section-26" class="slide level2">
+<h2><img data-src="img/layers.png"></h2>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># Instalar o pacote</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb56-3"><a href="#cb56-3"></a>  <span class="co"># Render a barplot</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section-27" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb57-1" class="hljs-ln-code"><a href="#cb57-1"></a><span class="co"># Fill in the spot we created for a plot</span></span>
+<span id="cb57-2" class="hljs-ln-code"><a href="#cb57-2"></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb57-3" class="hljs-ln-code"><a href="#cb57-3"></a>  <span class="co"># Render a barplot</span></span>
+<span id="cb57-4" class="hljs-ln-code"><a href="#cb57-4"></a>  <span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
+<span id="cb57-5" class="hljs-ln-code"><a href="#cb57-5"></a>          <span class="at">main=</span>input<span class="sc">$</span>region,</span>
+<span id="cb57-6" class="hljs-ln-code"><a href="#cb57-6"></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
+<span id="cb57-7" class="hljs-ln-code"><a href="#cb57-7"></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
+<span id="cb57-8" class="hljs-ln-code"><a href="#cb57-8"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section id="modelar" class="title-slide slide level1 center">
+<h1>Modelar</h1>
+
+</section>
+
+<section id="comunicar" class="title-slide slide level1 center">
+<h1>Comunicar</h1>
+<ul>
+<li class="fragment"><p><a href="https://robsonlima.netlify.app/">Blogs</a></p></li>
+<li class="fragment"><p><strong>Relatórios</strong></p></li>
+<li class="fragment"><p><a href="https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide"><strong>Slides</strong></a></p></li>
+<li class="fragment"><p><a href="https://shiny.rstudio.com/gallery/"><strong>Sites dinâmicos</strong> com <em>Shiny</em></a></p></li>
+<li class="fragment"><p><strong>Análise de Dados</strong> (Nosso foco hoje)</p></li>
+</ul>
+
+<img src="logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="apresentacao_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="apresentacao_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="apresentacao_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="apresentacao_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

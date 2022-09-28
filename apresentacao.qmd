@@ -1,0 +1,548 @@
+---
+title: "Dados em Informações para as Ciências Sociais"
+subtitle: "Usando **R** na Análise Estatística"
+author: "Dr Robson Oliveira"
+institute: "IFPB"
+logo: logo.png
+incremental: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: serif
+    code-fold: show
+    code-summary: ">"
+editor: visual
+---
+
+# O Que é R?
+
+![](img/R_logo.svg.png){width="600"}
+
+##  {auto-animate="true"}
+
+# O que vamos apresentar
+
+![](img/storytelling.png){fig-align="center" width="117"}
+
+# O que vamos apresentar
+
+![](img/data-science.png){fig-align="center" width="300"}
+
+# Pré-Requisitos
+
+## 
+
+::: nonincremental
+1.  Baixar e instalar **R** em <https://cloud.r-project.org/>
+:::
+
+![](img/r_console.png){fig-align="center" width="400"}
+
+## 
+
+::: nonincremental
+2.  Instalar o RStudio: [https://www.rstudio.com](https://www.rstudio.com/products/rstudio/download/)
+:::
+
+![](img/rstudio.png){fig-align="center" width="400"}
+
+##  {auto-animate="true"}
+
+```{r eval=FALSE}
+#| echo=TRUE
+# instalar um pacote:
+install.packages("tidyverse")
+```
+
+##  {auto-animate="true"}
+
+::: nonincremental
+3.  Instalar os pacotes necessários
+:::
+
+```{r eval=FALSE}
+#| echo=TRUE
+# instalar um pacote:
+install.packages("tidyverse")
+
+# Só é preciso instalar um pacote uma única vez.
+# Mas é preciso carregaro pacote sempre que iniciarmos o R:
+library(tidyverse)
+```
+
+## 
+
+![](img/tidyverse.png){fig-align="center" width="173"}
+
+# O Básico
+
+## Rodando Código no R
+
+```{r}
+1 + 2
+```
+
+## Rodando Código no R
+
+```{r}
+1 / 200 * 30
+```
+
+## Rodando Código no R
+
+```{r}
+sqrt(49)
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r}
+# podemos salvar o resultado de 3 * 4 como x
+x <- 3 * 4
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r}
+# podemos salvar o resultado de 3 * 4 como x
+x <- 3 * 4
+
+# para inspecionar o valor de `x` digitamos seu nome:
+x
+```
+
+## Chamando Funções
+
+R tem uma série de funções. Por exemplo, para criar uma sequência de números entre 1 e 10, usamos a função `seq()`:
+
+```{r}
+seq(1, 10)
+```
+
+## Chamando Funções
+
+Sempre chamamos uma função da seguinte forma:
+
+```{r eval=FALSE}
+nome_funcao(argumento1 = valor1, argumento2 = valor2, ...)
+```
+
+## Chamando Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r}
+# somar dois valores
+sum(10, 15)
+```
+
+## Chamando Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r}
+# somar dois valores
+sum(10, 15)
+```
+
+```{r}
+# encontrar raiz quadrada
+sqrt(49)
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+Sempre **atribuimos** da mesma forma:
+
+```{r eval=FALSE}
+nome_objeto <- valor
+
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+Sempre **atribuimos** da mesma forma:
+
+```{r eval=FALSE}
+nome_objeto <- valor
+
+```
+
+Dica: Podemos ler o código acima como "estamos salvando o valor como nome_objeto".
+
+## Nome de objetos
+
+Nome de objetos precisam:
+
+-   Começar com letras
+
+-   Conter letras, números, `_` e `.`
+
+-   Ser descritivo
+
+-   Recomendo separar palavras com `_`: `sequencia_entre_1_10`
+
+## Nome de objetos {auto-animate="true"}
+
+```{r}
+# salvar a sequência de números como um objeto
+sequencia_entre_1_10 <- seq(1, 10)
+```
+
+## Nome de objetos {auto-animate="true"}
+
+```{r}
+# salvar a sequência de números como um objeto
+sequencia_entre_1_10 <- seq(1, 10)
+
+# somar todos os valores da sequência
+sum(sequencia_entre_1_10)
+```
+
+## Banco de dados {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r eval=FALSE}
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+```
+
+## Banco de dados {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r}
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
+```
+
+## 
+
+```{r}
+#| echo=FALSE
+dados_carros <- mtcars
+#options(DT.options = list(pageLength = 4))
+font.size <- "14pt"
+
+dados_carros |> DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Banco de dados {auto-animate="true"}
+
+Para trabalharmos com dados no R, eles precisam estar em um formato `tidy`:
+
+![](img/tidy-1.png)
+
+## Exercícios
+
+Salve o 2022 como `ano_atual <- 2022`, salve seu ano de nascimento como `ano_nascimento` e faça uma variável igual a `idade` como a subtração das duas.
+
+# Importar Dados
+
+![](img/import_r.png){fig-align="center" width="300"}
+
+##  {auto-animate="true"}
+
+Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+
+```{r eval=FALSE}
+# importar o pacote
+library(tidyverse)
+```
+
+##  {auto-animate="true"}
+
+Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+
+```{r eval=FALSE}
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "despesas"
+despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+```
+
+##  {auto-animate="true"}
+
+Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+
+```{r}
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "despesas"
+despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+despesas
+```
+
+## 
+
+```{r}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "14pt"
+
+despesas |> 
+  sample_n(1000) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+# Transformação de dados
+
+![](img/hex-dplyr.png){fig-align="center" width="400"}
+
+## Verbos do `dplyr`
+
+-   `filter()` filtra apenas observações com valores específicos
+
+-   `arrange()` reordena as linhas da base
+
+-   `select()` seleciona apenas variáveis de interesse
+
+-   `mutate()` cria novas variáveis como função das demais
+
+-   `summarise()` cria estatísticas descritivas
+
+## Filtrar dados com `filter`
+
+![](img/filter.png)
+
+## Funcionamento da função `filter()` 
+
+```{r eval=FALSE}
+filter(<DADOS>, <REGRAS>)
+```
+
+##  {auto-animate="true"}
+
+Se quisermos filtrar as despesas dos municípios para o ano de 2020:
+
+```{r}
+filter(despesas, ano == 2020)
+```
+
+##  {auto-animate="true"}
+
+Se quisermos filtrar as despesas dos municípios para o ano de 2020 e **para o município de João Pessoa**:
+
+```{r}
+filter(despesas, ano == 2020, municipio == "João Pessoa")
+```
+
+## Pipe `|>`
+
+O *pipe `|>`* é um operador que permite reescrever as expressões de outra forma. Dica: Leia o *pipe* como um **ENTÃO**:
+
+![](img/pipe1.png)
+
+## 
+
+```{r eval=FALSE}
+# ao invés de escrever assim:
+filter(despesas, ano == 2020, municipio == "João Pessoa")
+
+
+```
+
+```{r}
+# escrevemos assim:
+despesas |> filter(ano == 2020, municipio == "João Pessoa")
+```
+
+## Função `select()`
+
+![](img/select.png)
+
+## 
+
+Podemos selecionar apenas as variáveis desejadas, como ano, município, conta e valor (excluindo o nome do estado):
+
+```{r}
+despesas |> select(ano, municipio, conta, despesas_empenhadas)
+```
+
+## 
+
+Podemos usar o `|>` para concatenar `filter()` e `select()`:
+
+```{r}
+despesas |> 
+  filter(ano == 2020 & conta == "Saúde") |> 
+  select(municipio, despesas_empenhadas)
+```
+
+## Função `arrange()`
+
+![](img/arrange.png)
+
+##  {auto-animate="true"}
+
+Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+
+```{r}
+despesas |> 
+  filter(ano == 2020 & conta == "Saúde") |> 
+  select(municipio, despesas_empenhadas)
+```
+
+##  {auto-animate="true"}
+
+Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+
+```{r}
+despesas |> 
+  filter(ano == 2020 & conta == "Saúde") |> 
+  select(municipio, despesas_empenhadas) |> 
+  arrange(despesas_empenhadas) # ordem crescente
+```
+
+##  {auto-animate="true"}
+
+Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+
+```{r}
+despesas |> 
+  filter(ano == 2020 & conta == "Saúde") |> 
+  select(municipio, despesas_empenhadas) |> 
+  arrange(desc(despesas_empenhadas)) # ordem decrescente
+```
+
+## Função `mutate()` 
+
+![](img/mutate.png)
+
+## 
+
+```{r eval=FALSE}
+
+# a função abaixo cria uma variavel nova como a soma
+# da variavel_1 e variavel_2
+dados <- mutate(variavel_nova = variavel_1 + variavel_2)
+```
+
+##  {auto-animate="true"}
+
+Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+
+```{r eval=FALSE}
+# vamos filtrar apenas para gastos de saúde em 2020
+despesas |> 
+  filter(ano == 2020, conta == "Saúde")
+
+```
+
+##  {auto-animate="true"}
+
+Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+
+```{r eval=FALSE}
+# vamos filtrar apenas para gastos de saúde em 2020
+despesas |> 
+  filter(ano == 2020, conta == "Saúde") |> 
+  # e criar a variável de restos a pagar com mutate()
+  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas)
+  
+```
+
+##  {auto-animate="true"}
+
+Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+
+```{r}
+# vamos filtrar apenas para gastos de saúde em 2020
+despesas |> 
+  filter(ano == 2020, conta == "Saúde") |> 
+  # e criar a variável de restos a pagar com mutate()
+  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas) |> 
+  # para facilitar a visualização das informações, vamos usar select e arrange:
+  select(municipio, restos_a_pagar_processadas) |> arrange(desc(restos_a_pagar_processadas))
+```
+
+## 
+
+```{r}
+#| echo=FALSE
+font.size <- "14pt"
+
+despesas |> 
+  filter(ano == 2020, conta == "Saúde") |> 
+  # e criar a variável de restos a pagar com mutate()
+  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas) |> 
+  # para facilitar a visualização das informações, vamos usar select e arrange:
+  select(municipio, restos_a_pagar_processadas) |> arrange(desc(restos_a_pagar_processadas)) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+
+
+```
+
+# Visualização {auto-animate="true"}
+
+##  {auto-animate="true"}
+
+![](img/ggplot.png){fig-align="center" width="400"}
+
+## 
+
+## ![](img/layers.png)
+
+``` r
+# Instalar o pacote
+output$phonePlot <- renderPlot({
+  # Render a barplot
+})
+```
+
+##  {auto-animate="true"}
+
+``` r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+  barplot(WorldPhones[,input$region]*1000, 
+          main=input$region,
+          ylab="Number of Telephones",
+          xlab="Year")
+})
+```
+
+# Modelar
+
+# Comunicar
+
+-   [Blogs](https://robsonlima.netlify.app/)
+
+-   **Relatórios**
+
+-   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide)
+
+-   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
+
+-   **Análise de Dados** (Nosso foco hoje)

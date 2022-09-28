@@ -1,6 +1,6 @@
 ---
-title: "Dados em Informações para as Ciências Sociais"
-subtitle: "Usando **R** na Análise Estatística"
+title: "Transformando Dados em Informações"
+subtitle: "Usando **R** nas Ciências Sociais"
 author: "Dr Robson Oliveira"
 institute: "IFPB"
 logo: logo.png
@@ -245,10 +245,6 @@ Para trabalharmos com dados no R, eles precisam estar em um formato `tidy`:
 
 ![](img/tidy-1.png)
 
-## Exercícios
-
-Salve o 2022 como `ano_atual <- 2022`, salve seu ano de nascimento como `ano_nascimento` e faça uma variável igual a `idade` como a subtração das duas.
-
 # Importar Dados
 
 ![](img/import_r.png){fig-align="center" width="300"}
@@ -328,7 +324,7 @@ despesas |>
 
 ![](img/filter.png)
 
-## Funcionamento da função `filter()` 
+## Funcionamento da função `filter()`
 
 ```{r eval=FALSE}
 filter(<DADOS>, <REGRAS>)
@@ -367,7 +363,8 @@ filter(despesas, ano == 2020, municipio == "João Pessoa")
 
 ```{r}
 # escrevemos assim:
-despesas |> filter(ano == 2020, municipio == "João Pessoa")
+despesas |> # pegue os dados
+  filter(ano == 2020, municipio == "João Pessoa") # ENTÃO filtre para...
 ```
 
 ## Função `select()`
@@ -376,7 +373,7 @@ despesas |> filter(ano == 2020, municipio == "João Pessoa")
 
 ## 
 
-Podemos selecionar apenas as variáveis desejadas, como ano, município, conta e valor (excluindo o nome do estado):
+Podemos selecionar apenas as variáveis desejadas, como ano, município, conta e despesas empenhadas:
 
 ```{r}
 despesas |> select(ano, municipio, conta, despesas_empenhadas)
@@ -388,8 +385,8 @@ Podemos usar o `|>` para concatenar `filter()` e `select()`:
 
 ```{r}
 despesas |> 
-  filter(ano == 2020 & conta == "Saúde") |> 
-  select(municipio, despesas_empenhadas)
+  filter(ano == 2020 & conta == "Saúde") |> # ENTÃO filtre os dados
+  select(municipio, despesas_empenhadas) # então selecione as colunas
 ```
 
 ## Função `arrange()`
@@ -428,11 +425,13 @@ despesas |>
   arrange(desc(despesas_empenhadas)) # ordem decrescente
 ```
 
-## Função `mutate()` 
+## Função `mutate()`
 
 ![](img/mutate.png)
 
 ## 
+
+Na função `mutate()` especifique o nome da nova variável e após o sinal de `=` indique a transformação que deseja realizar:
 
 ```{r eval=FALSE}
 
@@ -503,35 +502,239 @@ despesas |>
 
 ```
 
+# Função `summarise()`
+
+![](img/summarise.png)
+
+## 
+
+-   O último verbo do `dplyr` é o `summarise()`
+
+-   Ele colapsa os dados (resume\_ em uma única linha
+
+-   O objetivo é criar medidas como média, medianas, totais e outros.
+
+##  {auto-animate="true"}
+
+Para obter o total empenhado com saúde em 2020 podemos:
+
+```{r eval=TRUE}
+# filtrar os dados
+despesas |> 
+  filter(ano == 2020, conta == 'Saúde') 
+```
+
+##  {auto-animate="true"}
+
+Para obter o total gasto com saúde em 2020 podemos:
+
+```{r eval=TRUE}
+# filtrar os dados
+despesas |> 
+  filter(ano == 2020, conta == 'Saúde') |> 
+  # somar os valores empenhados:
+  summarise(total_empenhado_saude = sum(despesas_empenhadas))
+```
+
+## 
+
+Se quisermos saber o valor médio empenhado, só substituir a função `sum()` por `mean()`:
+
+```{r}
+despesas |> 
+  filter(ano == 2020, conta == 'Saúde') |> 
+  summarise(empenho_medio_saude = mean(despesas_empenhadas))
+```
+
+# Função `group_by()`
+
+![](img/groupby.png)
+
+## 
+
+-   `summarise()` é mais útil quando usamos em conjunto com `group_by()`
+
+-   `group_by()` muda a unidade de análise da base de dados completa para grupos de observações
+
+-   Por exemplo, podemos estar interessado no gasto médio de saúde para cada ano
+
+##  {auto-animate="true"}
+
+```{r eval=FALSE}
+despesas |> 
+  # filtramos apenas para gastos de saúde
+  filter(conta == 'Saúde')
+```
+
+##  {auto-animate="true"}
+
+```{r eval=FALSE}
+despesas |> 
+  # filtramos apenas para gastos de saúde
+  filter(conta == 'Saúde') |> 
+  # agrupamos as observações por ano
+  group_by(ano)
+```
+
+##  {auto-animate="true"}
+
+```{r}
+despesas |> 
+  # filtramos apenas para gastos de saúde
+  filter(conta == 'Saúde') |> 
+  # agrupamos as observações por ano
+  group_by(ano) |> 
+  # calculamos a média de gastos
+  summarise(total_empenhos = mean(despesas_empenhadas))
+```
+
+## Salvando Resultados
+
+Para que as transformações feitas nos dados sejam reutilizadas, podemos salvar o resultado como um objeto com o operador `<-`:
+
+```{r}
+# salvamos o que fizemos no objeto despesas_saude_ano
+despesas_saude_ano <- despesas |> 
+  filter(conta == 'Saúde') |> 
+  group_by(ano) |> 
+  summarise(total_empenhos = mean(despesas_empenhadas))
+```
+
+## Salvando Resultados
+
+E agora podemos ver o que foi feito acima:
+
+```{r}
+despesas_saude_ano
+```
+
 # Visualização {auto-animate="true"}
 
 ##  {auto-animate="true"}
 
 ![](img/ggplot.png){fig-align="center" width="400"}
 
+
+
+## {auto-animate="true"}
+
+Antes de criar o primeiro gráfico, vamos modificar o banco de dados para mostrar gastos com saúde e educação em 2020:
+
+```{r eval=FALSE}
+despesas_saude_educacao <- despesas |> 
+  filter(ano == 2020, conta == 'Saúde' | conta == 'Educação') |> 
+  filter(municipio != "João Pessoa" & municipio != "Campina Grande") |> 
+  select(ano, municipio, conta, despesas_pagas) |> 
+  # essas funções são um pouco mais avançadas. Mas não se preocupe por enquanto.
+  pivot_wider(names_from = "conta", values_from = "despesas_pagas") |> 
+  janitor::clean_names()
+
+```
+
+
+
+## {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r eval=FALSE}
+# camada de dados
+despesas_saude_educacao
+```
+
+
+
+## {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r eval=FALSE}
+# camada de dados
+despesas_saude_educacao |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = educacao, y = saude))
+```
+
+
+
+## {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r}
+# camada de dados
+despesas_saude_educacao |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = educacao, y = saude)) +
+  # camada de geometria
+  geom_point()
+```
+
+
+
+
 ## 
 
-## ![](img/layers.png)
+![](img/layers.png)
 
-``` r
-# Instalar o pacote
-output$phonePlot <- renderPlot({
-  # Render a barplot
-})
+
+## Geometrias
+
+![](img/geoms.png)
+
+## 
+
+-   **geom** é o objeto geométrico que um gráfico usa para representar dados.
+
+-   **Gráficos de barras** são construídos com `geom_bar`.
+
+-   **Gráficos de linhas** são construídos com `geom_line`.
+
+-   Assim, para mudar a geometria, só alterar o termo `geom_*`.
+
+
+## `geom_point()`
+
+```{r}
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_point(color = 'blue')
+
 ```
 
-##  {auto-animate="true"}
 
-``` r
-# Fill in the spot we created for a plot
-output$phonePlot <- renderPlot({
-  # Render a barplot
-  barplot(WorldPhones[,input$region]*1000, 
-          main=input$region,
-          ylab="Number of Telephones",
-          xlab="Year")
-})
+## `geom_smooth()`
+
+```{r}
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_smooth()
+
+
 ```
+
+
+## Múltiplos `geom_*`
+
+```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_smooth() +
+  geom_point()
+
+```
+
+### `geom_hist`
+
+
+```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# note geom_histogram exige uma variável contínua
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price))
+
+```
+
 
 # Modelar
 

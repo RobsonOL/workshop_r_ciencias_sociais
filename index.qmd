@@ -620,7 +620,7 @@ despesas_saude_ano
 
 Antes de criar o primeiro gráfico, vamos modificar o banco de dados para mostrar gastos com saúde e educação em 2020:
 
-```{r eval=FALSE}
+```{r}
 despesas_saude_educacao <- despesas |> 
   filter(ano == 2020, conta == 'Saúde' | conta == 'Educação') |> 
   filter(municipio != "João Pessoa" & municipio != "Campina Grande") |> 

@@ -725,13 +725,13 @@ despesas_saude_educacao |>
 
 ```
 
-### `geom_hist`
+## `geom_hist`
 
 
 ```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-# note geom_histogram exige uma variável contínua
-ggplot(data = diamonds) +
-  geom_histogram(mapping = aes(x = price))
+despesas_saude_educacao |> 
+  ggplot(aes(x = saude)) +
+  geom_histogram()
 
 ```
 

@@ -4,42 +4,80 @@ subtitle: "Usando **R** nas Ciências Sociais"
 author: "Dr Robson Oliveira"
 institute: "IFPB"
 logo: logo.png
+footer: "robsonolima.com.br"
 incremental: true
 execute:
   echo: true
 format: 
   revealjs:
     theme: serif
+    auto-animate: true
     code-fold: show
     code-summary: ">"
 editor: visual
 ---
 
-# O Que é R?
+# Contando Histórias com Dados
 
-![](img/R_logo.svg.png){width="600"}
+## Contando Histórias com Dados
 
-##  {auto-animate="true"}
+::: columns
+::: {.column width="50%"}
+![Edward Morgan Forster. Autor de "Aspects of the Novel (1927)"](img/foster.jpg){fig-align="center"}
+:::
 
-# O que vamos apresentar
+::: {.column width="50%"}
+-   História
+
+-   Pessoas
+
+-   Trama/enredo
+
+-   Fantasia
+
+-   Profecias
+
+-   Padrões
+
+-   Ritmo
+:::
+:::
+
+## Contando Histórias com Dados
 
 ![](img/storytelling.png){fig-align="center" width="117"}
 
-# O que vamos apresentar
+## Contando Histórias com Dados
 
-![](img/data-science.png){fig-align="center" width="300"}
+## ![](img/data-science.png)
+
+::: notes
+Planejar
+
+Simular
+
+Adquirir
+
+Explorar
+
+Compartilhar
+:::
 
 # Pré-Requisitos
 
-## 
+## R
+
+![](img/R_logo.svg.png){width="600"}
+
+## R
 
 ::: nonincremental
-1.  Baixar e instalar **R** em <https://cloud.r-project.org/>
+1.  Baixar e instalar **R** em <https://cloud.r-project.org>
 :::
 
 ![](img/r_console.png){fig-align="center" width="400"}
 
-## 
+## Rstudio
 
 ::: nonincremental
 2.  Instalar o RStudio: [https://www.rstudio.com](https://www.rstudio.com/products/rstudio/download/)
@@ -47,7 +85,11 @@ editor: visual
 
 ![](img/rstudio.png){fig-align="center" width="400"}
 
-##  {auto-animate="true"}
+## Pacotes {auto-animate="true"}
+
+::: nonincremental
+3.  Instalar os pacotes necessários
+:::
 
 ```{r eval=FALSE}
 #| echo=TRUE
@@ -55,7 +97,7 @@ editor: visual
 install.packages("tidyverse")
 ```
 
-##  {auto-animate="true"}
+## Pacotes {auto-animate="true"}
 
 ::: nonincremental
 3.  Instalar os pacotes necessários
@@ -67,7 +109,7 @@ install.packages("tidyverse")
 install.packages("tidyverse")
 
 # Só é preciso instalar um pacote uma única vez.
-# Mas é preciso carregaro pacote sempre que iniciarmos o R:
+# Mas é preciso carrega-lo sempre que iniciarmos o R:
 library(tidyverse)
 ```
 
@@ -75,21 +117,21 @@ library(tidyverse)
 
 ![](img/tidyverse.png){fig-align="center" width="173"}
 
-# O Básico
+# O Básico {auto-animate="true"}
 
-## Rodando Código no R
+## Rodando Código no R {auto-animate="true"}
 
 ```{r}
 1 + 2
 ```
 
-## Rodando Código no R
+## Rodando Código no R {auto-animate="true"}
 
 ```{r}
 1 / 200 * 30
 ```
 
-## Rodando Código no R
+## Rodando Código no R {auto-animate="true"}
 
 ```{r}
 sqrt(49)
@@ -169,7 +211,7 @@ nome_objeto <- valor
 
 ```
 
-Dica: Podemos ler o código acima como "estamos salvando o valor como nome_objeto".
+Dica: Podemos ler o código acima como "estamos salvando o valor como ***nome_objeto***".
 
 ## Nome de objetos
 
@@ -304,11 +346,33 @@ despesas |>
      ) 
 ```
 
+## Estatística Descritiva {auto-animate="true"}
+
+```{r eval=FALSE}
+install.packages("skimr")
+
+```
+
+## Estatística Descritiva {auto-animate="true"}
+
+```{r eval=FALSE}
+install.packages("skimr")
+library(skimr)
+```
+
+## Estatística Descritiva {auto-animate="true"}
+
+```{r}
+#install.packages("skimr")
+library(skimr)
+skim(despesas)
+```
+
 # Transformação de dados
 
 ![](img/hex-dplyr.png){fig-align="center" width="400"}
 
-## Verbos do `dplyr`
+## Funções do `dplyr`
 
 -   `filter()` filtra apenas observações com valores específicos
 
@@ -320,7 +384,7 @@ despesas |>
 
 -   `summarise()` cria estatísticas descritivas
 
-## Filtrar dados com `filter`
+## Função `filter`
 
 ![](img/filter.png)
 
@@ -502,11 +566,11 @@ despesas |>
 
 ```
 
-# Função `summarise()`
+## Função `summarise()`
 
 ![](img/summarise.png)
 
-## 
+## Função `summarise()`
 
 -   O último verbo do `dplyr` é o `summarise()`
 
@@ -546,7 +610,7 @@ despesas |>
   summarise(empenho_medio_saude = mean(despesas_empenhadas))
 ```
 
-# Função `group_by()`
+## Função `group_by()`
 
 ![](img/groupby.png)
 
@@ -614,9 +678,7 @@ despesas_saude_ano
 
 ![](img/ggplot.png){fig-align="center" width="400"}
 
-
-
-## {auto-animate="true"}
+##  {auto-animate="true"}
 
 Antes de criar o primeiro gráfico, vamos modificar o banco de dados para mostrar gastos com saúde e educação em 2020:
 
@@ -631,9 +693,7 @@ despesas_saude_educacao <- despesas |>
 
 ```
 
-
-
-## {auto-animate="true"}
+##  {auto-animate="true"}
 
 Vamos criar nosso primeiro gráfico:
 
@@ -642,9 +702,7 @@ Vamos criar nosso primeiro gráfico:
 despesas_saude_educacao
 ```
 
-
-
-## {auto-animate="true"}
+##  {auto-animate="true"}
 
 Vamos criar nosso primeiro gráfico:
 
@@ -655,9 +713,7 @@ despesas_saude_educacao |>
   ggplot(aes(x = educacao, y = saude))
 ```
 
-
-
-## {auto-animate="true"}
+##  {auto-animate="true"}
 
 Vamos criar nosso primeiro gráfico:
 
@@ -670,13 +726,9 @@ despesas_saude_educacao |>
   geom_point()
 ```
 
-
-
-
 ## 
 
 ![](img/layers.png)
-
 
 ## Geometrias
 
@@ -692,7 +744,6 @@ despesas_saude_educacao |>
 
 -   Assim, para mudar a geometria, só alterar o termo `geom_*`.
 
-
 ## `geom_point()`
 
 ```{r}
@@ -701,7 +752,6 @@ despesas_saude_educacao |>
   geom_point(color = 'blue')
 
 ```
-
 
 ## `geom_smooth()`
 
@@ -712,7 +762,6 @@ despesas_saude_educacao |>
 
 
 ```
-
 
 ## Múltiplos `geom_*`
 
@@ -727,7 +776,6 @@ despesas_saude_educacao |>
 
 ## `geom_hist`
 
-
 ```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 despesas_saude_educacao |> 
   ggplot(aes(x = saude)) +
@@ -735,8 +783,15 @@ despesas_saude_educacao |>
 
 ```
 
-
 # Modelar
+
+## Séries Temporais
+
+st
+
+## Regressão
+
+re
 
 # Comunicar
 
@@ -747,5 +802,3 @@ despesas_saude_educacao |>
 -   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide)
 
 -   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
-
--   **Análise de Dados** (Nosso foco hoje)

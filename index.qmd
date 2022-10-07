@@ -3,21 +3,29 @@ title: "Transformando Dados em Informações"
 subtitle: "Usando **R** nas Ciências Sociais"
 author: "Dr Robson Oliveira"
 institute: "IFPB"
-logo: logo.png
+logo: logo_ifpb.png
 footer: "robsonolima.com.br"
 incremental: true
 execute:
   echo: true
 format: 
   revealjs:
+    chalkboard: true
     theme: serif
+    slide-tone: false
     auto-animate: true
     code-fold: show
     code-summary: ">"
 editor: visual
 ---
 
-# Contando Histórias com Dados
+# 
+
+**Encontre esses slides em:**
+
+![](img/qrcode_slides.png){fig-align="center"}
+
+# 0. Contando Histórias com Dados
 
 ## Contando Histórias com Dados
 
@@ -63,7 +71,7 @@ Explorar
 Compartilhar
 :::
 
-# Pré-Requisitos
+# 1. Pré-Requisitos
 
 ## R
 
@@ -72,7 +80,7 @@ Compartilhar
 ## R
 
 ::: nonincremental
-1.  Baixar e instalar **R** em <https://cloud.r-project.org>
+1.  Baixar e instalar **R** em [<https://cloud.r-project.org>]{.rn}
 :::
 
 ![](img/r_console.png){fig-align="center" width="400"}
@@ -91,19 +99,7 @@ Compartilhar
 3.  Instalar os pacotes necessários
 :::
 
-```{r eval=FALSE}
-#| echo=TRUE
-# instalar um pacote:
-install.packages("tidyverse")
-```
-
-## Pacotes {auto-animate="true"}
-
-::: nonincremental
-3.  Instalar os pacotes necessários
-:::
-
-```{r eval=FALSE}
+```{r eval=FALSE, `code-line-numbers`="2"}
 #| echo=TRUE
 # instalar um pacote:
 install.packages("tidyverse")
@@ -113,11 +109,25 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
-## 
+## Pacotes {auto-animate="true"}
+
+::: nonincremental
+3.  Instalar os pacotes necessários
+:::
+
+```{r eval=FALSE, `code-line-numbers`="6"}
+#| echo=TRUE
+# instalar um pacote:
+install.packages("tidyverse")
+
+# Só é preciso instalar um pacote uma única vez.
+# Mas é preciso carrega-lo sempre que iniciarmos o R:
+library(tidyverse)
+```
+
+## Pacotes
 
 ![](img/tidyverse.png){fig-align="center" width="173"}
-
-# O Básico {auto-animate="true"}
 
 ## Rodando Código no R {auto-animate="true"}
 
@@ -139,14 +149,14 @@ sqrt(49)
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-```{r}
+```{r, `code-line-numbers`="2"}
 # podemos salvar o resultado de 3 * 4 como x
 x <- 3 * 4
 ```
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-```{r}
+```{r, `code-line-numbers`="5" }
 # podemos salvar o resultado de 3 * 4 como x
 x <- 3 * 4
 
@@ -174,7 +184,7 @@ nome_funcao(argumento1 = valor1, argumento2 = valor2, ...)
 
 Exemplos:
 
-```{r}
+```{r, `code-line-numbers`="2" }
 # somar dois valores
 sum(10, 15)
 ```
@@ -188,7 +198,7 @@ Exemplos:
 sum(10, 15)
 ```
 
-```{r}
+```{r, `code-line-numbers`="2" }
 # encontrar raiz quadrada
 sqrt(49)
 ```
@@ -227,14 +237,17 @@ Nome de objetos precisam:
 
 ## Nome de objetos {auto-animate="true"}
 
-```{r}
+```{r, `code-line-numbers`="2"}
 # salvar a sequência de números como um objeto
 sequencia_entre_1_10 <- seq(1, 10)
+
+# somar todos os valores da sequência
+sum(sequencia_entre_1_10)
 ```
 
 ## Nome de objetos {auto-animate="true"}
 
-```{r}
+```{r, `code-line-numbers`="5"}
 # salvar a sequência de números como um objeto
 sequencia_entre_1_10 <- seq(1, 10)
 
@@ -246,16 +259,19 @@ sum(sequencia_entre_1_10)
 
 Um tipo especial de objeto é o `data.frame`:
 
-```{r eval=FALSE}
+```{r eval=FALSE, `code-line-numbers`="2" }
 # mtcars é um banco de dados com informações de veículos:
 dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
 ```
 
 ## Banco de dados {auto-animate="true"}
 
 Um tipo especial de objeto é o `data.frame`:
 
-```{r}
+```{r, `code-line-numbers`="5" }
 # mtcars é um banco de dados com informações de veículos:
 dados_carros <- mtcars
 
@@ -283,11 +299,11 @@ dados_carros |> DT::datatable(
 
 ## Banco de dados {auto-animate="true"}
 
-Para trabalharmos com dados no R, eles precisam estar em um formato `tidy`:
+Vamos trabalhar com dados no R no formato `tidy`:
 
 ![](img/tidy-1.png)
 
-# Importar Dados
+# 2. Importar Dados
 
 ![](img/import_r.png){fig-align="center" width="300"}
 
@@ -295,28 +311,39 @@ Para trabalharmos com dados no R, eles precisam estar em um formato `tidy`:
 
 Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
 
-```{r eval=FALSE}
-# importar o pacote
-library(tidyverse)
-```
-
-##  {auto-animate="true"}
-
-Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
-
-```{r eval=FALSE}
+```{r eval=FALSE, `code-line-numbers`="2" }
 # importar o pacote
 library(tidyverse)
 
 # salvar o arquivo csv como o objeto "despesas"
 despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+despesas
+
 ```
 
 ##  {auto-animate="true"}
 
 Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
 
-```{r}
+```{r eval=FALSE, `code-line-numbers`="5" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "despesas"
+despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+despesas
+
+```
+
+##  {auto-animate="true"}
+
+Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+
+```{r, `code-line-numbers`="8" }
 # importar o pacote
 library(tidyverse)
 
@@ -327,9 +354,9 @@ despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
 despesas
 ```
 
-## 
+##  {#tabela-dinamica1}
 
-```{r}
+```{r tab-dinamica}
 #| echo=FALSE
 #options(DT.options = list(pageLength = 4))
 font.size <- "14pt"
@@ -346,29 +373,7 @@ despesas |>
      ) 
 ```
 
-## Estatística Descritiva {auto-animate="true"}
-
-```{r eval=FALSE}
-install.packages("skimr")
-
-```
-
-## Estatística Descritiva {auto-animate="true"}
-
-```{r eval=FALSE}
-install.packages("skimr")
-library(skimr)
-```
-
-## Estatística Descritiva {auto-animate="true"}
-
-```{r}
-#install.packages("skimr")
-library(skimr)
-skim(despesas)
-```
-
-# Transformação de dados
+# 3. Transformação de dados
 
 ![](img/hex-dplyr.png){fig-align="center" width="400"}
 
@@ -672,7 +677,9 @@ E agora podemos ver o que foi feito acima:
 despesas_saude_ano
 ```
 
-# Visualização {auto-animate="true"}
+# 4. Visualização {auto-animate="true"}
+
+> "Apresentar dados com gráficos pode ajudar você a comunicar informações com clareza."
 
 ##  {auto-animate="true"}
 
@@ -783,15 +790,43 @@ despesas_saude_educacao |>
 
 ```
 
-# Modelar
-
-## Séries Temporais
-
-st
+# 5. Modelar
 
 ## Regressão
 
+Regressão de salário na RAIS
+
+## Séries Temporais
+
+Previsão de vendas
+
+## Customer Lifetime Value
+
 re
+
+## Análise de Churn
+
+asdasdasdasd
+
+## Segmentação de Clientes
+
+Com clusterização
+
+## Otimização de Carteira
+
+otimização de carteira
+
+## CAPM
+
+aaasdadad
+
+## Análise de Sentimentos
+
+vale a pena?
+
+## Análise Fatorial
+
+aasasdasd
 
 # Comunicar
 
@@ -802,3 +837,11 @@ re
 -   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide)
 
 -   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
+
+## 
+
+# Onde Estudar?
+
+<https://www.escolavirtual.gov.br/curso/325>
+
+<https://livro.curso-r.com/index.html>

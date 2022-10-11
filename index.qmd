@@ -24,9 +24,11 @@ editor: visual
 
 **Encontre esses slides em:**
 
-![](img/qrcode_slides.png){fig-align="center"}
+![https://robsonol.github.io/workshop_r\_ciencias_sociais/](img/qrcode_slides.png){fig-align="center"}
 
-# 0. Contando Histórias com Dados
+# Contando Histórias com Dados
+
+![](img/storytelling.png){fig-align="center" width="117"}
 
 ## Contando Histórias com Dados
 
@@ -54,22 +56,23 @@ editor: visual
 
 ## Contando Histórias com Dados
 
-![](img/storytelling.png){fig-align="center" width="117"}
+::: columns
+::: {.column width="50%"}
+![](img/data-science.png)
+:::
 
-## Contando Histórias com Dados
+::: {.column width="50%"}
 
-## ![](img/data-science.png)
+-   Planejar
 
-::: notes
-Planejar
+-   Simular
 
-Simular
+-   Adquirir
 
-Adquirir
+-   Explorar
 
-Explorar
-
-Compartilhar
+-   Compartilhar
+:::
 :::
 
 # 1. Pré-Requisitos
@@ -93,6 +96,10 @@ Compartilhar
 :::
 
 ![](img/rstudio.png){fig-align="center" width="400"}
+
+## Pacotes {auto-animate="true"}
+
+![](img/tidyverse.png){fig-align="center" width="173"}
 
 ## Pacotes {auto-animate="true"}
 
@@ -125,10 +132,6 @@ install.packages("tidyverse")
 # Mas é preciso carrega-lo sempre que iniciarmos o R:
 library(tidyverse)
 ```
-
-## Pacotes
-
-![](img/tidyverse.png){fig-align="center" width="173"}
 
 ## Rodando Código no R {auto-animate="true"}
 

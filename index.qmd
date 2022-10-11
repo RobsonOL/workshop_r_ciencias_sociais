@@ -16,6 +16,7 @@ format:
     auto-animate: true
     code-fold: show
     code-summary: ">"
+    code-link: true
 editor: visual
 ---
 
@@ -671,10 +672,19 @@ despesas_saude_ano <- despesas |>
 
 ## Salvando Resultados
 
-E agora podemos ver o que foi feito acima:
+E agora podemos ver o que foi feito:
 
 ```{r}
 despesas_saude_ano
+```
+
+## Salvando Resultados
+
+E salvar esses resultados como um arquivo \*.csv\*:
+
+```{r eval=FALSE}
+despesas_saude_ano |> 
+  write_csv("despesas_saude_ano.csv")
 ```
 
 # 4. Visualização {auto-animate="true"}
@@ -770,17 +780,6 @@ despesas_saude_educacao |>
 
 ```
 
-## Múltiplos `geom_*`
-
-```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
-  geom_smooth() +
-  geom_point()
-
-```
-
 ## `geom_hist`
 
 ```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
@@ -790,15 +789,303 @@ despesas_saude_educacao |>
 
 ```
 
+## Múltiplos `geom_*`
+
+```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_smooth() +
+  geom_point()
+```
+
+## Mudando o Tema
+
+```{r}
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_smooth() +
+  geom_point() +
+  theme_bw()
+```
+
+## Mudando os Temas
+
+```{r}
+despesas_saude_educacao |>
+  ggplot(mapping = aes(x = educacao, y = saude)) + 
+  geom_smooth() +
+  geom_point() +
+  theme_classic()
+```
+
+## Outras Visualizações
+
+-   <https://robsonolima.com.br/post/visualizacao-com-ggplot2-e-seinfeld/>
+
+-   <https://r-graph-gallery.com/>
+
+-   <https://exts.ggplot2.tidyverse.org/gallery/>
+
+-   <https://livro.curso-r.com/8-graficos.html>
+
 # 5. Modelar
 
 ## Regressão
+
+```{r}
+# instalar pacote 
+# install.packages("tidymodels")
+
+# carregar pacote
+library(tidymodels)
+```
 
 Regressão de salário na RAIS
 
 ## Séries Temporais
 
-Previsão de vendas
+![](img/modeltime.png){fig-align="center"}
+
+## Séries Temporais
+
+> Vamos prever o valor futuro do consumo de energia residencial na Paraíba. Os dados podem ser obtidos no [link.](https://basedosdados.org/dataset/br-mme-consumo-energia-eletrica?bdm_table=uf)
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="2"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="3"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="6"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="7"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="8"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r, `code-line-numbers`="11"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/consumo_energia_brasil.csv")
+```
+
+## Séries Temporais
+
+```{r}
+#| echo=FALSE
+font.size <- "14pt"
+
+energia |> 
+  sample_n(1000) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="2"}
+energia_residencial_pb <- energia |> 
+  filter(tipo_consumo == "Residencial") |> 
+  filter(sigla_uf == "PB") |> 
+  # criar variável de data
+  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
+  select(data, consumo)
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE,`code-line-numbers`="3"}
+energia_residencial_pb <- energia |> 
+  filter(tipo_consumo == "Residencial") |> 
+  filter(sigla_uf == "PB") |> 
+  # criar variável de data
+  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
+  select(data, consumo)
+```
+
+## Séries Temporais
+
+```{r, eval=FALSE, `code-line-numbers`="5"}
+energia_residencial_pb <- energia |> 
+  filter(tipo_consumo == "Residencial") |> 
+  filter(sigla_uf == "PB") |> 
+  # criar variável de data
+  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
+  select(data, consumo)
+```
+
+## Séries Temporais
+
+```{r, `code-line-numbers`="6"}
+energia_residencial_pb <- energia |> 
+  filter(tipo_consumo == "Residencial") |> 
+  filter(sigla_uf == "PB") |> 
+  # criar variável de data
+  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
+  select(data, consumo)
+```
+
+## Séries Temporais
+
+```{r}
+#| echo=FALSE
+font.size <- "14pt"
+
+energia_residencial_pb |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Séries Temporais
+
+```{r}
+energia_residencial_pb |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_line() + 
+  labs(x = "Data", y = "Consumo", title = "Consumo de Energia Residencial na Paraíba")
+```
+
+## Séries Temporais
+
+```{r}
+energia_residencial_pb |> 
+  plot_time_series(data, consumo, .title = "Consumo de Energia Residencial na Paraíba")
+
+  
+```
+
+## Séries Temporais
+
+```{r}
+set.seed(123)
+energia_treinamento_teste <- energia_residencial_pb |> 
+  initial_time_split(prop = 0.8)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r}
+receita_energia <- recipe(consumo ~ data, training(energia_treinamento_teste))
+```
+
+## Séries Temporais
+
+```{r}
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(training(energia_treinamento_teste))
+
+previsao_energia <- workflow_arima |> 
+  modeltime_calibrate(new_data = testing(energia_treinamento_teste)) |> 
+  modeltime_forecast(new_data = testing(energia_treinamento_teste),
+                     actual_data = energia_residencial_pb)
+
+```
+
+## Séries Temporais
+
+```{r}
+previsao_energia |> 
+  plot_modeltime_forecast()
+```
 
 ## Customer Lifetime Value
 
@@ -806,7 +1093,168 @@ re
 
 ## Análise de Churn
 
-asdasdasdasd
+> A partir de informações dos clientes, podemos prever a probabilidade que um cliente abandone a empresa, nos permitindo desenvolver programas focados em retenção de clientes.
+
+## Análise de Churn
+
+```{r}
+data(wa_churn, package = "modeldata")
+```
+
+## Análise de Churn
+
+```{r}
+#| echo=FALSE
+font.size <- "14pt"
+
+wa_churn |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Análise de Churn
+
+```{r}
+# Criar a base de treinamento e teste
+churn_treinamento_teste <- wa_churn |> 
+  initial_split(prop = 0.8)
+
+tbl_treinamento <- churn_treinamento_teste |> training()
+tbl_teste <- churn_treinamento_teste |> testing()
+
+churn_treinamento_teste
+```
+
+## Análise de Churn
+
+```{r}
+# Transformações dos dados
+receita_churn <- recipe(churn ~ ., data = tbl_treinamento) %>% 
+  step_impute_linear(all_numeric()) %>% 
+  step_dummy(all_nominal(), -all_outcomes()) %>% 
+  step_normalize(all_numeric())
+
+```
+
+## Análise de Churn
+
+```{r}
+# Definir o modelo
+modelo_floresta_aleatoria <- 
+  rand_forest(
+    mtry = 3, 
+    trees = 200, 
+    min_n = 30) |> 
+  set_mode("classification") |> 
+  set_engine("ranger")
+
+```
+
+## Análise de Churn
+
+```{r}
+workflow_churn <- workflow() |> 
+  add_model(modelo_floresta_aleatoria) |> 
+  add_recipe(receita_churn) |>  
+  fit(tbl_treinamento)
+
+```
+
+## Análise de Churn {.smaller}
+
+A matriz de confusão:
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE}
+
+# Matriz de Confusão
+matriz_confusao_churn <- workflow_churn |> 
+  predict(tbl_teste) |> 
+  bind_cols(tbl_teste |> select(churn)) |>
+  mutate_all(as.factor) |> 
+  conf_mat(churn, .pred_class)
+
+matriz_confusao_churn |> 
+  autoplot(type = "heatmap")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: fig-mtcars
+#| fig-cap: "Matriz de Confusão"
+#| column: margin
+#| fig-width: 8
+#| fig-height: 4
+
+# Matriz de Confusão
+matriz_confusao_churn <- workflow_churn |> 
+  predict(tbl_teste) |> 
+  bind_cols(tbl_teste |> select(churn)) |>
+  mutate_all(as.factor) |> 
+  conf_mat(churn, .pred_class)
+
+matriz_confusao_churn |> 
+  autoplot(type = "heatmap")
+```
+:::
+:::
+
+## Análise de Churn
+
+```{r}
+matriz_confusao_churn |> 
+  summary() |> 
+  select(-.estimator) %>% 
+  filter(.metric %in% c('precision', 'recall', 'f_meas',
+                        'accuracy', 'spec', 'sens')) %>% 
+  rename(Medida = 1, Estimativa = 2)
+
+```
+
+## Análise de Churn
+
+```{r}
+cliente_ficticio <- data.frame(
+  female = 1, # mulher
+  senior_citizen = 0, # não idosa
+  partner = 1, # com parceiro(a)
+  dependents = 0, # sem dependentes
+  tenure = 2, # contrato a 2 anos
+  phone_service = 0, # sem telefone
+  multiple_lines = "No", # sem multiplas linhas
+  internet_service = "DSL", # internet tipo DSL
+  online_security = "No", # sem serviço de segurança online
+  online_backup = "No", # sem serviço de backup online
+  device_protection = "No", # sem serviço de seguro de roteador (?)
+  tech_support = "No", # suporte técnico
+  streaming_tv = "Yes", # usa streaming de tv
+  streaming_movies = "Yes", # faz uso de streaming de filmes
+  contract = "One year", # contrato anual
+  paperless_billing = 1, # não recebe a conta fisicamente
+  payment_method = "Bank transfer (automatic)", # débito automático
+  monthly_charges = 70, # paga $70 por mes
+  total_charges = 1680 # cobrança total 1400
+)
+```
+
+## Avaliação de Churn
+
+O modelo nos informa que provavelmente este cliente não deve cancelar sua assinatura em breve.
+
+```{r}
+# O modelo informa que provavelmente esta cliente não deve abandonar a empresa em breve
+workflow_churn |> 
+  predict(cliente_ficticio)
+```
 
 ## Segmentação de Clientes
 
@@ -818,7 +1266,94 @@ otimização de carteira
 
 ## CAPM
 
-aaasdadad
+![](img/tidyquant.png){fig-align="center"}
+
+## Análise Financeira
+
+```{r}
+# instalar o pacote tidyquant
+# install.packages("tidyquant")
+
+# carregar o pacote
+library(tidyquant)
+
+tickers <- c("ITSA3.SA", "PETR3.SA", "VALE3.SA", "ABEV3.SA",
+             "BBAS3.SA", "JBSS3.SA")
+
+preco_acoes <- tickers |> 
+  tq_get(get  = "stock.prices",
+         from = "2021-01-02",
+         to   = "2022-10-11") 
+
+```
+
+## Análise Financeira
+
+```{r}
+#| echo=FALSE
+font.size <- "14pt"
+
+preco_acoes |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Financeira
+
+```{r}
+preco_acoes |> 
+  filter(symbol == "PETR3.SA") |> 
+  filter(date > as.Date("2022-07-01")) |> 
+  ggplot(aes(x = date, y = close)) +
+  geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+  labs(x = "", y = "Preço de Fechamento") 
+```
+
+## Financeira
+
+```{r}
+Ra <- preco_acoes %>% 
+  select(date, symbol, close) %>% 
+  group_by(symbol) %>% 
+  tq_transmute(select = close,
+               mutate_fun = periodReturn,
+               period = "monthly",
+               col_rename = "Ra")
+```
+
+## Financeira
+
+```{r}
+Ra |> 
+  ggplot(aes(x = date, y = Ra, color = symbol)) +
+  geom_line() + 
+  facet_wrap(~symbol)
+```
+
+## Financeira
+
+```{r}
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    Rb = NULL, 
+    Rf = 0,
+    p = 0.95,
+    performance_fun = SharpeRatio
+    )
+```
+
+## Financeira
+
+<https://robsonolima.com.br/post/analise-de-portfolio-com-r/>
+
+<https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
 
 ## Análise de Sentimentos
 

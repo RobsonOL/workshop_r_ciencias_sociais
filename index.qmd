@@ -58,11 +58,10 @@ editor: visual
 
 ::: columns
 ::: {.column width="50%"}
-![](img/data-science.png)
+![Fonte: Allison Horst](img/tidydata_5.jpg)
 :::
 
 ::: {.column width="50%"}
-
 -   Planejar
 
 -   Simular
@@ -303,9 +302,15 @@ dados_carros |> DT::datatable(
 
 ## Banco de dados {auto-animate="true"}
 
+##  ![Fonte: Allison Horst](img/tidydata_2.jpg)
+
 Vamos trabalhar com dados no R no formato `tidy`:
 
 ![](img/tidy-1.png)
+
+## Banco de Dados
+
+![Fonte: Allison Horst](img/tidydata_3.jpg)
 
 # 2. Importar Dados
 
@@ -313,49 +318,49 @@ Vamos trabalhar com dados no R no formato `tidy`:
 
 ##  {auto-animate="true"}
 
-Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+Importando dados de consumo de energia usando a função `read_csv()`:
 
 ```{r eval=FALSE, `code-line-numbers`="2" }
 # importar o pacote
 library(tidyverse)
 
 # salvar o arquivo csv como o objeto "despesas"
-despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
 
 # mostrar apenas as primeiras linhas do banco de dados:
-despesas
+consumo_energia
 
 ```
 
 ##  {auto-animate="true"}
 
-Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+Importando dados de consumo de energia usando a função `read_csv()`:
 
 ```{r eval=FALSE, `code-line-numbers`="5" }
 # importar o pacote
 library(tidyverse)
 
-# salvar o arquivo csv como o objeto "despesas"
-despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
 
 # mostrar apenas as primeiras linhas do banco de dados:
-despesas
+consumo_energia
 
 ```
 
 ##  {auto-animate="true"}
 
-Importando dados de despesas municipais (Paraíba) usando a função `read_csv()`:
+Importando dados de consumo de energia usando a função `read_csv()`:
 
 ```{r, `code-line-numbers`="8" }
 # importar o pacote
 library(tidyverse)
 
-# salvar o arquivo csv como o objeto "despesas"
-despesas <- read_csv(file = "dados/dados_despesas_paraiba.csv")
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
 
 # mostrar apenas as primeiras linhas do banco de dados:
-despesas
+consumo_energia
 ```
 
 ##  {#tabela-dinamica1}
@@ -363,10 +368,10 @@ despesas
 ```{r tab-dinamica}
 #| echo=FALSE
 #options(DT.options = list(pageLength = 4))
-font.size <- "14pt"
+font.size <- "12pt"
 
-despesas |> 
-  sample_n(1000) |> 
+consumo_energia |> 
+  filter(ano == 2020) |> 
   DT::datatable(
      options=list(
        initComplete = htmlwidgets::JS(
@@ -405,18 +410,18 @@ filter(<DADOS>, <REGRAS>)
 
 ##  {auto-animate="true"}
 
-Se quisermos filtrar as despesas dos municípios para o ano de 2020:
+Se quisermos filtrar o consumo de energia da Paraíba:
 
 ```{r}
-filter(despesas, ano == 2020)
+filter(consumo_energia, sigla_uf == "PB")
 ```
 
 ##  {auto-animate="true"}
 
-Se quisermos filtrar as despesas dos municípios para o ano de 2020 e **para o município de João Pessoa**:
+Se quisermos filtrar o consumo de energia da Paraíba **apenas para consumidores residenciais**:
 
 ```{r}
-filter(despesas, ano == 2020, municipio == "João Pessoa")
+filter(consumo_energia, sigla_uf == "PB" & tipo_consumo == "Residencial")
 ```
 
 ## Pipe `|>`
@@ -429,73 +434,48 @@ O *pipe `|>`* é um operador que permite reescrever as expressões de outra form
 
 ```{r eval=FALSE}
 # ao invés de escrever assim:
-filter(despesas, ano == 2020, municipio == "João Pessoa")
+filter(consumo_energia, ano == 2020, sigla_uf == "PB")
 
 
 ```
 
 ```{r}
 # escrevemos assim:
-despesas |> # pegue os dados
-  filter(ano == 2020, municipio == "João Pessoa") # ENTÃO filtre para...
+consumo_energia |> # pegue os dados
+  filter(ano == 2020 & sigla_uf == "PB") # ENTÃO filtre para...
 ```
 
 ## Função `select()`
 
 ![](img/select.png)
 
-## 
+## Função `select()`
 
-Podemos selecionar apenas as variáveis desejadas, como ano, município, conta e despesas empenhadas:
+Podemos selecionar apenas as variáveis desejadas, como `ano`, `mes`, `sigla_uf` e `consumo`:
 
 ```{r}
-despesas |> select(ano, municipio, conta, despesas_empenhadas)
+consumo_energia |> 
+  select(ano, mes, sigla_uf, consumo)
 ```
 
-## 
+## Função `select()`
 
 Podemos usar o `|>` para concatenar `filter()` e `select()`:
 
 ```{r}
-despesas |> 
-  filter(ano == 2020 & conta == "Saúde") |> # ENTÃO filtre os dados
-  select(municipio, despesas_empenhadas) # então selecione as colunas
+consumo_energia |> 
+  filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> # ENTÃO filtre os dados
+  select(ano, mes, consumo) # então selecione as colunas
 ```
 
-## Função `arrange()`
+## Função `select()`
 
-![](img/arrange.png)
-
-##  {auto-animate="true"}
-
-Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+Vamos salvar o resultado como o objeto `energia_residencial_pb`:
 
 ```{r}
-despesas |> 
-  filter(ano == 2020 & conta == "Saúde") |> 
-  select(municipio, despesas_empenhadas)
-```
-
-##  {auto-animate="true"}
-
-Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
-
-```{r}
-despesas |> 
-  filter(ano == 2020 & conta == "Saúde") |> 
-  select(municipio, despesas_empenhadas) |> 
-  arrange(despesas_empenhadas) # ordem crescente
-```
-
-##  {auto-animate="true"}
-
-Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
-
-```{r}
-despesas |> 
-  filter(ano == 2020 & conta == "Saúde") |> 
-  select(municipio, despesas_empenhadas) |> 
-  arrange(desc(despesas_empenhadas)) # ordem decrescente
+energia_residencial_pb <- consumo_energia |> 
+  filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> 
+  select(ano, mes, consumo) 
 ```
 
 ## Função `mutate()`
@@ -513,56 +493,61 @@ Na função `mutate()` especifique o nome da nova variável e após o sinal de `
 dados <- mutate(variavel_nova = variavel_1 + variavel_2)
 ```
 
-##  {auto-animate="true"}
+## Função `mutate()`
 
-Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r eval=FALSE}
-# vamos filtrar apenas para gastos de saúde em 2020
-despesas |> 
-  filter(ano == 2020, conta == "Saúde")
+```{r eval=FALSE,`code-line-numbers`="3"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
 
+# agora podemos observar o resultado:
+energia_residencial_pb
 ```
 
-##  {auto-animate="true"}
+## Função `mutate()`
 
-Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r eval=FALSE}
-# vamos filtrar apenas para gastos de saúde em 2020
-despesas |> 
-  filter(ano == 2020, conta == "Saúde") |> 
-  # e criar a variável de restos a pagar com mutate()
-  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas)
-  
+```{r eval=FALSE,`code-line-numbers`="6"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
+
+# agora podemos observar o resultado:
+energia_residencial_pb
 ```
 
-##  {auto-animate="true"}
+## Função `mutate()`
 
-Podemos criar uma variável chamada `restos_a_pagar_processadas` que são as dispesas liquidadas e não pagas.
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r}
-# vamos filtrar apenas para gastos de saúde em 2020
-despesas |> 
-  filter(ano == 2020, conta == "Saúde") |> 
-  # e criar a variável de restos a pagar com mutate()
-  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas) |> 
-  # para facilitar a visualização das informações, vamos usar select e arrange:
-  select(municipio, restos_a_pagar_processadas) |> arrange(desc(restos_a_pagar_processadas))
+```{r eval=TRUE,`code-line-numbers`="9"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
+
+# agora podemos observar o resultado:
+energia_residencial_pb
 ```
 
-## 
+## Função `mutate()`:
 
 ```{r}
 #| echo=FALSE
 font.size <- "14pt"
 
-despesas |> 
-  filter(ano == 2020, conta == "Saúde") |> 
-  # e criar a variável de restos a pagar com mutate()
-  mutate(restos_a_pagar_processadas = despesas_liquidadas - despesas_pagas) |> 
-  # para facilitar a visualização das informações, vamos usar select e arrange:
-  select(municipio, restos_a_pagar_processadas) |> arrange(desc(restos_a_pagar_processadas)) |> 
+energia_residencial_pb |> 
   DT::datatable(
      options=list(
        initComplete = htmlwidgets::JS(
@@ -573,6 +558,36 @@ despesas |>
      ) 
 
 
+```
+
+## Função `arrange()`
+
+![](img/arrange.png)
+
+## Função `arrange()`
+
+Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
+
+```{r}
+energia_residencial_pb
+```
+
+##  {auto-animate="true"}
+
+Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
+
+```{r}
+energia_residencial_pb |> 
+  arrange(consumo) # ordem crescente
+```
+
+##  {auto-animate="true"}
+
+Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+
+```{r}
+energia_residencial_pb |> 
+  arrange(desc(consumo)) # ordem decrescente
 ```
 
 ## Função `summarise()`
@@ -587,43 +602,47 @@ despesas |>
 
 -   O objetivo é criar medidas como média, medianas, totais e outros.
 
-##  {auto-animate="true"}
+## Função `summarise()` {auto-animate="true"}
 
-Para obter o total empenhado com saúde em 2020 podemos:
+Para obter o total consumido em energia na Paraíba em 2020:
 
-```{r eval=TRUE}
-# filtrar os dados
-despesas |> 
-  filter(ano == 2020, conta == 'Saúde') 
+```{r eval=FALSE ,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_total = sum(consumo))
 ```
 
-##  {auto-animate="true"}
+## Função `summarise()` {auto-animate="true"}
 
-Para obter o total gasto com saúde em 2020 podemos:
+Para obter o total consumido em energia na Paraíba em 2020:
 
-```{r eval=TRUE}
-# filtrar os dados
-despesas |> 
-  filter(ano == 2020, conta == 'Saúde') |> 
-  # somar os valores empenhados:
-  summarise(total_empenhado_saude = sum(despesas_empenhadas))
+```{r eval=TRUE ,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_total = sum(consumo))
 ```
 
-## 
+## Função `summarise()` {auto-animate="true"}
 
-Se quisermos saber o valor médio empenhado, só substituir a função `sum()` por `mean()`:
+Se quisermos saber o valor médio consumido, só substituir a função `sum()` por `mean()`:
 
-```{r}
-despesas |> 
-  filter(ano == 2020, conta == 'Saúde') |> 
-  summarise(empenho_medio_saude = mean(despesas_empenhadas))
+```{r eval=TRUE ,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_medio_mensal = mean(consumo))
 ```
 
 ## Função `group_by()`
 
 ![](img/groupby.png)
 
-## 
+## Função `group_by()`
 
 -   `summarise()` é mais útil quando usamos em conjunto com `group_by()`
 
@@ -631,63 +650,33 @@ despesas |>
 
 -   Por exemplo, podemos estar interessado no gasto médio de saúde para cada ano
 
-##  {auto-animate="true"}
+## Função `group_by()` {auto-animate="true"}
 
-```{r eval=FALSE}
-despesas |> 
-  # filtramos apenas para gastos de saúde
-  filter(conta == 'Saúde')
-```
-
-##  {auto-animate="true"}
-
-```{r eval=FALSE}
-despesas |> 
-  # filtramos apenas para gastos de saúde
-  filter(conta == 'Saúde') |> 
-  # agrupamos as observações por ano
-  group_by(ano)
-```
-
-##  {auto-animate="true"}
-
-```{r}
-despesas |> 
-  # filtramos apenas para gastos de saúde
-  filter(conta == 'Saúde') |> 
+```{r eval=FALSE,`code-line-numbers`="3"}
+energia_residencial_pb |> 
   # agrupamos as observações por ano
   group_by(ano) |> 
   # calculamos a média de gastos
-  summarise(total_empenhos = mean(despesas_empenhadas))
+  summarise(consumo_medio_anual = mean(consumo))
 ```
 
-## Salvando Resultados
+## Função `group_by()` {auto-animate="true"}
 
-Para que as transformações feitas nos dados sejam reutilizadas, podemos salvar o resultado como um objeto com o operador `<-`:
-
-```{r}
-# salvamos o que fizemos no objeto despesas_saude_ano
-despesas_saude_ano <- despesas |> 
-  filter(conta == 'Saúde') |> 
+```{r eval=TRUE,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # agrupamos as observações por ano
   group_by(ano) |> 
-  summarise(total_empenhos = mean(despesas_empenhadas))
+  # calculamos a média de gastos
+  summarise(consumo_medio_anual = mean(consumo))
 ```
 
 ## Salvando Resultados
 
-E agora podemos ver o que foi feito:
-
-```{r}
-despesas_saude_ano
-```
-
-## Salvando Resultados
-
-E salvar esses resultados como um arquivo \*.csv\*:
+Podemos salvar esses resultados como um arquivo \*.csv\*:
 
 ```{r eval=FALSE}
-despesas_saude_ano |> 
-  write_csv("despesas_saude_ano.csv")
+energia_residencial_pb |> 
+  write_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 # 4. Visualização {auto-animate="true"}
@@ -700,48 +689,13 @@ despesas_saude_ano |>
 
 ##  {auto-animate="true"}
 
-Antes de criar o primeiro gráfico, vamos modificar o banco de dados para mostrar gastos com saúde e educação em 2020:
-
-```{r}
-despesas_saude_educacao <- despesas |> 
-  filter(ano == 2020, conta == 'Saúde' | conta == 'Educação') |> 
-  filter(municipio != "João Pessoa" & municipio != "Campina Grande") |> 
-  select(ano, municipio, conta, despesas_pagas) |> 
-  # essas funções são um pouco mais avançadas. Mas não se preocupe por enquanto.
-  pivot_wider(names_from = "conta", values_from = "despesas_pagas") |> 
-  janitor::clean_names()
-
-```
-
-##  {auto-animate="true"}
-
 Vamos criar nosso primeiro gráfico:
 
-```{r eval=FALSE}
+```{r eval=TRUE,`code-line-numbers`="2"}
 # camada de dados
-despesas_saude_educacao
-```
-
-##  {auto-animate="true"}
-
-Vamos criar nosso primeiro gráfico:
-
-```{r eval=FALSE}
-# camada de dados
-despesas_saude_educacao |> 
+energia_residencial_pb |> 
   # camada estética (mapeamento)
-  ggplot(aes(x = educacao, y = saude))
-```
-
-##  {auto-animate="true"}
-
-Vamos criar nosso primeiro gráfico:
-
-```{r}
-# camada de dados
-despesas_saude_educacao |> 
-  # camada estética (mapeamento)
-  ggplot(aes(x = educacao, y = saude)) +
+  ggplot(aes(x = data, y = consumo)) +
   # camada de geometria
   geom_point()
 ```
@@ -766,28 +720,34 @@ despesas_saude_educacao |>
 
 ## `geom_point()`
 
-```{r}
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
-  geom_point(color = 'blue')
+```{r,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_point(color = "blue")
 
+```
+
+## `geom_line()`
+
+```{r,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_line()
 ```
 
 ## `geom_smooth()`
 
-```{r}
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
+```{r,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
   geom_smooth()
-
-
 ```
 
 ## `geom_hist`
 
-```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-despesas_saude_educacao |> 
-  ggplot(aes(x = saude)) +
+```{r ,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(x = consumo)) +
   geom_histogram()
 
 ```
@@ -796,31 +756,192 @@ despesas_saude_educacao |>
 
 ```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
-  geom_smooth() +
-  geom_point()
+energia_residencial_pb |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_point() +
+  geom_line()
 ```
 
-## Mudando o Tema
+## `Dplyr` + `ggplot`
 
 ```{r}
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
-  geom_smooth() +
-  geom_point() +
-  theme_bw()
+energia_residencial_pb |> 
+  group_by(ano) |> 
+  summarise(consumo_total = sum(consumo)) |> 
+  ggplot(aes(x = ano, y = consumo_total)) + 
+  geom_col()
 ```
 
-## Mudando os Temas
+## Múltiplas faces com `facet_wrap`
 
+```{r,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+
+```
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+:::
+
+::: {.column width="50%"}
 ```{r}
-despesas_saude_educacao |>
-  ggplot(mapping = aes(x = educacao, y = saude)) + 
-  geom_smooth() +
-  geom_point() +
-  theme_classic()
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
 ```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE,`code-line-numbers`="6"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE,`code-line-numbers`="9"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE,`code-line-numbers`="4"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r eval=FALSE,`code-line-numbers`="10"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() + 
+  guides(color="none")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() +
+  guides(color="none")
+
+```
+:::
+:::
 
 ## Outras Visualizações
 
@@ -834,17 +955,7 @@ despesas_saude_educacao |>
 
 # 5. Modelar
 
-## Regressão
-
-```{r}
-# instalar pacote 
-# install.packages("tidymodels")
-
-# carregar pacote
-library(tidymodels)
-```
-
-Regressão de salário na RAIS
+![](img/tidymodels.png){fig-align="center"}
 
 ## Séries Temporais
 
@@ -852,7 +963,7 @@ Regressão de salário na RAIS
 
 ## Séries Temporais
 
-> Vamos prever o valor futuro do consumo de energia residencial na Paraíba. Os dados podem ser obtidos no [link.](https://basedosdados.org/dataset/br-mme-consumo-energia-eletrica?bdm_table=uf)
+> Vamos prever o valor futuro do consumo de energia residencial na Paraíba.
 
 ## Séries Temporais
 
@@ -867,7 +978,7 @@ library(modeltime)
 library(timetk)
 
 # carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 ## Séries Temporais
@@ -883,7 +994,7 @@ library(modeltime)
 library(timetk)
 
 # carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 ## Séries Temporais
@@ -899,7 +1010,7 @@ library(modeltime)
 library(timetk)
 
 # carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 ## Séries Temporais
@@ -931,7 +1042,7 @@ library(modeltime)
 library(timetk)
 
 # carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 ## Séries Temporais
@@ -947,112 +1058,45 @@ library(modeltime)
 library(timetk)
 
 # carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
 ## Séries Temporais
 
 ```{r}
-#| echo=FALSE
-font.size <- "14pt"
-
 energia |> 
-  sample_n(1000) |> 
-  DT::datatable(
-     options=list(
-       initComplete = htmlwidgets::JS(
-          "function(settings, json) {",
-          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
-          "}")
-       )
-     ) 
-```
-
-## Séries Temporais
-
-```{r, eval=FALSE, `code-line-numbers`="2"}
-energia_residencial_pb <- energia |> 
-  filter(tipo_consumo == "Residencial") |> 
-  filter(sigla_uf == "PB") |> 
-  # criar variável de data
-  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
-  select(data, consumo)
-```
-
-## Séries Temporais
-
-```{r, eval=FALSE,`code-line-numbers`="3"}
-energia_residencial_pb <- energia |> 
-  filter(tipo_consumo == "Residencial") |> 
-  filter(sigla_uf == "PB") |> 
-  # criar variável de data
-  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
-  select(data, consumo)
-```
-
-## Séries Temporais
-
-```{r, eval=FALSE, `code-line-numbers`="5"}
-energia_residencial_pb <- energia |> 
-  filter(tipo_consumo == "Residencial") |> 
-  filter(sigla_uf == "PB") |> 
-  # criar variável de data
-  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
-  select(data, consumo)
-```
-
-## Séries Temporais
-
-```{r, `code-line-numbers`="6"}
-energia_residencial_pb <- energia |> 
-  filter(tipo_consumo == "Residencial") |> 
-  filter(sigla_uf == "PB") |> 
-  # criar variável de data
-  mutate(data = as.Date(paste0(ano, "-", mes, "-01"))) |> 
-  select(data, consumo)
-```
-
-## Séries Temporais
-
-```{r}
-#| echo=FALSE
-font.size <- "14pt"
-
-energia_residencial_pb |> 
-  DT::datatable(
-     options=list(
-       initComplete = htmlwidgets::JS(
-          "function(settings, json) {",
-          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
-          "}")
-       )
-     ) 
-```
-
-## Séries Temporais
-
-```{r}
-energia_residencial_pb |> 
   ggplot(aes(x = data, y = consumo)) +
-  geom_line() + 
-  labs(x = "Data", y = "Consumo", title = "Consumo de Energia Residencial na Paraíba")
+  geom_line(color = "red") + 
+  labs(x = "Data", y = "Consumo", title = "Consumo de Energia Residencial na Paraíba") +
+  theme_bw()
 ```
 
 ## Séries Temporais
 
-```{r}
+```{r, `code-line-numbers`="2"}
 energia_residencial_pb |> 
-  plot_time_series(data, consumo, .title = "Consumo de Energia Residencial na Paraíba")
-
-  
+  plot_time_series(data, 
+                   consumo, 
+                   .title = "Consumo de Energia Residencial na Paraíba"
+                   )
 ```
 
 ## Séries Temporais
+
+Base de Treinamento e Base de Teste
+
+![](img/resamples.png)
+
+## Séries Temporais {.smaller}
 
 ```{r}
 set.seed(123)
+# base de teste (20%) e treinamento (80%)
 energia_treinamento_teste <- energia_residencial_pb |> 
   initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
 
 energia_treinamento_teste |> 
     tk_time_series_cv_plan() |> 
@@ -1061,38 +1105,61 @@ energia_treinamento_teste |>
 
 ## Séries Temporais
 
+Agora vamos informar quem são nossas variáveis explicativas: *o consumo de energia residencial será explicado apenas pelos seus valores passados. Poderiamos incluir outras variáveis, como feriados, tarifa de energia, etc.*
+
 ```{r}
-receita_energia <- recipe(consumo ~ data, training(energia_treinamento_teste))
+receita_energia <- recipe(consumo ~ data, tbl_energia_treinamento)
 ```
 
 ## Séries Temporais
 
+Por fim, definir o modelo, rodar e gerar previsões:
+
 ```{r}
+# definir o modelo a ser rodado (ARIMA)
 modelo_arima <- arima_reg() %>% 
   set_engine("auto_arima")
 
+# Rodar o modelo na base de treinamento
 workflow_arima <- workflow() %>% 
   add_recipe(receita_energia) %>% 
   add_model(modelo_arima) %>% 
-  fit(training(energia_treinamento_teste))
+  fit(tbl_energia_treinamento)
 
-previsao_energia <- workflow_arima |> 
-  modeltime_calibrate(new_data = testing(energia_treinamento_teste)) |> 
-  modeltime_forecast(new_data = testing(energia_treinamento_teste),
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
                      actual_data = energia_residencial_pb)
 
 ```
 
 ## Séries Temporais
 
+Gráfico da previsão comparada com o que ocorreu de fato:
+
 ```{r}
-previsao_energia |> 
+tbl_energia_previsao |> 
   plot_modeltime_forecast()
 ```
 
-## Customer Lifetime Value
+## Séries Temporais
 
-re
+É possível ainda criar uma série de medidas de performance. Elas são úteis para nos guiar sobre qual o melhor modelo:
+
+```{r}
+tbl_energia_calibracao |> 
+  modeltime_accuracy(new_data = tbl_energia_teste) |> 
+  knitr::kable()
+```
+
+## Séries Temporais
+
+-   <https://robsonol.github.io/timeseries_r_book/>
 
 ## Análise de Churn
 
@@ -1120,6 +1187,67 @@ wa_churn |>
        )
      ) 
 ```
+
+## Análise de Churn
+
+::: panel-tabset
+## Gastos 
+
+```{r}
+#| output-location: column
+#| 
+wa_churn |> 
+  ggplot(aes(x = monthly_charges)) +
+  geom_histogram(aes(y = ..density..)) + 
+  geom_density(fill = "blue", alpha = .2) +
+  labs(x = "Gasto Mensal", y = "", 
+       title = "Distribuição de Gastos Mensais dos Clientes") +
+  theme_light()
+```
+
+## Sexo
+
+```{r}
+#| output-location: column
+
+wa_churn |> 
+  mutate(female = case_when(female == 1 ~ "Mulher",
+                            female == 0 ~ "Homem")) |> 
+  ggplot(aes(x = female, fill = female)) +
+  geom_bar() + 
+  labs(x = "", y = "Total de Clientes",
+       title = "Clientes por Sexo") +
+  guides(fill = "none") +
+  theme_light()
+  
+```
+
+## Tempo
+
+```{r}
+#| output-location: column
+
+wa_churn |> 
+  ggplot(aes(x = tenure)) + 
+  geom_histogram(aes(y = ..density..)) +
+  geom_density(fill = "blue", alpha = 0.2) +
+  labs(x = "Tempo como cliente (meses)", y = "",
+       title = "Distribuição de Tempo como Cliente") +
+  theme_light()
+```
+
+## Churn
+
+```{r}
+#| output-location: column
+
+wa_churn |> 
+  ggplot(aes(x = churn)) +
+  geom_bar() +
+  labs(x = "Churn?", y = "", title = "") +
+  theme_light()
+```
+:::
 
 ## Análise de Churn
 
@@ -1249,7 +1377,7 @@ cliente_ficticio <- data.frame(
 )
 ```
 
-## Avaliação de Churn
+## Análise de Churn
 
 O modelo nos informa que provavelmente este cliente não deve cancelar sua assinatura em breve.
 
@@ -1259,15 +1387,141 @@ workflow_churn |>
   predict(cliente_ficticio)
 ```
 
+## Análise de Churn
+
+-   <https://robsonolima.com.br/post/analise-de-churn-com-tidymodels-parte-1/>
+
+-   <https://robsonolima.com.br/post/analise-de-churn-com-tidymodels-parte-2/>
+
 ## Segmentação de Clientes
 
-Com clusterização
+> O objetivo da clusterização é agrupar pontos em subgrupos distintos. Uma das principais aplicações de clusterização é a **segmentação de clientes.** Com ela podemos separar certos grupos de clientes, para oferecer descontos, ofertas, códigos promocionais, etc.
 
-## Otimização de Carteira
+## Segmentação de Clientes
 
-otimização de carteira
+## [![Animação por Allison Horst](img/kmeans.gif)](https://github.com/allisonhorst/stats-illustrations)
 
-## CAPM
+## Segmentação de Clientes
+
+```{r}
+clientes_shopping <- read_csv("dados/clientes_shopping.csv")
+
+clientes_shopping |> 
+  head()
+```
+
+## Segmentação de Clientes {.smaller}
+
+::: panel-tabset
+## Sexo
+
+```{r}
+#| output-location: column
+
+clientes_shopping |>
+  ggplot(aes(x = genero, fill = genero)) +
+  geom_bar() + 
+  labs(x = "", 
+       y = "",
+       title = "Distribuição dos Clientes por Gênero") +
+  guides(fill = "none") +
+  theme_light()
+```
+
+## Gastos x Renda
+
+```{r}
+#| output-location: column
+
+# Uma inspeção visual parece indicar 
+# 5 grupos distintos de pontos.
+clientes_shopping |> 
+  ggplot(aes(renda_anual_mil, score_gastos, color = genero)) +
+  geom_point() +
+  labs(x = "Renda Anual (em mil R$)",
+       y = "Score de Gastos",
+       title = "Relação entre Gastos e Renda dos Clientes",
+       color = "") +
+  theme_light()
+
+```
+
+## Idade
+
+```{r}
+#| output-location: column
+
+clientes_shopping |> 
+  ggplot(aes(x = idade)) +
+  geom_histogram(fill = "cadetblue") +
+  labs(x = "Idade", y = "",
+       title = "Distribuição dos Clientes por Idade",
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+
+```
+:::
+
+## Segmentação de Clientes {.smaller}
+
+Vamos construir os clusters usando o score de gastos e renda anual. Para o número de clusters, vamos usar cinco:
+
+```{r}
+clusters_clientes <- clientes_shopping |> 
+  select(score_gastos, renda_anual_mil) |> 
+  kmeans(centers = 5)
+
+clusters_clientes |> 
+  tidy()
+```
+
+## Segmentação de Clientes {.smaller}
+
+Podemos repetir o gráfico de dispersão renda por gastos, mas usando como *cor* a classificação produzida pelo *K-means*.
+
+```{r}
+clusters_clientes |> 
+  augment(clientes_shopping) |> 
+  ggplot(aes(renda_anual_mil, score_gastos, color = .cluster)) +
+  geom_point() +
+  labs(x = "Renda Anual (em mil R$)", y = "Score de Gastos",
+       title = "Relação entre Gastos e Renda dos Clientes", color = "Clusters") +
+  theme_light()
+
+```
+
+## Segmentação de Clientes
+
+Escolhendo outros valores de `K`, rodando para vários valores de `K` e
+
+```{r}
+kclusts <-
+  tibble(k = 1:9) %>%
+  mutate(
+    kclust = map(k, ~ kmeans(select(clientes_shopping, score_gastos, renda_anual_mil), .x)),
+    glanced = map(kclust, glance)
+  )
+
+kclusts %>%
+  unnest(cols = c(glanced)) %>%
+  ggplot(aes(k, tot.withinss)) +
+  geom_line(alpha = 0.5, size = 1.2, color = "midnightblue") +
+  geom_point(size = 2, color = "midnightblue")
+```
+
+## Segmentação de Clientes
+
+Clusterização:
+
+-   Marketing: *Segmentação de Clientes*
+
+-   [Setor imobiliário: *grupos de imóveis*](https://medium.com/@tenzkunsang648/k-means-clustering-of-homes-and-neighborhoods-in-minneapolis-6b4fb02bc308)
+
+-   [Identificar locais suscetíveis a crimes](https://periodicos.ufpb.br/ojs/index.php/tpa/article/view/50891/31372)
+
+-   Clusterizar mensagens de redes sociais (twitters)
+
+## Análise Financeira
 
 ![](img/tidyquant.png){fig-align="center"}
 
@@ -1307,7 +1561,7 @@ preco_acoes |>
      ) 
 ```
 
-## Financeira
+## Análise Financeira
 
 ```{r}
 preco_acoes |> 
@@ -1318,7 +1572,7 @@ preco_acoes |>
   labs(x = "", y = "Preço de Fechamento") 
 ```
 
-## Financeira
+## Análise Financeira
 
 ```{r}
 Ra <- preco_acoes %>% 
@@ -1330,7 +1584,7 @@ Ra <- preco_acoes %>%
                col_rename = "Ra")
 ```
 
-## Financeira
+## Análise Financeira
 
 ```{r}
 Ra |> 
@@ -1339,7 +1593,26 @@ Ra |>
   facet_wrap(~symbol)
 ```
 
-## Financeira
+## Análise Financeira
+
+```{r}
+Ra %>% 
+  group_by(symbol) %>% 
+  mutate(retorno_acumulado = cumsum(Ra)) %>% 
+  ggplot(aes(x = date, y = retorno_acumulado, color = symbol)) +
+  geom_line() + 
+  geom_hline(yintercept = 0, linetype = 2) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "", 
+       y = "Retorno acumulado", 
+       title = "Retorno acumulado por empresa selecionada, 2021-2022",
+       caption = "Fonte: Elaborado pelo autor.") +
+  facet_wrap(~symbol, scales = "free_y", ncol = 2) +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle=45, size = 8))
+```
+
+## Análise Financeira
 
 ```{r}
 Ra |> 
@@ -1352,23 +1625,39 @@ Ra |>
     )
 ```
 
-## Financeira
+## Análise Financeira
+
+![](img/otimizacao.png)
+
+## Análise Financeira
+
+![](img/plot-pesos-1.png)
+
+## Análise Financeira
 
 <https://robsonolima.com.br/post/analise-de-portfolio-com-r/>
 
 <https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
 
+## Customer Lifetime Value
+
+*working*
+
 ## Análise de Sentimentos
 
-vale a pena?
+*working*
 
 ## Análise Fatorial
 
-aasasdasd
+*working*
 
 # Comunicar
 
--   [Blogs](https://robsonlima.netlify.app/)
+![](img/quarto_schematic.png)
+
+## Comunicação
+
+-   [Blogs](robsonolima.com.br)
 
 -   **Relatórios**
 
@@ -1376,9 +1665,11 @@ aasasdasd
 
 -   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
 
-## 
+# Por onde começar a estudar?
 
-# Onde Estudar?
+![](img/r_rollercoaster.png)
+
+## Onde Estudar?
 
 <https://www.escolavirtual.gov.br/curso/325>
 

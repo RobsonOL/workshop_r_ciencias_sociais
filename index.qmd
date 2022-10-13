@@ -34,47 +34,27 @@ editor: visual
 
 ::: columns
 ::: {.column width="50%"}
-![Edward Morgan Forster. Autor de "Aspects of the Novel (1927)"](img/foster.jpg){fig-align="center"}
-:::
-
-::: {.column width="50%"}
--   História
-
--   Pessoas
-
--   Trama/enredo
-
--   Fantasia
-
--   Profecias
-
--   Padrões
-
--   Ritmo
-:::
-:::
-
-## Contando Histórias com Dados
-
-::: columns
-::: {.column width="50%"}
 ![Fonte: Allison Horst](img/tidydata_5.jpg)
 :::
 
 ::: {.column width="50%"}
 -   Planejar
 
--   Simular
+-   Adquirir dados
 
--   Adquirir
+-   Explorar:
 
--   Explorar
+    -   Transformar
 
--   Compartilhar
+    -   Visualizar
+
+    -   Modelar
+
+-   Comunicar
 :::
 :::
 
-# 1. Pré-Requisitos
+# Pré-Requisitos
 
 ## R
 
@@ -106,7 +86,7 @@ editor: visual
 3.  Instalar os pacotes necessários
 :::
 
-```{r eval=FALSE, `code-line-numbers`="2"}
+```{r pacotes1, eval=FALSE, `code-line-numbers`="2"}
 #| echo=TRUE
 # instalar um pacote:
 install.packages("tidyverse")
@@ -122,7 +102,7 @@ library(tidyverse)
 3.  Instalar os pacotes necessários
 :::
 
-```{r eval=FALSE, `code-line-numbers`="6"}
+```{r pacotes2, eval=FALSE, `code-line-numbers`="6"}
 #| echo=TRUE
 # instalar um pacote:
 install.packages("tidyverse")
@@ -134,32 +114,77 @@ library(tidyverse)
 
 ## Rodando Código no R {auto-animate="true"}
 
-```{r}
+```{r basico1}
 1 + 2
 ```
 
 ## Rodando Código no R {auto-animate="true"}
 
-```{r}
+```{r basico2}
 1 / 200 * 30
 ```
 
 ## Rodando Código no R {auto-animate="true"}
 
-```{r}
+```{r basico3}
+sqrt(49)
+```
+
+## Funções
+
+R tem uma série de funções. Por exemplo, para criar uma sequência de números entre 1 e 10, usamos a função `seq()`:
+
+```{r funcao1}
+seq(1, 10)
+```
+
+## Funções
+
+Sempre chamamos uma função da seguinte forma:
+
+```{r funcao2, eval=FALSE}
+nome_funcao(argumento1 = valor1, argumento2 = valor2, ...)
+```
+
+## Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r, funcao3, `code-line-numbers`="2" }
+# somar dois valores
+sum(10, 15)
+```
+
+## Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r, funcao4, `code-line-numbers`="2" }
+# somar dois valores
+sum(10, 15)
+```
+
+## Funções
+
+```{r, funcao5, `code-line-numbers`="2" }
+# encontrar raiz quadrada
 sqrt(49)
 ```
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-```{r, `code-line-numbers`="2"}
-# podemos salvar o resultado de 3 * 4 como x
-x <- 3 * 4
+**Atribuimos** um valor a um objeto usando `<-`:
+
+```{r objeto1, eval=FALSE}
+nome_objeto <- valor
+
 ```
+
+Dica: Podemos ler o código acima como "estamos salvando o valor como ***nome_objeto***".
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-```{r, `code-line-numbers`="5" }
+```{r, objeto2, `code-line-numbers`="2"}
 # podemos salvar o resultado de 3 * 4 como x
 x <- 3 * 4
 
@@ -167,80 +192,31 @@ x <- 3 * 4
 x
 ```
 
-## Chamando Funções
+## Criando objetos com `<-` {auto-animate="true"}
 
-R tem uma série de funções. Por exemplo, para criar uma sequência de números entre 1 e 10, usamos a função `seq()`:
+```{r, objeto3, `code-line-numbers`="5" }
+# podemos salvar o resultado de 3 * 4 como x
+x <- 3 * 4
 
-```{r}
-seq(1, 10)
-```
-
-## Chamando Funções
-
-Sempre chamamos uma função da seguinte forma:
-
-```{r eval=FALSE}
-nome_funcao(argumento1 = valor1, argumento2 = valor2, ...)
-```
-
-## Chamando Funções {auto-animate="true"}
-
-Exemplos:
-
-```{r, `code-line-numbers`="2" }
-# somar dois valores
-sum(10, 15)
-```
-
-## Chamando Funções {auto-animate="true"}
-
-Exemplos:
-
-```{r}
-# somar dois valores
-sum(10, 15)
-```
-
-```{r, `code-line-numbers`="2" }
-# encontrar raiz quadrada
-sqrt(49)
+# para inspecionar o valor de `x` digitamos seu nome:
+x
 ```
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-Sempre **atribuimos** da mesma forma:
+Algumas recomendações para nomear objetos:
 
-```{r eval=FALSE}
-nome_objeto <- valor
+1.  Começar com letras
 
-```
+2.  Conter letras, números, `_` e `.`
+
+3.  Ser descritivo
+
+4.  Separar palavras com `_`: `sequencia_entre_1_10`
 
 ## Criando objetos com `<-` {auto-animate="true"}
 
-Sempre **atribuimos** da mesma forma:
-
-```{r eval=FALSE}
-nome_objeto <- valor
-
-```
-
-Dica: Podemos ler o código acima como "estamos salvando o valor como ***nome_objeto***".
-
-## Nome de objetos
-
-Nome de objetos precisam:
-
--   Começar com letras
-
--   Conter letras, números, `_` e `.`
-
--   Ser descritivo
-
--   Recomendo separar palavras com `_`: `sequencia_entre_1_10`
-
-## Nome de objetos {auto-animate="true"}
-
-```{r, `code-line-numbers`="2"}
+```{r, objeto4, `code-line-numbers`="2"}
 # salvar a sequência de números como um objeto
 sequencia_entre_1_10 <- seq(1, 10)
 
@@ -248,9 +224,9 @@ sequencia_entre_1_10 <- seq(1, 10)
 sum(sequencia_entre_1_10)
 ```
 
-## Nome de objetos {auto-animate="true"}
+## Criando objetos com `<-` {auto-animate="true"}
 
-```{r, `code-line-numbers`="5"}
+```{r, objeto5, `code-line-numbers`="5"}
 # salvar a sequência de números como um objeto
 sequencia_entre_1_10 <- seq(1, 10)
 
@@ -258,11 +234,11 @@ sequencia_entre_1_10 <- seq(1, 10)
 sum(sequencia_entre_1_10)
 ```
 
-## Banco de dados {auto-animate="true"}
+## Banco de dados: `data.frame` {auto-animate="true"}
 
 Um tipo especial de objeto é o `data.frame`:
 
-```{r eval=FALSE, `code-line-numbers`="2" }
+```{r bancodados1, eval=FALSE, `code-line-numbers`="2" }
 # mtcars é um banco de dados com informações de veículos:
 dados_carros <- mtcars
 
@@ -270,11 +246,11 @@ dados_carros <- mtcars
 dados_carros
 ```
 
-## Banco de dados {auto-animate="true"}
+## Banco de dados: `data.frame` {auto-animate="true"}
 
 Um tipo especial de objeto é o `data.frame`:
 
-```{r, `code-line-numbers`="5" }
+```{r, bancodados2, `code-line-numbers`="5" }
 # mtcars é um banco de dados com informações de veículos:
 dados_carros <- mtcars
 
@@ -282,9 +258,9 @@ dados_carros <- mtcars
 dados_carros
 ```
 
-## 
+## Banco de dados: `data.frame` {auto-animate="true"}
 
-```{r}
+```{r bancodados3}
 #| echo=FALSE
 dados_carros <- mtcars
 #options(DT.options = list(pageLength = 4))
@@ -300,27 +276,33 @@ dados_carros |> DT::datatable(
      ) 
 ```
 
-## Banco de dados {auto-animate="true"}
+## Banco de dados: `data.frame` {auto-animate="true"}
 
-##  ![Fonte: Allison Horst](img/tidydata_2.jpg)
+![Fonte: Allison Horst](img/tidydata_2.jpg){alt="Fonte: Allison Horst"}
+
+## Banco de dados: `data.frame` {auto-animate="true"}
 
 Vamos trabalhar com dados no R no formato `tidy`:
 
 ![](img/tidy-1.png)
 
-## Banco de Dados
+## Banco de dados: `data.frame` {auto-animate="true"}
 
 ![Fonte: Allison Horst](img/tidydata_3.jpg)
 
-# 2. Importar Dados
+## Transformar Dados em Informação
+
+![](img/data-science.png){fig-align="center"}
+
+# 1. Importar Dados
 
 ![](img/import_r.png){fig-align="center" width="300"}
 
-##  {auto-animate="true"}
+## Importando dados {auto-animate="true"}
 
 Importando dados de consumo de energia usando a função `read_csv()`:
 
-```{r eval=FALSE, `code-line-numbers`="2" }
+```{r importar-dados1, eval=FALSE, `code-line-numbers`="2" }
 # importar o pacote
 library(tidyverse)
 
@@ -332,11 +314,11 @@ consumo_energia
 
 ```
 
-##  {auto-animate="true"}
+## Importando dados {auto-animate="true"}
 
 Importando dados de consumo de energia usando a função `read_csv()`:
 
-```{r eval=FALSE, `code-line-numbers`="5" }
+```{r importar-dados2, eval=FALSE, `code-line-numbers`="5" }
 # importar o pacote
 library(tidyverse)
 
@@ -348,11 +330,11 @@ consumo_energia
 
 ```
 
-##  {auto-animate="true"}
+## Importando dados {auto-animate="true"}
 
 Importando dados de consumo de energia usando a função `read_csv()`:
 
-```{r, `code-line-numbers`="8" }
+```{r, importar-dados3, `code-line-numbers`="8" }
 # importar o pacote
 library(tidyverse)
 
@@ -363,7 +345,7 @@ consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
 consumo_energia
 ```
 
-##  {#tabela-dinamica1}
+## Importando dados {auto-animate="true"}
 
 ```{r tab-dinamica}
 #| echo=FALSE
@@ -382,7 +364,7 @@ consumo_energia |>
      ) 
 ```
 
-# 3. Transformação de dados
+# 2. Transformação de dados
 
 ![](img/hex-dplyr.png){fig-align="center" width="400"}
 
@@ -402,25 +384,25 @@ consumo_energia |>
 
 ![](img/filter.png)
 
-## Funcionamento da função `filter()`
+## Função `filter`
 
-```{r eval=FALSE}
+```{r filter1, eval=FALSE}
 filter(<DADOS>, <REGRAS>)
 ```
 
-##  {auto-animate="true"}
+## Função `filter`
 
 Se quisermos filtrar o consumo de energia da Paraíba:
 
-```{r}
+```{r filter2}
 filter(consumo_energia, sigla_uf == "PB")
 ```
 
-##  {auto-animate="true"}
+## Função `filter`
 
 Se quisermos filtrar o consumo de energia da Paraíba **apenas para consumidores residenciais**:
 
-```{r}
+```{r filter3}
 filter(consumo_energia, sigla_uf == "PB" & tipo_consumo == "Residencial")
 ```
 
@@ -430,16 +412,16 @@ O *pipe `|>`* é um operador que permite reescrever as expressões de outra form
 
 ![](img/pipe1.png)
 
-## 
+## Pipe `|>`
 
-```{r eval=FALSE}
+```{r pipe1, eval=FALSE}
 # ao invés de escrever assim:
 filter(consumo_energia, ano == 2020, sigla_uf == "PB")
 
 
 ```
 
-```{r}
+```{r pipe2}
 # escrevemos assim:
 consumo_energia |> # pegue os dados
   filter(ano == 2020 & sigla_uf == "PB") # ENTÃO filtre para...
@@ -453,7 +435,7 @@ consumo_energia |> # pegue os dados
 
 Podemos selecionar apenas as variáveis desejadas, como `ano`, `mes`, `sigla_uf` e `consumo`:
 
-```{r}
+```{r select1}
 consumo_energia |> 
   select(ano, mes, sigla_uf, consumo)
 ```
@@ -462,7 +444,7 @@ consumo_energia |>
 
 Podemos usar o `|>` para concatenar `filter()` e `select()`:
 
-```{r}
+```{r select2}
 consumo_energia |> 
   filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> # ENTÃO filtre os dados
   select(ano, mes, consumo) # então selecione as colunas
@@ -472,7 +454,7 @@ consumo_energia |>
 
 Vamos salvar o resultado como o objeto `energia_residencial_pb`:
 
-```{r}
+```{r select3}
 energia_residencial_pb <- consumo_energia |> 
   filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> 
   select(ano, mes, consumo) 
@@ -482,11 +464,11 @@ energia_residencial_pb <- consumo_energia |>
 
 ![](img/mutate.png)
 
-## 
+## Função `mutate()`
 
 Na função `mutate()` especifique o nome da nova variável e após o sinal de `=` indique a transformação que deseja realizar:
 
-```{r eval=FALSE}
+```{r mutate1, eval=FALSE}
 
 # a função abaixo cria uma variavel nova como a soma
 # da variavel_1 e variavel_2
@@ -497,7 +479,7 @@ dados <- mutate(variavel_nova = variavel_1 + variavel_2)
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r eval=FALSE,`code-line-numbers`="3"}
+```{r mutate2, eval=FALSE,`code-line-numbers`="3"}
 energia_residencial_pb <- energia_residencial_pb |> 
   # unir ano, mes e o dia "01" com a função paste0
   mutate(data = paste0(ano,"-",mes,"-01")) |> 
@@ -513,7 +495,7 @@ energia_residencial_pb
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r eval=FALSE,`code-line-numbers`="6"}
+```{r mutate3, eval=FALSE,`code-line-numbers`="6"}
 energia_residencial_pb <- energia_residencial_pb |> 
   # unir ano, mes e o dia "01" com a função paste0
   mutate(data = paste0(ano,"-",mes,"-01")) |> 
@@ -529,7 +511,7 @@ energia_residencial_pb
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
-```{r eval=TRUE,`code-line-numbers`="9"}
+```{r mutate4, eval=TRUE,`code-line-numbers`="9"}
 energia_residencial_pb <- energia_residencial_pb |> 
   # unir ano, mes e o dia "01" com a função paste0
   mutate(data = paste0(ano,"-",mes,"-01")) |> 
@@ -543,7 +525,7 @@ energia_residencial_pb
 
 ## Função `mutate()`:
 
-```{r}
+```{r mutate5}
 #| echo=FALSE
 font.size <- "14pt"
 
@@ -568,24 +550,24 @@ energia_residencial_pb |>
 
 Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
 
-```{r}
+```{r arrange1}
 energia_residencial_pb
 ```
 
-##  {auto-animate="true"}
+## Função `arrange()`
 
 Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
 
-```{r}
+```{r arrange2}
 energia_residencial_pb |> 
   arrange(consumo) # ordem crescente
 ```
 
-##  {auto-animate="true"}
+## Função `arrange()`
 
 Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
 
-```{r}
+```{r arrange3}
 energia_residencial_pb |> 
   arrange(desc(consumo)) # ordem decrescente
 ```
@@ -606,7 +588,7 @@ energia_residencial_pb |>
 
 Para obter o total consumido em energia na Paraíba em 2020:
 
-```{r eval=FALSE ,`code-line-numbers`="3"}
+```{r summ1, eval=FALSE ,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   # filtrar os dados para o ano de 2020
   filter(ano == 2020) |> 
@@ -618,7 +600,7 @@ energia_residencial_pb |>
 
 Para obter o total consumido em energia na Paraíba em 2020:
 
-```{r eval=TRUE ,`code-line-numbers`="5"}
+```{r summ2, eval=TRUE ,`code-line-numbers`="5"}
 energia_residencial_pb |> 
   # filtrar os dados para o ano de 2020
   filter(ano == 2020) |> 
@@ -630,7 +612,7 @@ energia_residencial_pb |>
 
 Se quisermos saber o valor médio consumido, só substituir a função `sum()` por `mean()`:
 
-```{r eval=TRUE ,`code-line-numbers`="5"}
+```{r summ3, eval=TRUE ,`code-line-numbers`="5"}
 energia_residencial_pb |> 
   # filtrar os dados para o ano de 2020
   filter(ano == 2020) |> 
@@ -652,7 +634,7 @@ energia_residencial_pb |>
 
 ## Função `group_by()` {auto-animate="true"}
 
-```{r eval=FALSE,`code-line-numbers`="3"}
+```{r groupby1, eval=FALSE,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   # agrupamos as observações por ano
   group_by(ano) |> 
@@ -662,7 +644,7 @@ energia_residencial_pb |>
 
 ## Função `group_by()` {auto-animate="true"}
 
-```{r eval=TRUE,`code-line-numbers`="5"}
+```{r groupby2, eval=TRUE,`code-line-numbers`="5"}
 energia_residencial_pb |> 
   # agrupamos as observações por ano
   group_by(ano) |> 
@@ -670,28 +652,28 @@ energia_residencial_pb |>
   summarise(consumo_medio_anual = mean(consumo))
 ```
 
-## Salvando Resultados
+## Salvando resultado no computador
 
 Podemos salvar esses resultados como um arquivo \*.csv\*:
 
-```{r eval=FALSE}
+```{r salvar-csv, eval=FALSE}
 energia_residencial_pb |> 
   write_csv("dados/energia_residencial_paraiba.csv")
 ```
 
-# 4. Visualização {auto-animate="true"}
+# 3. Visualização {auto-animate="true"}
 
 > "Apresentar dados com gráficos pode ajudar você a comunicar informações com clareza."
 
-##  {auto-animate="true"}
+## Pacote `ggplot2` {auto-animate="true"}
 
 ![](img/ggplot.png){fig-align="center" width="400"}
 
-##  {auto-animate="true"}
+## Pacote `ggplot2` {auto-animate="true"}
 
 Vamos criar nosso primeiro gráfico:
 
-```{r eval=TRUE,`code-line-numbers`="2"}
+```{r ggplot1, eval=TRUE,`code-line-numbers`="2"}
 # camada de dados
 energia_residencial_pb |> 
   # camada estética (mapeamento)
@@ -700,7 +682,7 @@ energia_residencial_pb |>
   geom_point()
 ```
 
-## 
+## Pacote `ggplot2` {auto-animate="true"}
 
 ![](img/layers.png)
 
@@ -708,7 +690,7 @@ energia_residencial_pb |>
 
 ![](img/geoms.png)
 
-## 
+## Geometrias
 
 -   **geom** é o objeto geométrico que um gráfico usa para representar dados.
 
@@ -720,7 +702,7 @@ energia_residencial_pb |>
 
 ## `geom_point()`
 
-```{r,`code-line-numbers`="3"}
+```{r geom-point,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   ggplot(mapping = aes(x = data, y = consumo)) +
   geom_point(color = "blue")
@@ -729,7 +711,7 @@ energia_residencial_pb |>
 
 ## `geom_line()`
 
-```{r,`code-line-numbers`="3"}
+```{r geom-line,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   ggplot(mapping = aes(x = data, y = consumo)) +
   geom_line()
@@ -737,7 +719,7 @@ energia_residencial_pb |>
 
 ## `geom_smooth()`
 
-```{r,`code-line-numbers`="3"}
+```{r geom-smooth,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   ggplot(mapping = aes(x = data, y = consumo)) +
   geom_smooth()
@@ -745,7 +727,7 @@ energia_residencial_pb |>
 
 ## `geom_hist`
 
-```{r ,`code-line-numbers`="3"}
+```{r geom-hist,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   ggplot(aes(x = consumo)) +
   geom_histogram()
@@ -754,7 +736,7 @@ energia_residencial_pb |>
 
 ## Múltiplos `geom_*`
 
-```{r echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+```{r geom-multiplos, echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 
 energia_residencial_pb |> 
   ggplot(aes(x = data, y = consumo)) +
@@ -764,7 +746,7 @@ energia_residencial_pb |>
 
 ## `Dplyr` + `ggplot`
 
-```{r}
+```{r dplyr-ggplot}
 energia_residencial_pb |> 
   group_by(ano) |> 
   summarise(consumo_total = sum(consumo)) |> 
@@ -774,7 +756,7 @@ energia_residencial_pb |>
 
 ## Múltiplas faces com `facet_wrap`
 
-```{r,`code-line-numbers`="5"}
+```{r ggplot-facet,`code-line-numbers`="5"}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo)) + 
@@ -787,7 +769,7 @@ energia_residencial_pb |>
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE}
+```{r ggplot-style1, eval=FALSE}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo)) + 
@@ -797,7 +779,7 @@ energia_residencial_pb |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r ggplot-style2}
 #| echo: false
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
@@ -812,7 +794,7 @@ energia_residencial_pb |>
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE,`code-line-numbers`="6"}
+```{r ggplot-style3, eval=FALSE,`code-line-numbers`="6"}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo)) + 
@@ -825,7 +807,7 @@ energia_residencial_pb |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r ggplot-style4}
 #| echo: false
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
@@ -843,7 +825,7 @@ energia_residencial_pb |>
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE,`code-line-numbers`="9"}
+```{r ggplot-style5, eval=FALSE,`code-line-numbers`="9"}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo)) + 
@@ -857,7 +839,7 @@ energia_residencial_pb |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r ggplot-style6}
 #| echo: false
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
@@ -876,7 +858,7 @@ energia_residencial_pb |>
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE,`code-line-numbers`="4"}
+```{r ggplot-style7, eval=FALSE,`code-line-numbers`="4"}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo, 
@@ -891,7 +873,7 @@ energia_residencial_pb |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r ggplot-style8}
 #| echo: false
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
@@ -911,7 +893,7 @@ energia_residencial_pb |>
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE,`code-line-numbers`="10"}
+```{r ggplot-style9, eval=FALSE,`code-line-numbers`="10"}
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
   ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
@@ -926,7 +908,7 @@ energia_residencial_pb |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r ggplot-style10}
 #| echo: false
 energia_residencial_pb |> 
   filter(ano > 2012) |> 
@@ -943,7 +925,7 @@ energia_residencial_pb |>
 :::
 :::
 
-## Outras Visualizações
+## Mais Informações
 
 -   <https://robsonolima.com.br/post/visualizacao-com-ggplot2-e-seinfeld/>
 
@@ -953,13 +935,26 @@ energia_residencial_pb |>
 
 -   <https://livro.curso-r.com/8-graficos.html>
 
-# 5. Modelar
+# 4. Modelar
 
 ![](img/tidymodels.png){fig-align="center"}
 
+## Modelar {.smaller}
+
+Vou apresentar uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas ciências sociais:
+
+::: incremental
+1.  Previsão de séries temporais
+2.  Regressão
+3.  Segmentação de clientes com clusterização
+4.  Análise de Churn
+5.  Análise financeira (portfólios)
+6.  Análise fatorial
+:::
+
 ## Séries Temporais
 
-![](img/modeltime.png){fig-align="center"}
+![Para análise de séries temporais no R vamos usar o pacote Modeltime](img/modeltime.png){fig-align="center"}
 
 ## Séries Temporais
 
@@ -967,7 +962,7 @@ energia_residencial_pb |>
 
 ## Séries Temporais
 
-```{r, eval=FALSE, `code-line-numbers`="2"}
+```{r series-pacotes, eval=FALSE, `code-line-numbers`="2"}
 # Instalar pacote:
 # install.packages("modeltime")
 # install.packages("timetk")
@@ -983,7 +978,7 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 
 ## Séries Temporais
 
-```{r, eval=FALSE, `code-line-numbers`="3"}
+```{r series-dados, eval=FALSE, `code-line-numbers`="3"}
 # Instalar pacote:
 # install.packages("modeltime")
 # install.packages("timetk")
@@ -999,7 +994,7 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 
 ## Séries Temporais
 
-```{r, eval=FALSE, `code-line-numbers`="6"}
+```{r series-dados2, eval=FALSE, `code-line-numbers`="6"}
 # Instalar pacote:
 # install.packages("modeltime")
 # install.packages("timetk")
@@ -1015,23 +1010,7 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 
 ## Séries Temporais
 
-```{r, eval=FALSE, `code-line-numbers`="7"}
-# Instalar pacote:
-# install.packages("modeltime")
-# install.packages("timetk")
-
-# carregar pacote
-library(tidymodels)
-library(modeltime)
-library(timetk)
-
-# carregar dados
-energia <- read_csv("dados/consumo_energia_brasil.csv")
-```
-
-## Séries Temporais
-
-```{r, eval=FALSE, `code-line-numbers`="8"}
+```{r series-dados3, eval=FALSE, `code-line-numbers`="7"}
 # Instalar pacote:
 # install.packages("modeltime")
 # install.packages("timetk")
@@ -1047,7 +1026,7 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 
 ## Séries Temporais
 
-```{r, `code-line-numbers`="11"}
+```{r series-dados4, eval=FALSE, `code-line-numbers`="8"}
 # Instalar pacote:
 # install.packages("modeltime")
 # install.packages("timetk")
@@ -1063,7 +1042,23 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 
 ## Séries Temporais
 
-```{r}
+```{r series-dados5, `code-line-numbers`="11"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r energia-plot}
 energia |> 
   ggplot(aes(x = data, y = consumo)) +
   geom_line(color = "red") + 
@@ -1073,8 +1068,8 @@ energia |>
 
 ## Séries Temporais
 
-```{r, `code-line-numbers`="2"}
-energia_residencial_pb |> 
+```{r energia-plot2, `code-line-numbers`="2"}
+energia |> 
   plot_time_series(data, 
                    consumo, 
                    .title = "Consumo de Energia Residencial na Paraíba"
@@ -1087,12 +1082,12 @@ Base de Treinamento e Base de Teste
 
 ![](img/resamples.png)
 
-## Séries Temporais {.smaller}
+## Séries Temporais
 
-```{r}
+```{r series-treino-teste0, eval=FALSE, `code-line-numbers`="4"}
 set.seed(123)
 # base de teste (20%) e treinamento (80%)
-energia_treinamento_teste <- energia_residencial_pb |> 
+energia_treinamento_teste <- energia |> 
   initial_time_split(prop = 0.8)
 
 tbl_energia_treinamento <- training(energia_treinamento_teste)
@@ -1105,9 +1100,57 @@ energia_treinamento_teste |>
 
 ## Séries Temporais
 
+```{r series-treino-teste1, eval=FALSE, `code-line-numbers`="6"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r series-treino-teste2, eval=FALSE, `code-line-numbers`="7"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r series-treino-teste3, eval=TRUE, `code-line-numbers`="11"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais {.smaller}
+
 Agora vamos informar quem são nossas variáveis explicativas: *o consumo de energia residencial será explicado apenas pelos seus valores passados. Poderiamos incluir outras variáveis, como feriados, tarifa de energia, etc.*
 
-```{r}
+```{r series-receita, eval=TRUE, `code-line-numbers`="1"}
 receita_energia <- recipe(consumo ~ data, tbl_energia_treinamento)
 ```
 
@@ -1115,7 +1158,7 @@ receita_energia <- recipe(consumo ~ data, tbl_energia_treinamento)
 
 Por fim, definir o modelo, rodar e gerar previsões:
 
-```{r}
+```{r series-modelo1, eval=FALSE, `code-line-numbers`="2"}
 # definir o modelo a ser rodado (ARIMA)
 modelo_arima <- arima_reg() %>% 
   set_engine("auto_arima")
@@ -1131,7 +1174,7 @@ workflow_arima <- workflow() %>%
 tbl_energia_calibracao <- workflow_arima |> 
   modeltime_calibrate(new_data = tbl_energia_teste)
 
-
+# gerar os valores previstos
 tbl_energia_previsao <- tbl_energia_calibracao |> 
   modeltime_forecast(new_data = tbl_energia_teste,
                      actual_data = energia_residencial_pb)
@@ -1140,9 +1183,90 @@ tbl_energia_previsao <- tbl_energia_calibracao |>
 
 ## Séries Temporais
 
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo2, eval=FALSE, `code-line-numbers`="6"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia_residencial_pb)
+
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo3, eval=FALSE, `code-line-numbers`="14"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia_residencial_pb)
+
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo4, eval=TRUE, `code-line-numbers`="18"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia_residencial_pb)
+
+```
+
+## Séries Temporais {.smaller}
+
 Gráfico da previsão comparada com o que ocorreu de fato:
 
-```{r}
+```{r series-previsao, `code-line-numbers`="2"}
 tbl_energia_previsao |> 
   plot_modeltime_forecast()
 ```
@@ -1151,7 +1275,7 @@ tbl_energia_previsao |>
 
 É possível ainda criar uma série de medidas de performance. Elas são úteis para nos guiar sobre qual o melhor modelo:
 
-```{r}
+```{r series-acuracia, `code-line-numbers`="2"}
 tbl_energia_calibracao |> 
   modeltime_accuracy(new_data = tbl_energia_teste) |> 
   knitr::kable()
@@ -1159,21 +1283,23 @@ tbl_energia_calibracao |>
 
 ## Séries Temporais
 
+Para mais informações sobre séries temporais:
+
 -   <https://robsonol.github.io/timeseries_r_book/>
 
 ## Análise de Churn
 
-> A partir de informações dos clientes, podemos prever a probabilidade que um cliente abandone a empresa, nos permitindo desenvolver programas focados em retenção de clientes.
+> A partir de informações dos clientes, podemos prever a probabilidade que um cliente abandone (*churn)* a empresa, nos permitindo desenvolver programas focados em retenção de clientes.
 
 ## Análise de Churn
 
-```{r}
+```{r churn-dados}
 data(wa_churn, package = "modeldata")
 ```
 
 ## Análise de Churn
 
-```{r}
+```{r churn-dados2}
 #| echo=FALSE
 font.size <- "14pt"
 
@@ -1188,12 +1314,12 @@ wa_churn |>
      ) 
 ```
 
-## Análise de Churn
+## Análise de Churn {.smaller}
 
 ::: panel-tabset
-## Gastos 
+## Gastos
 
-```{r}
+```{r churn-stat1}
 #| output-location: column
 #| 
 wa_churn |> 
@@ -1207,7 +1333,7 @@ wa_churn |>
 
 ## Sexo
 
-```{r}
+```{r churn-stat2}
 #| output-location: column
 
 wa_churn |> 
@@ -1224,7 +1350,7 @@ wa_churn |>
 
 ## Tempo
 
-```{r}
+```{r churn-stat3}
 #| output-location: column
 
 wa_churn |> 
@@ -1238,7 +1364,7 @@ wa_churn |>
 
 ## Churn
 
-```{r}
+```{r churn-stat4}
 #| output-location: column
 
 wa_churn |> 
@@ -1251,7 +1377,7 @@ wa_churn |>
 
 ## Análise de Churn
 
-```{r}
+```{r churn-treino}
 # Criar a base de treinamento e teste
 churn_treinamento_teste <- wa_churn |> 
   initial_split(prop = 0.8)
@@ -1264,7 +1390,7 @@ churn_treinamento_teste
 
 ## Análise de Churn
 
-```{r}
+```{r churn-receita}
 # Transformações dos dados
 receita_churn <- recipe(churn ~ ., data = tbl_treinamento) %>% 
   step_impute_linear(all_numeric()) %>% 
@@ -1275,7 +1401,7 @@ receita_churn <- recipe(churn ~ ., data = tbl_treinamento) %>%
 
 ## Análise de Churn
 
-```{r}
+```{r churn-modelo}
 # Definir o modelo
 modelo_floresta_aleatoria <- 
   rand_forest(
@@ -1289,7 +1415,7 @@ modelo_floresta_aleatoria <-
 
 ## Análise de Churn
 
-```{r}
+```{r churn-previsao}
 workflow_churn <- workflow() |> 
   add_model(modelo_floresta_aleatoria) |> 
   add_recipe(receita_churn) |>  
@@ -1303,7 +1429,7 @@ A matriz de confusão:
 
 ::: columns
 ::: {.column width="50%"}
-```{r eval=FALSE}
+```{r churn-matriz, eval=FALSE}
 
 # Matriz de Confusão
 matriz_confusao_churn <- workflow_churn |> 
@@ -1318,7 +1444,7 @@ matriz_confusao_churn |>
 :::
 
 ::: {.column width="50%"}
-```{r}
+```{r churn-matriz2}
 #| echo: false
 #| label: fig-mtcars
 #| fig-cap: "Matriz de Confusão"
@@ -1341,7 +1467,7 @@ matriz_confusao_churn |>
 
 ## Análise de Churn
 
-```{r}
+```{r churn-confusao3}
 matriz_confusao_churn |> 
   summary() |> 
   select(-.estimator) %>% 
@@ -1353,7 +1479,7 @@ matriz_confusao_churn |>
 
 ## Análise de Churn
 
-```{r}
+```{r churn-cliente}
 cliente_ficticio <- data.frame(
   female = 1, # mulher
   senior_citizen = 0, # não idosa
@@ -1381,13 +1507,15 @@ cliente_ficticio <- data.frame(
 
 O modelo nos informa que provavelmente este cliente não deve cancelar sua assinatura em breve.
 
-```{r}
+```{r churn-cliente2}
 # O modelo informa que provavelmente esta cliente não deve abandonar a empresa em breve
 workflow_churn |> 
   predict(cliente_ficticio)
 ```
 
 ## Análise de Churn
+
+Para mais informações:
 
 -   <https://robsonolima.com.br/post/analise-de-churn-com-tidymodels-parte-1/>
 
@@ -1399,15 +1527,32 @@ workflow_churn |>
 
 ## Segmentação de Clientes
 
-## [![Animação por Allison Horst](img/kmeans.gif)](https://github.com/allisonhorst/stats-illustrations)
+![](img/kmeans.gif)
 
 ## Segmentação de Clientes
 
-```{r}
+```{r kmeans-dados}
 clientes_shopping <- read_csv("dados/clientes_shopping.csv")
 
 clientes_shopping |> 
   head()
+```
+
+## Segmentação de Clientes
+
+```{r kmeans-dados2}
+#| echo=FALSE
+font.size <- "14pt"
+
+clientes_shopping |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
 ```
 
 ## Segmentação de Clientes {.smaller}
@@ -1415,7 +1560,7 @@ clientes_shopping |>
 ::: panel-tabset
 ## Sexo
 
-```{r}
+```{r kmeans-stat1}
 #| output-location: column
 
 clientes_shopping |>
@@ -1430,7 +1575,7 @@ clientes_shopping |>
 
 ## Gastos x Renda
 
-```{r}
+```{r kmeans-stat2}
 #| output-location: column
 
 # Uma inspeção visual parece indicar 
@@ -1448,7 +1593,7 @@ clientes_shopping |>
 
 ## Idade
 
-```{r}
+```{r kmeans-stat3}
 #| output-location: column
 
 clientes_shopping |> 
@@ -1466,7 +1611,7 @@ clientes_shopping |>
 
 Vamos construir os clusters usando o score de gastos e renda anual. Para o número de clusters, vamos usar cinco:
 
-```{r}
+```{r kmeans-clusters}
 clusters_clientes <- clientes_shopping |> 
   select(score_gastos, renda_anual_mil) |> 
   kmeans(centers = 5)
@@ -1479,7 +1624,7 @@ clusters_clientes |>
 
 Podemos repetir o gráfico de dispersão renda por gastos, mas usando como *cor* a classificação produzida pelo *K-means*.
 
-```{r}
+```{r kmeans-cluster2}
 clusters_clientes |> 
   augment(clientes_shopping) |> 
   ggplot(aes(renda_anual_mil, score_gastos, color = .cluster)) +
@@ -1494,7 +1639,7 @@ clusters_clientes |>
 
 Escolhendo outros valores de `K`, rodando para vários valores de `K` e
 
-```{r}
+```{r kmeans-cluster3}
 kclusts <-
   tibble(k = 1:9) %>%
   mutate(
@@ -1523,11 +1668,11 @@ Clusterização:
 
 ## Análise Financeira
 
-![](img/tidyquant.png){fig-align="center"}
+![O pacote tidyQuant permite realizar análise financeira no R.](img/tidyquant.png){fig-align="center"}
 
 ## Análise Financeira
 
-```{r}
+```{r finance-dados}
 # instalar o pacote tidyquant
 # install.packages("tidyquant")
 
@@ -1546,7 +1691,7 @@ preco_acoes <- tickers |>
 
 ## Análise Financeira
 
-```{r}
+```{r finance-dados2}
 #| echo=FALSE
 font.size <- "14pt"
 
@@ -1561,9 +1706,9 @@ preco_acoes |>
      ) 
 ```
 
-## Análise Financeira
+## Análise Financeira {.smaller}
 
-```{r}
+```{r finance-precos}
 preco_acoes |> 
   filter(symbol == "PETR3.SA") |> 
   filter(date > as.Date("2022-07-01")) |> 
@@ -1574,7 +1719,7 @@ preco_acoes |>
 
 ## Análise Financeira
 
-```{r}
+```{r finance-retorno}
 Ra <- preco_acoes %>% 
   select(date, symbol, close) %>% 
   group_by(symbol) %>% 
@@ -1584,9 +1729,9 @@ Ra <- preco_acoes %>%
                col_rename = "Ra")
 ```
 
-## Análise Financeira
+## Análise Financeira {.smaller}
 
-```{r}
+```{r finance-grafico}
 Ra |> 
   ggplot(aes(x = date, y = Ra, color = symbol)) +
   geom_line() + 
@@ -1595,7 +1740,7 @@ Ra |>
 
 ## Análise Financeira
 
-```{r}
+```{r finance-graficoacumulado}
 Ra %>% 
   group_by(symbol) %>% 
   mutate(retorno_acumulado = cumsum(Ra)) %>% 
@@ -1614,7 +1759,7 @@ Ra %>%
 
 ## Análise Financeira
 
-```{r}
+```{r finance-sharpe}
 Ra |> 
   tq_performance(
     Ra = Ra, 
@@ -1635,6 +1780,8 @@ Ra |>
 
 ## Análise Financeira
 
+Para mais informações
+
 <https://robsonolima.com.br/post/analise-de-portfolio-com-r/>
 
 <https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
@@ -1643,15 +1790,141 @@ Ra |>
 
 *working*
 
-## Análise de Sentimentos
+## Análise Fatorial {.smaller}
 
-*working*
+| Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
+|------|-----------------|-----------------|-----------------|-----------------|
+| y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
+| y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
+| y3  | Eleições livres e justas (1960)                        | x               |                 |       |
+| y4  | Efetividade do congresso eleito (1960)                 | x               |                 |       |
+| y5  | Score dado por experts em liberdade de imprensa (1965) |                 | x               |       |
+| y6  | Liberdade dos partidos políticos (1965)                |                 | x               |       |
+| y7  | Eleições livres e justas (1965)                        |                 | x               |       |
+| y8  | Eleições livres e justas (1965)                        |                 | x               |       |
+| x1  | PIB per capita (1960)                                  |                 |                 | x     |
+| x2  | Consumo de energia per capita (1960)                   |                 |                 | x     |
+| x3  | \% da força de trabalho na industrial (1960)           |                 |                 | x     |
+
+## Análise Fatorial {.smaller}
+
+![](img/sem22.png)
+
+## Análise Fatorial {.smaller}
+
+```{r pacote-lavaan}
+# Instalar pacote lavaan
+# install.packages("lavaan")
+
+# carregar pacote lavaan
+library(lavaan)
+
+# importar dados
+dados <- PoliticalDemocracy
+```
 
 ## Análise Fatorial
 
-*working*
+```{r lavaan-dados}
+#| echo=FALSE
+font.size <- "12pt"
 
-# Comunicar
+dados |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Análise Fatorial
+
+::: columns
+::: {.column width="50%"}
+![](img/sem22.png)
+:::
+
+::: {.column width="50%"}
+```{r lavaan-modelo}
+# Podemos especificar o modelo como:
+LVdata.model <-'# Modelo de medidas
+                  ind60 =~ x1 + x2 + x3 
+                  dem60 =~ y1 + y2 + y3 + y4
+                  dem65 =~ y5 + y6 + y7 + y8
+                # Regressão
+                  dem60 ~ ind60
+                  dem65 ~ ind60 + dem60
+                # Resíduos
+                  y1 ~~ y5
+                  y2 ~~ y4 + y6
+                  y3 ~~ y7
+                  y4 ~~ y8
+                  y6 ~~ y8'
+```
+:::
+:::
+
+## Análise Fatorial
+
+```{r lavaan-fit}
+# Especificar o modelo lavaan
+fit <- sem(LVdata.model, data = dados)
+
+# Mostrar o resultado
+fit |> tidy()
+```
+
+## Análise Fatorial
+
+```{r lavaan-resultado}
+#| echo=FALSE
+font.size <- "10pt"
+
+fit |> tidy() |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) |> 
+  DT::formatRound(columns=c('op', 'estimate', "std.error",
+                        "statistic", "p.value", "std.lv",
+                        "std.all","std.nox"), digits=1)
+```
+
+## Análise Fatorial {.smaller}
+
+```{r lavaan-plot1}
+# Instalar lavaanPlot
+# install.packages("lavaanPlot")
+
+# carregar pacote lavaanPlot
+library(lavaanPlot)
+
+# Exibir gráfico
+lavaanPlot(model = fit)
+```
+
+## Análise Fatorial {.smaller}
+
+```{r lavaan-plot2}
+# Instalar lavaanPlot
+# install.packages("lavaanPlot")
+
+# carregar pacote lavaanPlot
+library(lavaanPlot)
+
+# Exibir gráfico
+lavaanPlot(model = fit, 
+           node_options = list(style = "filled",color = "YellowGreen"), coefs = TRUE, stars = c("regress"))
+```
+
+# 5. Comunicar
 
 ![](img/quarto_schematic.png)
 
@@ -1665,7 +1938,7 @@ Ra |>
 
 -   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
 
-# Por onde começar a estudar?
+# Conclusão
 
 ![](img/r_rollercoaster.png)
 

@@ -54,6 +54,14 @@ editor: visual
 :::
 :::
 
+## Contando Histórias com Dados
+
+![](img/data-science.png){fig-align="center"}
+
+## Contando Histórias com Dados
+
+![Fonte: Allison Horst](img/reproducibility_court.png){fig-align="center"}
+
 # Pré-Requisitos
 
 ## R
@@ -68,13 +76,17 @@ editor: visual
 
 ![](img/r_console.png){fig-align="center" width="400"}
 
-## Rstudio
+## RStudio
 
 ::: nonincremental
 2.  Instalar o RStudio: [https://www.rstudio.com](https://www.rstudio.com/products/rstudio/download/)
 :::
 
 ![](img/rstudio.png){fig-align="center" width="400"}
+
+## RStudio Cloud
+
+![](img/rstudio_cloud.png){fig-align="center"}
 
 ## Pacotes {auto-animate="true"}
 
@@ -111,6 +123,8 @@ install.packages("tidyverse")
 # Mas é preciso carrega-lo sempre que iniciarmos o R:
 library(tidyverse)
 ```
+
+# R: Uso Básico
 
 ## Rodando Código no R {auto-animate="true"}
 
@@ -290,10 +304,6 @@ Vamos trabalhar com dados no R no formato `tidy`:
 
 ![Fonte: Allison Horst](img/tidydata_3.jpg)
 
-## Transformar Dados em Informação
-
-![](img/data-science.png){fig-align="center"}
-
 # 1. Importar Dados
 
 ![](img/import_r.png){fig-align="center" width="300"}
@@ -370,27 +380,27 @@ consumo_energia |>
 
 ## Funções do `dplyr`
 
--   `filter()` filtra apenas observações com valores específicos
+A.  `filter()` filtra apenas observações com valores específicos
 
--   `arrange()` reordena as linhas da base
+B.  `arrange()` reordena as linhas da base
 
--   `select()` seleciona apenas variáveis de interesse
+C.  `select()` seleciona apenas variáveis de interesse
 
--   `mutate()` cria novas variáveis como função das demais
+D.  `mutate()` cria novas variáveis como função das demais
 
--   `summarise()` cria estatísticas descritivas
+E.  `summarise()` cria estatísticas descritivas
 
 ## Função `filter`
 
 ![](img/filter.png)
 
-## Função `filter`
+## A. Função `filter`
 
 ```{r filter1, eval=FALSE}
 filter(<DADOS>, <REGRAS>)
 ```
 
-## Função `filter`
+## A. Função `filter`
 
 Se quisermos filtrar o consumo de energia da Paraíba:
 
@@ -398,7 +408,7 @@ Se quisermos filtrar o consumo de energia da Paraíba:
 filter(consumo_energia, sigla_uf == "PB")
 ```
 
-## Função `filter`
+## A. Função `filter`
 
 Se quisermos filtrar o consumo de energia da Paraíba **apenas para consumidores residenciais**:
 
@@ -427,11 +437,11 @@ consumo_energia |> # pegue os dados
   filter(ano == 2020 & sigla_uf == "PB") # ENTÃO filtre para...
 ```
 
-## Função `select()`
+## B. Função `select()`
 
 ![](img/select.png)
 
-## Função `select()`
+## B. Função `select()`
 
 Podemos selecionar apenas as variáveis desejadas, como `ano`, `mes`, `sigla_uf` e `consumo`:
 
@@ -440,7 +450,7 @@ consumo_energia |>
   select(ano, mes, sigla_uf, consumo)
 ```
 
-## Função `select()`
+## B. Função `select()`
 
 Podemos usar o `|>` para concatenar `filter()` e `select()`:
 
@@ -450,7 +460,7 @@ consumo_energia |>
   select(ano, mes, consumo) # então selecione as colunas
 ```
 
-## Função `select()`
+## B. Função `select()`
 
 Vamos salvar o resultado como o objeto `energia_residencial_pb`:
 
@@ -460,11 +470,11 @@ energia_residencial_pb <- consumo_energia |>
   select(ano, mes, consumo) 
 ```
 
-## Função `mutate()`
+## C. Função `mutate()`
 
 ![](img/mutate.png)
 
-## Função `mutate()`
+## C. Função `mutate()`
 
 Na função `mutate()` especifique o nome da nova variável e após o sinal de `=` indique a transformação que deseja realizar:
 
@@ -475,7 +485,7 @@ Na função `mutate()` especifique o nome da nova variável e após o sinal de `
 dados <- mutate(variavel_nova = variavel_1 + variavel_2)
 ```
 
-## Função `mutate()`
+## C. Função `mutate()`
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
@@ -491,7 +501,7 @@ energia_residencial_pb <- energia_residencial_pb |>
 energia_residencial_pb
 ```
 
-## Função `mutate()`
+## C. Função `mutate()`
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
@@ -507,7 +517,7 @@ energia_residencial_pb <- energia_residencial_pb |>
 energia_residencial_pb
 ```
 
-## Função `mutate()`
+## C. Função `mutate()`
 
 Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
 
@@ -523,7 +533,7 @@ energia_residencial_pb <- energia_residencial_pb |>
 energia_residencial_pb
 ```
 
-## Função `mutate()`:
+## C. Função `mutate()`:
 
 ```{r mutate5}
 #| echo=FALSE
@@ -542,11 +552,11 @@ energia_residencial_pb |>
 
 ```
 
-## Função `arrange()`
+## D. Função `arrange()`
 
 ![](img/arrange.png)
 
-## Função `arrange()`
+## D. Função `arrange()`
 
 Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
 
@@ -554,7 +564,7 @@ Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
 energia_residencial_pb
 ```
 
-## Função `arrange()`
+## D. Função `arrange()`
 
 Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
 
@@ -563,7 +573,7 @@ energia_residencial_pb |>
   arrange(consumo) # ordem crescente
 ```
 
-## Função `arrange()`
+## D. Função `arrange()`
 
 Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
 
@@ -572,11 +582,11 @@ energia_residencial_pb |>
   arrange(desc(consumo)) # ordem decrescente
 ```
 
-## Função `summarise()`
+## E. Função `summarise()`
 
 ![](img/summarise.png)
 
-## Função `summarise()`
+## E. Função `summarise()`
 
 -   O último verbo do `dplyr` é o `summarise()`
 
@@ -584,7 +594,7 @@ energia_residencial_pb |>
 
 -   O objetivo é criar medidas como média, medianas, totais e outros.
 
-## Função `summarise()` {auto-animate="true"}
+## E. Função `summarise()` {auto-animate="true"}
 
 Para obter o total consumido em energia na Paraíba em 2020:
 
@@ -608,7 +618,7 @@ energia_residencial_pb |>
   summarise(consumo_total = sum(consumo))
 ```
 
-## Função `summarise()` {auto-animate="true"}
+## E. Função `summarise()` {auto-animate="true"}
 
 Se quisermos saber o valor médio consumido, só substituir a função `sum()` por `mean()`:
 
@@ -620,11 +630,11 @@ energia_residencial_pb |>
   summarise(consumo_medio_mensal = mean(consumo))
 ```
 
-## Função `group_by()`
+## F. Função `group_by()`
 
 ![](img/groupby.png)
 
-## Função `group_by()`
+## F. Função `group_by()`
 
 -   `summarise()` é mais útil quando usamos em conjunto com `group_by()`
 
@@ -632,7 +642,7 @@ energia_residencial_pb |>
 
 -   Por exemplo, podemos estar interessado no gasto médio de saúde para cada ano
 
-## Função `group_by()` {auto-animate="true"}
+## F. Função `group_by()` {auto-animate="true"}
 
 ```{r groupby1, eval=FALSE,`code-line-numbers`="3"}
 energia_residencial_pb |> 
@@ -642,7 +652,7 @@ energia_residencial_pb |>
   summarise(consumo_medio_anual = mean(consumo))
 ```
 
-## Função `group_by()` {auto-animate="true"}
+## F. Função `group_by()` {auto-animate="true"}
 
 ```{r groupby2, eval=TRUE,`code-line-numbers`="5"}
 energia_residencial_pb |> 
@@ -734,6 +744,23 @@ energia_residencial_pb |>
 
 ```
 
+## `geom_boxplot`
+
+```{r geom-boxplot,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(y = consumo)) +
+  geom_boxplot()
+```
+
+## `geom_qq`
+
+```{r geom-qq,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(sample = consumo)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
 ## Múltiplos `geom_*`
 
 ```{r geom-multiplos, echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
@@ -762,7 +789,6 @@ energia_residencial_pb |>
   ggplot(aes(x = mes, y = consumo)) + 
   geom_line() + 
   facet_wrap(~ano)
-
 ```
 
 ## Estilizando o gráfico
@@ -944,13 +970,100 @@ energia_residencial_pb |>
 Vou apresentar uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas ciências sociais:
 
 ::: incremental
-1.  Previsão de séries temporais
-2.  Regressão
-3.  Segmentação de clientes com clusterização
-4.  Análise de Churn
-5.  Análise financeira (portfólios)
-6.  Análise fatorial
+1.  Estatística Básica
+2.  Previsão de séries temporais
+3.  Regressão
+4.  Segmentação de clientes com clusterização
+5.  Análise de Churn
+6.  Análise financeira (portfólios)
+7.  Análise fatorial
 :::
+
+## Estatística Básica: Estatísticas Descritivas
+
+```{r}
+salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
+
+salario_pb |> head()
+```
+
+## Estatísticas Básica: Estatísticas Descritivas
+
+```{r}
+summary(salario_pb)
+
+```
+
+## Estatísticas Básica: Estatísticas Descritivas
+
+```{r}
+salario_pb |> 
+  summarise(across(c(salario, idade, escolaridade),
+                   list(media = ~ mean(., na.rm = TRUE),
+                        mediana = ~ median(., na.rm = TRUE),
+                        dp = ~ sd(., na.rm = TRUE)))) |> 
+  pivot_longer(cols = everything(),
+               names_to = c("Variável", ".value"), 
+               names_sep = "_") |> 
+  rename("Média" = media,
+         "Mediana" = mediana,
+         "Desvio-Padrão" = dp)
+```
+
+## Estatística Básica: Correlação
+
+Calcular correlação pode ser executada com a função `cor()`:
+
+```{r}
+salario_pb |> 
+  # selecionar variáveis numéricas
+  select(salario, escolaridade, sexo) |> 
+  cor()
+```
+
+## Estatística Básica: Distribuição Normal
+
+```{r}
+salario_pb |> 
+  ggplot(aes(x = salario)) + 
+  geom_histogram(breaks = seq(0,10000, by = 100),
+                 alpha = 0.3) +
+  labs(x = "Salário", y = "", title = "Histograma do Salário Nominal na Paraíba (2013)",
+       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
+```
+
+## Estatística Básica: Distribuição Normal
+
+```{r}
+salario_pb |> 
+  ggplot(aes(sample = salario)) + 
+  geom_qq() +
+  geom_qq_line() +
+  labs(x = "Salário", y = "", title = "QQ-Plot do Salário Nominal na Paraíba (2013)",
+       subtitle = "A distribuição de salário não parece seguir uma distribuição Normal",
+       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
+```
+
+```{r stat-basico1,`code-line-numbers`="8"}
+salario_mulheres <- salario_pb |> 
+  filter(sexo == 1) |> 
+  pull(salario)
+
+salario_homens <- salario_pb |> 
+  filter(sexo == 2) |> 
+  pull(salario)
+
+t.test(salario_mulheres, salario_homens)
+```
+
+## Regressão
+
+```{r}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+resultado <- lm(equacao, data = salario_pb) 
+resultado |> 
+  broom::tidy()
+```
 
 ## Séries Temporais
 
@@ -1793,7 +1906,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|------|-----------------|-----------------|-----------------|-----------------|
+|-------------|-----------------------|-------------|-------------|-------------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |

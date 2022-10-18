@@ -308,6 +308,22 @@ Vamos trabalhar com dados no R no formato `tidy`:
 
 ![](img/import_r.png){fig-align="center" width="300"}
 
+## Importando dados {.smaller}
+
+Sugestão de fontes de dados:
+
+-   <https://basedosdados.org/>
+
+-   <https://dados.gov.br/>
+
+-   <http://www.ipeadata.gov.br/>
+
+-   <https://datasetsearch.research.google.com/>
+
+-   <https://siconfi.tesouro.gov.br/siconfi/pages/public/consulta_finbra/finbra_list.jsf>
+
+-   <https://www.kaggle.com/>
+
 ## Importando dados {auto-animate="true"}
 
 Importando dados de consumo de energia usando a função `read_csv()`:
@@ -590,7 +606,7 @@ energia_residencial_pb |>
 
 -   O último verbo do `dplyr` é o `summarise()`
 
--   Ele colapsa os dados (resume\_ em uma única linha
+-   Ele colapsa os dados (*resume* em uma única linha)
 
 -   O objetivo é criar medidas como média, medianas, totais e outros.
 
@@ -640,7 +656,7 @@ energia_residencial_pb |>
 
 -   `group_by()` muda a unidade de análise da base de dados completa para grupos de observações
 
--   Por exemplo, podemos estar interessado no gasto médio de saúde para cada ano
+-   Por exemplo, podemos estar interessado no consumo de energia por ano.
 
 ## F. Função `group_by()` {auto-animate="true"}
 
@@ -694,6 +710,32 @@ energia_residencial_pb |>
 
 ## Pacote `ggplot2` {auto-animate="true"}
 
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot12, eval=TRUE,`code-line-numbers`="4"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot13, eval=TRUE,`code-line-numbers`="6"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
 ![](img/layers.png)
 
 ## Geometrias
@@ -715,7 +757,7 @@ energia_residencial_pb |>
 ```{r geom-point,`code-line-numbers`="3"}
 energia_residencial_pb |> 
   ggplot(mapping = aes(x = data, y = consumo)) +
-  geom_point(color = "blue")
+  geom_point()
 
 ```
 
@@ -967,7 +1009,7 @@ energia_residencial_pb |>
 
 ## Modelar {.smaller}
 
-Vou apresentar uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas ciências sociais:
+Uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas ciências sociais:
 
 ::: incremental
 1.  Estatística Básica
@@ -987,14 +1029,33 @@ salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
 salario_pb |> head()
 ```
 
-## Estatísticas Básica: Estatísticas Descritivas
+## Estatística Básica: Estatísticas Descritivas
+
+```{r tab-dinamica-salario}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+salario_pb |> 
+  head(1000) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Estatística Básica: Estatísticas Descritivas
 
 ```{r}
 summary(salario_pb)
 
 ```
 
-## Estatísticas Básica: Estatísticas Descritivas
+## Estatística Básica: Estatísticas Descritivas
 
 ```{r}
 salario_pb |> 
@@ -1015,10 +1076,35 @@ salario_pb |>
 Calcular correlação pode ser executada com a função `cor()`:
 
 ```{r}
-salario_pb |> 
+matriz_corr <- salario_pb |> 
   # selecionar variáveis numéricas
   select(salario, escolaridade, sexo) |> 
   cor()
+
+matriz_corr
+```
+
+## Estatística Básica: Correlação
+
+```{r}
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+
+matriz_corr |> 
+  ggcorrplot()
+```
+
+## Estatística Básica: Correlação
+
+```{r}
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+
+matriz_corr |> 
+  ggcorrplot(ggtheme = theme_grey, 
+             lab = TRUE, 
+             colors = c("#6D9EC1", "white", "#E46726"), 
+             title = "Matriz de Correlação")
 ```
 
 ## Estatística Básica: Distribuição Normal
@@ -1027,9 +1113,12 @@ salario_pb |>
 salario_pb |> 
   ggplot(aes(x = salario)) + 
   geom_histogram(breaks = seq(0,10000, by = 100),
+                 fill = "red",
                  alpha = 0.3) +
-  labs(x = "Salário", y = "", title = "Histograma do Salário Nominal na Paraíba (2013)",
-       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
+  labs(x = "Salário", y = "", 
+       title = "Histograma do Salário Nominal na Paraíba (2013)",
+       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)") +
+  theme_light()
 ```
 
 ## Estatística Básica: Distribuição Normal
@@ -1044,25 +1133,108 @@ salario_pb |>
        caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
 ```
 
+## Estatística Básica: Diferença de Médias {.smaller}
+
+```{r}
+#| output-location: column
+salario_pb |> 
+  mutate(sexo = case_when(
+    sexo == 2 ~ "Mulher",
+    sexo == 1 ~ "Homem")) |> 
+  filter(salario < 3000) |> 
+  ggplot(aes(salario, fill = fct_rev(as.factor(sexo)))) +
+  geom_density(position = 'identity', alpha = 0.5) +
+  facet_wrap(~sexo) +
+  guides(fill = "none") +
+  labs(x = "Salário (R$)", y = "", 
+       title = "Distribuição de Salários na Paraíba por Gênero, 2013",
+       subtitle = "Salários abaixo de R$ 3000",
+       caption = "Fonte: Elaboração do autor a partir de dados da RAIS (2013)")
+```
+
+## Estatística Básica: Diferença de Médias
+
 ```{r stat-basico1,`code-line-numbers`="8"}
+# calcular salário das mulheres
 salario_mulheres <- salario_pb |> 
   filter(sexo == 1) |> 
   pull(salario)
 
+# salário dos homens
 salario_homens <- salario_pb |> 
   filter(sexo == 2) |> 
   pull(salario)
 
+# teste t para diferença de médias
 t.test(salario_mulheres, salario_homens)
 ```
 
 ## Regressão
 
-```{r}
+Retornos salariais da educação segundo a equação de Mincer (1974):
+
+$$
+Y (\text{Salário}) = \beta_0 + \beta_1 \text{educação} + \beta_2 \text{exp} + \beta_3 \text{exp}^2 + u
+$$
+
+## Regressão
+
+```{r lm1, eval=FALSE, `code-line-numbers`="2"}
 equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
-resultado <- lm(equacao, data = salario_pb) 
-resultado |> 
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
   broom::tidy()
+```
+
+## Regressão
+
+```{r lm-predict1, eval=FALSE, `code-line-numbers`="4"}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
+  broom::tidy()
+```
+
+## Regressão
+
+```{r lm-predict2, eval=TRUE, `code-line-numbers`="6"}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
+  broom::tidy()
+```
+
+## Regressão
+
+$$
+\log(\text{salário} ) = 5,78 - 0,13 \text{ Mulher} + 0,02 \text{ Idade} + 0.10 \text{ Escolaridade} \\[0.1in] - 0,07 \text{ Borborema} + 0.20 \text{ Zona Mata} - 0,09 \text{ Sertão} + 0,08 \text{Semiarido}
+$$
+
+##  Regressão
+
+```{r lm-predict3, `code-line-numbers`="1"}
+pessoa_ficticia <- data.frame(
+  idade = 25,
+  escolaridade = 10,
+  sexo = 2,
+  meso_trab = "Mata Paraibana",
+  semiarido_trab = "N"
+)
+
+
+```
+
+## Regressão
+
+O modelo sugere que a renda dessa pessoa deve ser de R\$ 1298,13:
+
+```{r lm-predict4, `code-line-numbers`="2"}
+modelo |> 
+  predict(pessoa_ficticia) |> 
+  exp()
 ```
 
 ## Séries Temporais
@@ -2060,3 +2232,5 @@ lavaanPlot(model = fit,
 <https://www.escolavirtual.gov.br/curso/325>
 
 <https://livro.curso-r.com/index.html>
+
+<https://www.bigbookofr.com/index.html>

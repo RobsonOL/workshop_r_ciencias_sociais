@@ -1171,6 +1171,8 @@ t.test(salario_mulheres, salario_homens)
 
 ## Regressão
 
+## Regressão
+
 Retornos salariais da educação segundo a equação de Mincer (1974):
 
 $$
@@ -1236,6 +1238,8 @@ modelo |>
   predict(pessoa_ficticia) |> 
   exp()
 ```
+
+## Séries Temporais
 
 ## Séries Temporais
 
@@ -1648,6 +1652,8 @@ Para mais informações sobre séries temporais:
 
 ## Análise de Churn
 
+## Análise de Churn
+
 > A partir de informações dos clientes, podemos prever a probabilidade que um cliente abandone (*churn)* a empresa, nos permitindo desenvolver programas focados em retenção de clientes.
 
 ## Análise de Churn
@@ -1882,11 +1888,17 @@ Para mais informações:
 
 ## Segmentação de Clientes
 
+## Segmentação de Clientes
+
 > O objetivo da clusterização é agrupar pontos em subgrupos distintos. Uma das principais aplicações de clusterização é a **segmentação de clientes.** Com ela podemos separar certos grupos de clientes, para oferecer descontos, ofertas, códigos promocionais, etc.
 
 ## Segmentação de Clientes
 
 ![](img/kmeans.gif)
+
+## Segmentação de Clientes
+
+<https://shiny.rstudio.com/gallery/kmeans-example.html>
 
 ## Segmentação de Clientes
 
@@ -2024,6 +2036,10 @@ Clusterização:
 -   [Identificar locais suscetíveis a crimes](https://periodicos.ufpb.br/ojs/index.php/tpa/article/view/50891/31372)
 
 -   Clusterizar mensagens de redes sociais (twitters)
+
+-   <https://shiny.rstudio.com/gallery/kmeans-example.html>
+
+## Análise Financeira
 
 ## Análise Financeira
 
@@ -2186,7 +2202,7 @@ onde o $\beta$ representa a volatilidade de uma ação comparada com o risco sis
 
 -   $\beta < 1: \text{ação menos volátil que a média do mercado}$
 
--   $\beta<1: \text{ativo mais volátil que o mercado$
+-   $\beta<1: \text{ativo mais volátil que o mercado}$
 
 -   $
     \beta <0: \text{ativo tende a aumentar de preço quando o mercado cai}
@@ -2236,6 +2252,8 @@ Para mais informações
 <https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
 
 <https://business-science.github.io/tidyquant/>
+
+## Análise Fatorial {.smaller}
 
 ## Análise Fatorial {.smaller}
 
@@ -2382,7 +2400,7 @@ lavaanPlot(model = fit,
 
 ## Comunicação
 
--   [Blogs](robsonolima.com.br)
+-   [Blogs](www.robsonolima.com.br)
 
 -   **Relatórios**
 

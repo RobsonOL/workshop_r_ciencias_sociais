@@ -1325,7 +1325,7 @@ library(timetk)
 energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
-## Séries Temporais
+## Séries Temporais {.smaller}
 
 ```{r series-dados5, `code-line-numbers`="11"}
 # Instalar pacote:
@@ -1344,16 +1344,19 @@ energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ## Séries Temporais
 
 ```{r energia-plot}
+#| output-location: column
 energia |> 
   ggplot(aes(x = data, y = consumo)) +
-  geom_line(color = "red") + 
-  labs(x = "Data", y = "Consumo", title = "Consumo de Energia Residencial na Paraíba") +
+  geom_line(color = "red", size = 1, alpha = .4) + 
+  labs(x = "Data", y = "Consumo", 
+       title = "Consumo de Energia Residencial na Paraíba") +
   theme_bw()
 ```
 
 ## Séries Temporais
 
 ```{r energia-plot2, `code-line-numbers`="2"}
+#| output-location: column
 energia |> 
   plot_time_series(data, 
                    consumo, 
@@ -1421,7 +1424,7 @@ energia_treinamento_teste |>
 set.seed(123)
 # base de teste (20%) e treinamento (80%)
 energia_treinamento_teste <- energia |> 
-  initial_time_split(prop = 0.8)
+  initial_time_split(prop = 0.7)
 
 tbl_energia_treinamento <- training(energia_treinamento_teste)
 tbl_energia_teste <- testing(energia_treinamento_teste)
@@ -1462,7 +1465,7 @@ tbl_energia_calibracao <- workflow_arima |>
 # gerar os valores previstos
 tbl_energia_previsao <- tbl_energia_calibracao |> 
   modeltime_forecast(new_data = tbl_energia_teste,
-                     actual_data = energia_residencial_pb)
+                     actual_data = energia)
 
 ```
 
@@ -1489,7 +1492,7 @@ tbl_energia_calibracao <- workflow_arima |>
 # gerar os valores previstos
 tbl_energia_previsao <- tbl_energia_calibracao |> 
   modeltime_forecast(new_data = tbl_energia_teste,
-                     actual_data = energia_residencial_pb)
+                     actual_data = energia)
 
 ```
 
@@ -1516,7 +1519,7 @@ tbl_energia_calibracao <- workflow_arima |>
 # gerar os valores previstos
 tbl_energia_previsao <- tbl_energia_calibracao |> 
   modeltime_forecast(new_data = tbl_energia_teste,
-                     actual_data = energia_residencial_pb)
+                     actual_data = energia)
 
 ```
 
@@ -1543,7 +1546,7 @@ tbl_energia_calibracao <- workflow_arima |>
 # gerar os valores previstos
 tbl_energia_previsao <- tbl_energia_calibracao |> 
   modeltime_forecast(new_data = tbl_energia_teste,
-                     actual_data = energia_residencial_pb)
+                     actual_data = energia)
 
 ```
 
@@ -1556,7 +1559,7 @@ tbl_energia_previsao |>
   plot_modeltime_forecast()
 ```
 
-## Séries Temporais
+## Séries Temporais {.smaller}
 
 É possível ainda criar uma série de medidas de performance. Elas são úteis para nos guiar sobre qual o melhor modelo:
 
@@ -1568,9 +1571,80 @@ tbl_energia_calibracao |>
 
 ## Séries Temporais
 
+```{r, echo=FALSE}
+receita_fourier <- recipe(consumo ~ data, tbl_energia_treinamento) |> 
+  step_fourier(data, period = 12, K = 6) |> 
+  step_date(data)
+
+modelo_ets <- seasonal_reg() |> set_engine("stlm_ets")
+modelo_tbats <- seasonal_reg() |> set_engine("tbats")
+modelo_prophet <- prophet_reg() |> set_engine("prophet")
+modelo_boosted <- arima_boost(min_n = 2,learn_rate = 0.015) |> 
+    set_engine(engine = "auto_arima_xgboost")
+
+workflow_fourier <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_arima) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_ets <- workflow() |> 
+  add_recipe(receita_energia) |> 
+  add_model(modelo_ets) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_tbats <- workflow() |> 
+  add_recipe(receita_energia) |> 
+  add_model(modelo_tbats) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_prophet <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_prophet) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_boosted <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_boosted) |> 
+  fit(tbl_energia_treinamento)
+
+tbl_modelos <- modeltime_table(
+  workflow_fourier,
+  workflow_arima,
+  workflow_ets,
+  workflow_tbats,
+  workflow_prophet,
+  workflow_boosted
+)
+
+tbl_calibracao_energia <- tbl_modelos |> 
+  modeltime_calibrate(
+  new_data = tbl_energia_teste
+)
+
+tbl_calibracao_energia %>% 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia) %>% 
+  plot_modeltime_forecast(.legend_max_width = 20)
+
+```
+
+## Séries Temporais
+
+```{r}
+#| echo: FALSE
+tbl_calibracao_energia |> 
+  modeltime_accuracy(new_data = tbl_energia_teste) |> 
+  select(.model_desc, mape) |> 
+  arrange(mape)
+```
+
+## Séries Temporais
+
 Para mais informações sobre séries temporais:
 
 -   <https://robsonol.github.io/timeseries_r_book/>
+-   <https://robsonolima.com.br/post/previsao-de-dados-semanais-com-modeltime/>
+-   <https://cran.r-project.org/web/packages/modeltime/vignettes/getting-started-with-modeltime.html>
 
 ## Análise de Churn
 
@@ -2019,8 +2093,10 @@ Ra <- preco_acoes %>%
 ```{r finance-grafico}
 Ra |> 
   ggplot(aes(x = date, y = Ra, color = symbol)) +
-  geom_line() + 
-  facet_wrap(~symbol)
+  geom_line(size = 1) + 
+  facet_wrap(~symbol) + guides(color = "none") +
+  labs(title = "Retorno Mensal de Ativos Selecionados, 2021 - 2022",
+       y = "Retorno Mensal (%)", x = "")
 ```
 
 ## Análise Financeira
@@ -2044,6 +2120,49 @@ Ra %>%
 
 ## Análise Financeira
 
+```{r}
+# mean = retorno médio do ativo
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = mean
+    )
+```
+
+## Análise Financeira
+
+```{r}
+# sd = desvio-padrão (medida de volatilidade)
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = sd
+    )
+```
+
+## Análise Financeira
+
+```{r}
+# VaR indica a percentagem máxima esperada com 95% de confiança
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = VaR
+    )
+```
+
+## Análise Financeira
+
+A Razão de Sharpe é comumente utilizada como uma medida de retorno por unidade de risco, e tem a seguinte fórmula:
+
+$$
+ \text{Sharpe} = \frac{r_P - r_F}{\sigma_P}
+$$
+
+Uma razão de Sharpe maior, indica uma melhor combinação risco-retorno.
+
+## Análise Financeira
+
 ```{r finance-sharpe}
 Ra |> 
   tq_performance(
@@ -2055,9 +2174,54 @@ Ra |>
     )
 ```
 
+## Análise Financeira {.smaller}
+
+Podemos estimar o modelo CAPM para as ações. No modelo CAPM podemos fatorar a taxa livre de risco e calcular a seguinte equação:
+
+$$ r_p - r_F = \alpha + \beta(b - r_F) + \epsilon$$
+
+onde o $\beta$ representa a volatilidade de uma ação comparada com o risco sistêmico do mercado:
+
+-   $ \beta = 1: \text{ação relacionada com o mercado}$
+
+-   $\beta < 1: \text{ação menos volátil que a média do mercado}$
+
+-   $\beta<1: \text{ativo mais volátil que o mercado$
+
+-   $
+    \beta <0: \text{ativo tende a aumentar de preço quando o mercado cai}
+    $
+
 ## Análise Financeira
 
-![](img/otimizacao.png)
+```{r finance-bovespa}
+Rb <- "^BVSP" |> 
+  tq_get(get = "stock.prices", from = "2021-01-02", to   = "2022-10-11") |> 
+  tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Rb")
+
+Rb |> 
+  ggplot(aes(x = date, y = Rb)) +
+  geom_line(size = 1) + 
+  labs(title = "Retorno Mensal da Bovespa, 2021 - 2022",
+       y = "Retorno Mensal (%)", x = "")
+```
+
+## Análise Financeira
+
+```{r finance-beta}
+Ra |> 
+  left_join(Rb) |> 
+  tq_performance(
+    Ra = Ra, 
+    Rb = Rb, 
+    Rf = 0,
+    performance_fun = CAPM.beta
+    )
+```
+
+## Análise Financeira
+
+![Podemos otimizar portfólios com pacote PortfolioAnalytics](img/otimizacao.png)
 
 ## Análise Financeira
 
@@ -2071,9 +2235,7 @@ Para mais informações
 
 <https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
 
-## Customer Lifetime Value
-
-*working*
+<https://business-science.github.io/tidyquant/>
 
 ## Análise Fatorial {.smaller}
 
@@ -2085,11 +2247,16 @@ Para mais informações
 | y4  | Efetividade do congresso eleito (1960)                 | x               |                 |       |
 | y5  | Score dado por experts em liberdade de imprensa (1965) |                 | x               |       |
 | y6  | Liberdade dos partidos políticos (1965)                |                 | x               |       |
-| y7  | Eleições livres e justas (1965)                        |                 | x               |       |
-| y8  | Eleições livres e justas (1965)                        |                 | x               |       |
-| x1  | PIB per capita (1960)                                  |                 |                 | x     |
-| x2  | Consumo de energia per capita (1960)                   |                 |                 | x     |
-| x3  | \% da força de trabalho na industrial (1960)           |                 |                 | x     |
+
+## Análise Fatorial {.smaller}
+
+| Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
+|--------------|-------------------|--------------|--------------|--------------|
+| y7  | Eleições livres e justas (1965)              |                 | x               |       |
+| y8  | Eleições livres e justas (1965)              |                 | x               |       |
+| x1  | PIB per capita (1960)                        |                 |                 | x     |
+| x2  | Consumo de energia per capita (1960)         |                 |                 | x     |
+| x3  | \% da força de trabalho na industrial (1960) |                 |                 | x     |
 
 ## Análise Fatorial {.smaller}
 

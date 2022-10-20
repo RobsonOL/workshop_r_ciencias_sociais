@@ -1215,7 +1215,7 @@ $$
 \log(\text{salário} ) = 5,78 - 0,13 \text{ Mulher} + 0,02 \text{ Idade} + 0.10 \text{ Escolaridade} \\[0.1in] - 0,07 \text{ Borborema} + 0.20 \text{ Zona Mata} - 0,09 \text{ Sertão} + 0,08 \text{Semiarido}
 $$
 
-##  Regressão
+## Regressão
 
 ```{r lm-predict3, `code-line-numbers`="1"}
 pessoa_ficticia <- data.frame(
@@ -2198,22 +2198,25 @@ $$ r_p - r_F = \alpha + \beta(b - r_F) + \epsilon$$
 
 onde o $\beta$ representa a volatilidade de uma ação comparada com o risco sistêmico do mercado:
 
--   $ \beta = 1: \text{ação relacionada com o mercado}$
+-   $\beta = 1: \text{ação relacionada com o mercado}$
 
 -   $\beta < 1: \text{ação menos volátil que a média do mercado}$
 
 -   $\beta<1: \text{ativo mais volátil que o mercado}$
 
--   $
-    \beta <0: \text{ativo tende a aumentar de preço quando o mercado cai}
-    $
+-   $\beta <0: \text{ativo tende a aumentar de preço quando o mercado cai}$
 
 ## Análise Financeira
 
 ```{r finance-bovespa}
+#| output-location: column
 Rb <- "^BVSP" |> 
-  tq_get(get = "stock.prices", from = "2021-01-02", to   = "2022-10-11") |> 
-  tq_transmute(adjusted, periodReturn, period = "monthly", col_rename = "Rb")
+  tq_get(get = "stock.prices", 
+         from = "2021-01-02", 
+         to   = "2022-10-11") |> 
+  tq_transmute(adjusted, periodReturn, 
+               period = "monthly", 
+               col_rename = "Rb")
 
 Rb |> 
   ggplot(aes(x = date, y = Rb)) +
@@ -2258,7 +2261,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-------------|-----------------------|-------------|-------------|-------------|
+|-----|--------------------------------------------------------|-----------------|-----------------|-------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |
@@ -2269,7 +2272,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|--------------|-------------------|--------------|--------------|--------------|
+|-----|----------------------------------------------|-----------------|-----------------|-------|
 | y7  | Eleições livres e justas (1965)              |                 | x               |       |
 | y8  | Eleições livres e justas (1965)              |                 | x               |       |
 | x1  | PIB per capita (1960)                        |                 |                 | x     |

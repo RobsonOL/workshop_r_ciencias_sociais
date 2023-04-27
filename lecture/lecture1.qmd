@@ -1,0 +1,1906 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Usando **R** nas Ciências Sociais"
+author: "Dr Robson Oliveira"
+institute: "IFPB"
+logo: logo_ifpb.png
+footer: "robsonolima.com.br"
+incremental: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    chalkboard: true
+    theme: serif
+    slide-tone: false
+    auto-animate: true
+    code-fold: show
+    code-summary: ">"
+    code-link: true
+editor: visual
+---
+
+# 
+
+**Encontre esses slides em:**
+
+![https://robsonol.github.io/workshop_r\_ciencias_sociais/](img/qrcode_slides.png){fig-align="center"}
+
+## Agenda
+
+| Col1                               | Horário    | Local       |
+|------------------------------------|------------|-------------|
+| Tema                               | 27/04/2023 | Auditório   |
+| Introdução ao R                    |            | Laboratório |
+| Gráficos com `ggplot2`             |            | Laboratório |
+| Transformação de dados com `dplyr` |            | Laboratório |
+| Modelagem                          |            | Laboratório |
+
+# Contando Histórias com Dados
+
+![](img/storytelling.png){fig-align="center" width="117"}
+
+## Contando Histórias com Dados
+
+::: columns
+::: {.column width="50%"}
+![Fonte: Allison Horst](img/tidydata_5.jpg)
+:::
+
+::: {.column width="50%"}
+
+::: columns
+::: {.column width="50%"}
+1.  Planejar
+2.  Adquirir dados
+3.  Explorar:
+    -   Transformar
+
+    -   Visualizar
+
+    -   Modelar
+4.  Comunicar
+:::
+:::
+:::
+:::
+
+## Contando Histórias com Dados
+
+![](img/data-science.png){fig-align="center"}
+
+## Pré-Requisitos
+
+## R
+
+![](img/R_logo.svg.png){width="600"}
+
+## R
+
+::: nonincremental
+1.  Baixar e instalar **R** em [<https://cloud.r-project.org>]{.rn}
+:::
+
+![](img/r_console.png){fig-align="center" width="400"}
+
+## RStudio
+
+::: nonincremental
+2.  Instalar o RStudio: [https://www.rstudio.com](https://www.rstudio.com/products/rstudio/download/)
+:::
+
+![](img/rstudio.png){fig-align="center" width="400"}
+
+## RStudio Cloud
+
+![](img/rstudio_cloud.png){fig-align="center"}
+
+## Pacotes {auto-animate="true"}
+
+![](img/tidyverse.png){fig-align="center" width="173"}
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r bancodados1, eval=FALSE, `code-line-numbers`="2" }
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r, bancodados2, `code-line-numbers`="5" }
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+```{r bancodados3}
+#| echo=FALSE
+dados_carros <- mtcars
+#options(DT.options = list(pageLength = 4))
+font.size <- "14pt"
+
+dados_carros |> DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+![Fonte: Allison Horst](img/tidydata_2.jpg){alt="Fonte: Allison Horst"}
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Vamos trabalhar com dados no R no formato `tidy`:
+
+![](img/tidy-1.png)
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+![Fonte: Allison Horst](img/tidydata_3.jpg)
+
+# 1. Adquirindo Dados
+
+![](img/import_r.png){fig-align="center" width="300"}
+
+## Importando dados {.smaller}
+
+Sugestão de fontes de dados:
+
+-   <https://basedosdados.org/>
+
+-   <https://dados.gov.br/>
+
+-   <http://www.ipeadata.gov.br/>
+
+-   <https://datasetsearch.research.google.com/>
+
+-   <https://siconfi.tesouro.gov.br/siconfi/pages/public/consulta_finbra/finbra_list.jsf>
+
+-   <https://www.kaggle.com/>
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r importar-dados1, eval=FALSE, `code-line-numbers`="2" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "despesas"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+
+```
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r importar-dados2, eval=FALSE, `code-line-numbers`="5" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+
+```
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r, importar-dados3, `code-line-numbers`="8" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+```
+
+## Importando dados {auto-animate="true"}
+
+```{r tab-dinamica}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+consumo_energia |> 
+  filter(ano == 2020) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+# 2. Transformação de dados
+
+![](img/hex-dplyr.png){fig-align="center" width="400"}
+
+## Funções do `dplyr`
+
+A.  `filter()` filtra apenas observações com valores específicos
+
+B.  `arrange()` reordena as linhas da base
+
+C.  `select()` seleciona apenas variáveis de interesse
+
+D.  `mutate()` cria novas variáveis como função das demais
+
+E.  `summarise()` cria estatísticas descritivas
+
+## A. Função `filter`
+
+![](img/filter.png)
+
+## B. Função `select()`
+
+![](img/select.png)
+
+## C. Função `mutate()`
+
+![](img/mutate.png)
+
+## D. Função `arrange()`
+
+![](img/arrange.png)
+
+## E. Função `summarise()`
+
+![](img/summarise.png)
+
+## F. Função `group_by()`
+
+![](img/groupby.png)
+
+## Exemplo de Transformação
+
+```{r criarbase, include=FALSE}
+energia_residencial_pb <- consumo_energia |> 
+  filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> 
+  select(ano, mes, consumo) |> 
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  mutate(data = as.Date(data))
+```
+
+## Exemplo de Transformação
+
+```{r tab-dinamica2}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+consumo_energia |> 
+  filter(ano == 2020) |> 
+  DT::datatable(caption = "Base de Consumo de Energia Completa",
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Exemplo de Transformação
+
+```{r tab-dinamica3}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+energia_residencial_pb |> 
+  #filter(ano == 2020) |> 
+  DT::datatable(caption = "Consumo Residencial na Paraíba",
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+# 3. Visualização {auto-animate="true"}
+
+> "Apresentar dados com gráficos pode ajudar você a comunicar informações com clareza."
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/ggplot.png){fig-align="center" width="400"}
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot1, eval=TRUE,`code-line-numbers`="2"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot12, eval=TRUE,`code-line-numbers`="4"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot13, eval=TRUE,`code-line-numbers`="6"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/layers.png)
+
+## Geometrias
+
+![](img/geoms.png)
+
+## Geometrias
+
+-   **geom** é o objeto geométrico que um gráfico usa para representar dados.
+
+-   **Gráficos de barras** são construídos com `geom_bar`.
+
+-   **Gráficos de linhas** são construídos com `geom_line`.
+
+-   Assim, para mudar a geometria, só alterar o termo `geom_*`.
+
+## `geom_point()`
+
+```{r geom-point,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_point()
+
+```
+
+## `geom_line()`
+
+```{r geom-line,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_line()
+```
+
+## `geom_smooth()`
+
+```{r geom-smooth,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_smooth()
+```
+
+## `geom_hist`
+
+```{r geom-hist,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(x = consumo)) +
+  geom_histogram()
+
+```
+
+## `geom_boxplot`
+
+```{r geom-boxplot,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(y = consumo)) +
+  geom_boxplot()
+```
+
+## `geom_qq`
+
+```{r geom-qq,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(sample = consumo)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+## Múltiplos `geom_*`
+
+```{r geom-multiplos, echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+
+energia_residencial_pb |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_point() +
+  geom_line()
+```
+
+## `Dplyr` + `ggplot`
+
+```{r dplyr-ggplot}
+energia_residencial_pb |> 
+  group_by(ano) |> 
+  summarise(consumo_total = sum(consumo)) |> 
+  ggplot(aes(x = ano, y = consumo_total)) + 
+  geom_col()
+```
+
+## Múltiplas faces com `facet_wrap`
+
+```{r ggplot-facet,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+
+## Mais Informações
+
+-   <https://robsonolima.com.br/post/visualizacao-com-ggplot2-e-seinfeld/>
+
+-   <https://r-graph-gallery.com/>
+
+-   <https://exts.ggplot2.tidyverse.org/gallery/>
+
+-   <https://livro.curso-r.com/8-graficos.html>
+
+-   <https://www.msperlin.com/vdr/>
+
+# 4. Modelar
+
+![](img/tidymodels.png){fig-align="center"}
+
+## Modelar {.smaller}
+
+Uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas ciências sociais:
+
+::: incremental
+1.  Estatística Básica
+2.  Previsão de séries temporais
+3.  Regressão
+4.  Segmentação de clientes com clusterização
+5.  Análise de Churn
+6.  Análise financeira (portfólios)
+7.  Análise fatorial
+:::
+
+## Estatística Básica: Estatísticas Descritivas
+
+```{r est-basica1}
+salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
+
+salario_pb |> head()
+```
+
+## Estatística Básica: Estatísticas Descritivas
+
+```{r tab-dinamica-salario}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+salario_pb |> 
+  head(1000) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Estatística Básica: Estatísticas Descritivas
+
+```{r est-basica2}
+summary(salario_pb)
+
+```
+
+## Estatística Básica: Estatísticas Descritivas
+
+```{r est-basica3}
+salario_pb |> 
+  summarise(across(c(salario, idade, escolaridade),
+                   list(media = ~ mean(., na.rm = TRUE),
+                        mediana = ~ median(., na.rm = TRUE),
+                        dp = ~ sd(., na.rm = TRUE)))) |> 
+  pivot_longer(cols = everything(),
+               names_to = c("Variável", ".value"), 
+               names_sep = "_") |> 
+  rename("Média" = media,
+         "Mediana" = mediana,
+         "Desvio-Padrão" = dp) |> 
+  knitr::kable()
+```
+
+## Estatística Básica: Correlação {.smaller}
+
+Calcular correlação pode ser executada com a função `cor()`:
+
+```{r corr1}
+matriz_corr <- salario_pb |> 
+  # selecionar variáveis numéricas
+  select(salario, escolaridade, sexo) |> 
+  cor()
+
+matriz_corr
+```
+
+## Estatística Básica: Correlação {.smaller}
+
+```{r corr2}
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+
+matriz_corr |> 
+  ggcorrplot()
+```
+
+## Estatística Básica: Correlação {.smaller}
+
+```{r corr3}
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+
+matriz_corr |> 
+  ggcorrplot(ggtheme = theme_grey, 
+             lab = TRUE, 
+             colors = c("#6D9EC1", "white", "#E46726"), 
+             title = "Matriz de Correlação")
+```
+
+## Estatística Básica: Distribuição Normal {.smaller}
+
+```{r normal1}
+salario_pb |> 
+  ggplot(aes(x = salario)) + 
+  geom_histogram(breaks = seq(0,10000, by = 100),
+                 fill = "red",
+                 alpha = 0.3) +
+  labs(x = "Salário", y = "", 
+       title = "Histograma do Salário Nominal na Paraíba (2013)",
+       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)") +
+  theme_light()
+```
+
+## Estatística Básica: Distribuição Normal {.smaller}
+
+```{r normal2}
+salario_pb |> 
+  sample_n(size = 1000) |> 
+  ggplot(aes(sample = salario)) + 
+  geom_qq() +
+  geom_qq_line() +
+  labs(x = "Salário", y = "", title = "QQ-Plot do Salário Nominal na Paraíba (2013)",
+       subtitle = "A distribuição de salário não parece seguir uma distribuição Normal",
+       caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
+```
+
+## Estatística Básica: Diferença de Médias {.smaller}
+
+```{r diff-media1}
+#| output-location: column
+salario_pb |> 
+  mutate(sexo = case_when(
+    sexo == 2 ~ "Mulher",
+    sexo == 1 ~ "Homem")) |> 
+  filter(salario < 3000) |> 
+  ggplot(aes(salario, fill = fct_rev(as.factor(sexo)))) +
+  geom_density(position = 'identity', alpha = 0.5) +
+  facet_wrap(~sexo) +
+  guides(fill = "none") +
+  labs(x = "Salário (R$)", y = "", 
+       title = "Distribuição de Salários na Paraíba por Gênero, 2013",
+       subtitle = "Salários abaixo de R$ 3000",
+       caption = "Fonte: Elaboração do autor a partir de dados da RAIS (2013)")
+```
+
+## Estatística Básica: Diferença de Médias {.smaller}
+
+```{r stat-basico1,`code-line-numbers`="8"}
+# calcular salário das mulheres
+salario_mulheres <- salario_pb |> 
+  filter(sexo == 1) |> 
+  pull(salario)
+
+# salário dos homens
+salario_homens <- salario_pb |> 
+  filter(sexo == 2) |> 
+  pull(salario)
+
+# teste t para diferença de médias
+t.test(salario_mulheres, salario_homens)
+```
+
+## Regressão
+
+Retornos salariais da educação segundo a equação de Mincer (1974):
+
+$$
+Y (\text{Salário}) = \beta_0 + \beta_1 \text{educação} + \beta_2 \text{exp} + \beta_3 \text{exp}^2 + u
+$$
+
+## Regressão
+
+```{r lm1, eval=FALSE, `code-line-numbers`="2"}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
+  broom::tidy()
+```
+
+## Regressão
+
+```{r lm-predict1, eval=FALSE, `code-line-numbers`="4"}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
+  broom::tidy()
+```
+
+## Regressão
+
+```{r lm-predict2, eval=TRUE, `code-line-numbers`="6"}
+equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
+
+modelo <- lm(equacao, data = salario_pb) 
+modelo |> 
+  broom::tidy()
+```
+
+## Regressão {.smaller}
+
+$$
+\log(\text{salário} ) = 5,78 - 0,13 \text{ Mulher} + 0,02 \text{ Idade} + 0.10 \text{ Escolaridade} \\[0.1in] - 0,07 \text{ Borborema} + 0.20 \text{ Zona Mata} - 0,09 \text{ Sertão} + 0,08 \text{Semiarido}
+$$
+
+## Regressão
+
+```{r lm-predict3, `code-line-numbers`="1"}
+pessoa_ficticia <- data.frame(
+  idade = 25,
+  escolaridade = 10,
+  sexo = 2,
+  meso_trab = "Mata Paraibana",
+  semiarido_trab = "N"
+)
+
+
+```
+
+## Regressão
+
+O modelo sugere que a renda dessa pessoa deve ser de R\$ 1298,13:
+
+```{r lm-predict4, `code-line-numbers`="2"}
+modelo |> 
+  predict(pessoa_ficticia) |> 
+  exp()
+```
+
+## Séries Temporais
+
+![Para análise de séries temporais no R vamos usar o pacote Modeltime](img/modeltime.png){fig-align="center"}
+
+## Séries Temporais
+
+> Vamos prever o valor futuro do consumo de energia residencial na Paraíba.
+
+## Séries Temporais
+
+```{r series-pacotes, eval=FALSE, `code-line-numbers`="2"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r series-dados, eval=FALSE, `code-line-numbers`="3"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r series-dados2, eval=FALSE, `code-line-numbers`="6"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r series-dados3, eval=FALSE, `code-line-numbers`="7"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r series-dados4, eval=FALSE, `code-line-numbers`="8"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais {.smaller}
+
+```{r series-dados5, `code-line-numbers`="11"}
+# Instalar pacote:
+# install.packages("modeltime")
+# install.packages("timetk")
+
+# carregar pacote
+library(tidymodels)
+library(modeltime)
+library(timetk)
+
+# carregar dados
+energia <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Séries Temporais
+
+```{r energia-plot}
+#| output-location: column
+energia |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_line(color = "red", size = 1, alpha = .4) + 
+  labs(x = "Data", y = "Consumo", 
+       title = "Consumo de Energia Residencial na Paraíba") +
+  theme_bw()
+```
+
+## Séries Temporais
+
+```{r energia-plot2, `code-line-numbers`="2"}
+#| output-location: column
+energia |> 
+  plot_time_series(data, 
+                   consumo, 
+                   .title = "Consumo de Energia Residencial na Paraíba"
+                   )
+```
+
+## Séries Temporais
+
+Base de Treinamento e Base de Teste
+
+![](img/resamples.png)
+
+## Séries Temporais
+
+```{r series-treino-teste0, eval=FALSE, `code-line-numbers`="4"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r series-treino-teste1, eval=FALSE, `code-line-numbers`="6"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r series-treino-teste2, eval=FALSE, `code-line-numbers`="7"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.8)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais
+
+```{r series-treino-teste3, eval=TRUE, `code-line-numbers`="11"}
+set.seed(123)
+# base de teste (20%) e treinamento (80%)
+energia_treinamento_teste <- energia |> 
+  initial_time_split(prop = 0.7)
+
+tbl_energia_treinamento <- training(energia_treinamento_teste)
+tbl_energia_teste <- testing(energia_treinamento_teste)
+
+energia_treinamento_teste |> 
+    tk_time_series_cv_plan() |> 
+    plot_time_series_cv_plan(data, consumo)
+```
+
+## Séries Temporais {.smaller}
+
+Agora vamos informar quem são nossas variáveis explicativas: *o consumo de energia residencial será explicado apenas pelos seus valores passados. Poderiamos incluir outras variáveis, como feriados, tarifa de energia, etc.*
+
+```{r series-receita, eval=TRUE, `code-line-numbers`="1"}
+receita_energia <- recipe(consumo ~ data, tbl_energia_treinamento)
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo1, eval=FALSE, `code-line-numbers`="2"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia)
+
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo2, eval=FALSE, `code-line-numbers`="6"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia)
+
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo3, eval=FALSE, `code-line-numbers`="14"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia)
+
+```
+
+## Séries Temporais
+
+Por fim, definir o modelo, rodar e gerar previsões:
+
+```{r series-modelo4, eval=TRUE, `code-line-numbers`="18"}
+# definir o modelo a ser rodado (ARIMA)
+modelo_arima <- arima_reg() %>% 
+  set_engine("auto_arima")
+
+# Rodar o modelo na base de treinamento
+workflow_arima <- workflow() %>% 
+  add_recipe(receita_energia) %>% 
+  add_model(modelo_arima) %>% 
+  fit(tbl_energia_treinamento)
+
+# Gerar uma previsão e comparar com o que realmente 
+# aconteceu no período de teste
+tbl_energia_calibracao <- workflow_arima |> 
+  modeltime_calibrate(new_data = tbl_energia_teste)
+
+# gerar os valores previstos
+tbl_energia_previsao <- tbl_energia_calibracao |> 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia)
+
+```
+
+## Séries Temporais {.smaller}
+
+Gráfico da previsão comparada com o que ocorreu de fato:
+
+```{r series-previsao, `code-line-numbers`="2"}
+tbl_energia_previsao |> 
+  plot_modeltime_forecast()
+```
+
+## Séries Temporais {.smaller}
+
+É possível ainda criar uma série de medidas de performance. Elas são úteis para nos guiar sobre qual o melhor modelo:
+
+```{r series-acuracia, `code-line-numbers`="2"}
+tbl_energia_calibracao |> 
+  modeltime_accuracy(new_data = tbl_energia_teste) |> 
+  knitr::kable()
+```
+
+## Séries Temporais
+
+```{r, echo=FALSE}
+receita_fourier <- recipe(consumo ~ data, tbl_energia_treinamento) |> 
+  step_fourier(data, period = 12, K = 6) |> 
+  step_date(data)
+
+modelo_ets <- seasonal_reg() |> set_engine("stlm_ets")
+modelo_tbats <- seasonal_reg() |> set_engine("tbats")
+modelo_prophet <- prophet_reg() |> set_engine("prophet")
+modelo_boosted <- arima_boost(min_n = 2,learn_rate = 0.015) |> 
+    set_engine(engine = "auto_arima_xgboost")
+
+workflow_fourier <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_arima) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_ets <- workflow() |> 
+  add_recipe(receita_energia) |> 
+  add_model(modelo_ets) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_tbats <- workflow() |> 
+  add_recipe(receita_energia) |> 
+  add_model(modelo_tbats) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_prophet <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_prophet) |> 
+  fit(tbl_energia_treinamento)
+
+workflow_boosted <- workflow() |> 
+  add_recipe(receita_fourier) |> 
+  add_model(modelo_boosted) |> 
+  fit(tbl_energia_treinamento)
+
+tbl_modelos <- modeltime_table(
+  workflow_fourier,
+  workflow_arima,
+  workflow_ets,
+  workflow_tbats,
+  workflow_prophet,
+  workflow_boosted
+)
+
+tbl_calibracao_energia <- tbl_modelos |> 
+  modeltime_calibrate(
+  new_data = tbl_energia_teste
+)
+
+tbl_calibracao_energia %>% 
+  modeltime_forecast(new_data = tbl_energia_teste,
+                     actual_data = energia) %>% 
+  plot_modeltime_forecast(.legend_max_width = 20)
+
+```
+
+## Séries Temporais
+
+```{r}
+#| echo: FALSE
+tbl_calibracao_energia |> 
+  modeltime_accuracy(new_data = tbl_energia_teste) |> 
+  select(.model_desc, mape) |> 
+  arrange(mape)
+```
+
+## Séries Temporais
+
+Para mais informações sobre séries temporais:
+
+-   <https://robsonol.github.io/timeseries_r_book/>
+-   <https://robsonolima.com.br/post/previsao-de-dados-semanais-com-modeltime/>
+-   <https://cran.r-project.org/web/packages/modeltime/vignettes/getting-started-with-modeltime.html>
+
+## Análise de Churn
+
+## Análise de Churn
+
+> A partir de informações dos clientes, podemos prever a probabilidade que um cliente abandone (*churn)* a empresa, nos permitindo desenvolver programas focados em retenção de clientes.
+
+## Análise de Churn
+
+```{r churn-dados}
+data(wa_churn, package = "modeldata")
+```
+
+## Análise de Churn
+
+```{r churn-dados2}
+#| echo=FALSE
+font.size <- "14pt"
+
+wa_churn |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Análise de Churn {.smaller}
+
+::: panel-tabset
+## Gastos
+
+```{r churn-stat1}
+#| output-location: column
+#| 
+wa_churn |> 
+  ggplot(aes(x = monthly_charges)) +
+  geom_histogram(aes(y = ..density..)) + 
+  geom_density(fill = "blue", alpha = .2) +
+  labs(x = "Gasto Mensal", y = "", 
+       title = "Distribuição de Gastos Mensais dos Clientes") +
+  theme_light()
+```
+
+## Sexo
+
+```{r churn-stat2}
+#| output-location: column
+
+wa_churn |> 
+  mutate(female = case_when(female == 1 ~ "Mulher",
+                            female == 0 ~ "Homem")) |> 
+  ggplot(aes(x = female, fill = female)) +
+  geom_bar() + 
+  labs(x = "", y = "Total de Clientes",
+       title = "Clientes por Sexo") +
+  guides(fill = "none") +
+  theme_light()
+  
+```
+
+## Tempo
+
+```{r churn-stat3}
+#| output-location: column
+
+wa_churn |> 
+  ggplot(aes(x = tenure)) + 
+  geom_histogram(aes(y = ..density..)) +
+  geom_density(fill = "blue", alpha = 0.2) +
+  labs(x = "Tempo como cliente (meses)", y = "",
+       title = "Distribuição de Tempo como Cliente") +
+  theme_light()
+```
+
+## Churn
+
+```{r churn-stat4}
+#| output-location: column
+
+wa_churn |> 
+  ggplot(aes(x = churn)) +
+  geom_bar() +
+  labs(x = "Churn?", y = "", title = "") +
+  theme_light()
+```
+:::
+
+## Análise de Churn
+
+```{r churn-treino}
+# Criar a base de treinamento e teste
+churn_treinamento_teste <- wa_churn |> 
+  initial_split(prop = 0.8)
+
+tbl_treinamento <- churn_treinamento_teste |> training()
+tbl_teste <- churn_treinamento_teste |> testing()
+
+churn_treinamento_teste
+```
+
+## Análise de Churn
+
+```{r churn-receita}
+# Transformações dos dados
+receita_churn <- recipe(churn ~ ., data = tbl_treinamento) %>% 
+  step_impute_linear(all_numeric()) %>% 
+  step_dummy(all_nominal(), -all_outcomes()) %>% 
+  step_normalize(all_numeric())
+
+```
+
+## Análise de Churn
+
+```{r churn-modelo}
+# Definir o modelo
+modelo_floresta_aleatoria <- 
+  rand_forest(
+    mtry = 3, 
+    trees = 200, 
+    min_n = 30) |> 
+  set_mode("classification") |> 
+  set_engine("ranger")
+
+```
+
+## Análise de Churn
+
+```{r churn-previsao}
+workflow_churn <- workflow() |> 
+  add_model(modelo_floresta_aleatoria) |> 
+  add_recipe(receita_churn) |>  
+  fit(tbl_treinamento)
+
+```
+
+## Análise de Churn {.smaller}
+
+A matriz de confusão:
+
+::: columns
+::: {.column width="50%"}
+```{r churn-matriz, eval=FALSE}
+
+# Matriz de Confusão
+matriz_confusao_churn <- workflow_churn |> 
+  predict(tbl_teste) |> 
+  bind_cols(tbl_teste |> select(churn)) |>
+  mutate_all(as.factor) |> 
+  conf_mat(churn, .pred_class)
+
+matriz_confusao_churn |> 
+  autoplot(type = "heatmap")
+```
+:::
+
+::: {.column width="50%"}
+```{r churn-matriz2}
+#| echo: false
+#| label: fig-mtcars
+#| fig-cap: "Matriz de Confusão"
+#| column: margin
+#| fig-width: 8
+#| fig-height: 4
+
+# Matriz de Confusão
+matriz_confusao_churn <- workflow_churn |> 
+  predict(tbl_teste) |> 
+  bind_cols(tbl_teste |> select(churn)) |>
+  mutate_all(as.factor) |> 
+  conf_mat(churn, .pred_class)
+
+matriz_confusao_churn |> 
+  autoplot(type = "heatmap")
+```
+:::
+:::
+
+## Análise de Churn
+
+```{r churn-confusao3}
+matriz_confusao_churn |> 
+  summary() |> 
+  select(-.estimator) %>% 
+  filter(.metric %in% c('precision', 'recall', 'f_meas',
+                        'accuracy', 'spec', 'sens')) %>% 
+  rename(Medida = 1, Estimativa = 2)
+
+```
+
+## Análise de Churn
+
+```{r churn-cliente}
+cliente_ficticio <- data.frame(
+  female = 1, # mulher
+  senior_citizen = 0, # não idosa
+  partner = 1, # com parceiro(a)
+  dependents = 0, # sem dependentes
+  tenure = 2, # contrato a 2 anos
+  phone_service = 0, # sem telefone
+  multiple_lines = "No", # sem multiplas linhas
+  internet_service = "DSL", # internet tipo DSL
+  online_security = "No", # sem serviço de segurança online
+  online_backup = "No", # sem serviço de backup online
+  device_protection = "No", # sem serviço de seguro de roteador (?)
+  tech_support = "No", # suporte técnico
+  streaming_tv = "Yes", # usa streaming de tv
+  streaming_movies = "Yes", # faz uso de streaming de filmes
+  contract = "One year", # contrato anual
+  paperless_billing = 1, # não recebe a conta fisicamente
+  payment_method = "Bank transfer (automatic)", # débito automático
+  monthly_charges = 70, # paga $70 por mes
+  total_charges = 1680 # cobrança total 1400
+)
+```
+
+## Análise de Churn
+
+O modelo nos informa que provavelmente este cliente não deve cancelar sua assinatura em breve.
+
+```{r churn-cliente2}
+# O modelo informa que provavelmente esta cliente não deve abandonar a empresa em breve
+workflow_churn |> 
+  predict(cliente_ficticio)
+```
+
+## Análise de Churn
+
+Para mais informações:
+
+-   <https://robsonolima.com.br/post/analise-de-churn-com-tidymodels-parte-1/>
+
+-   <https://robsonolima.com.br/post/analise-de-churn-com-tidymodels-parte-2/>
+
+## Segmentação de Clientes
+
+## Segmentação de Clientes
+
+> O objetivo da clusterização é agrupar pontos em subgrupos distintos. Uma das principais aplicações de clusterização é a **segmentação de clientes.** Com ela podemos separar certos grupos de clientes, para oferecer descontos, ofertas, códigos promocionais, etc.
+
+## Segmentação de Clientes
+
+![](img/kmeans.gif)
+
+## Segmentação de Clientes
+
+<https://shiny.rstudio.com/gallery/kmeans-example.html>
+
+## Segmentação de Clientes
+
+```{r kmeans-dados}
+clientes_shopping <- read_csv("dados/clientes_shopping.csv")
+
+clientes_shopping |> 
+  head()
+```
+
+## Segmentação de Clientes
+
+```{r kmeans-dados2}
+#| echo=FALSE
+font.size <- "14pt"
+
+clientes_shopping |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Segmentação de Clientes {.smaller}
+
+::: panel-tabset
+## Sexo
+
+```{r kmeans-stat1}
+#| output-location: column
+
+clientes_shopping |>
+  ggplot(aes(x = genero, fill = genero)) +
+  geom_bar() + 
+  labs(x = "", 
+       y = "",
+       title = "Distribuição dos Clientes por Gênero") +
+  guides(fill = "none") +
+  theme_light()
+```
+
+## Gastos x Renda
+
+```{r kmeans-stat2}
+#| output-location: column
+
+# Uma inspeção visual parece indicar 
+# 5 grupos distintos de pontos.
+clientes_shopping |> 
+  ggplot(aes(renda_anual_mil, score_gastos, color = genero)) +
+  geom_point() +
+  labs(x = "Renda Anual (em mil R$)",
+       y = "Score de Gastos",
+       title = "Relação entre Gastos e Renda dos Clientes",
+       color = "") +
+  theme_light()
+
+```
+
+## Idade
+
+```{r kmeans-stat3}
+#| output-location: column
+
+clientes_shopping |> 
+  ggplot(aes(x = idade)) +
+  geom_histogram(fill = "cadetblue") +
+  labs(x = "Idade", y = "",
+       title = "Distribuição dos Clientes por Idade",
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+
+```
+:::
+
+## Segmentação de Clientes {.smaller}
+
+Vamos construir os clusters usando o score de gastos e renda anual. Para o número de clusters, vamos usar cinco:
+
+```{r kmeans-clusters}
+clusters_clientes <- clientes_shopping |> 
+  select(score_gastos, renda_anual_mil) |> 
+  kmeans(centers = 5)
+
+clusters_clientes |> 
+  tidy()
+```
+
+## Segmentação de Clientes {.smaller}
+
+Podemos repetir o gráfico de dispersão renda por gastos, mas usando como *cor* a classificação produzida pelo *K-means*.
+
+```{r kmeans-cluster2}
+clusters_clientes |> 
+  augment(clientes_shopping) |> 
+  ggplot(aes(renda_anual_mil, score_gastos, color = .cluster)) +
+  geom_point() +
+  labs(x = "Renda Anual (em mil R$)", y = "Score de Gastos",
+       title = "Relação entre Gastos e Renda dos Clientes", color = "Clusters") +
+  theme_light()
+
+```
+
+## Segmentação de Clientes
+
+Escolhendo outros valores de `K`, rodando para vários valores de `K` e
+
+```{r kmeans-cluster3}
+kclusts <-
+  tibble(k = 1:9) %>%
+  mutate(
+    kclust = map(k, ~ kmeans(select(clientes_shopping, score_gastos, renda_anual_mil), .x)),
+    glanced = map(kclust, glance)
+  )
+
+kclusts %>%
+  unnest(cols = c(glanced)) %>%
+  ggplot(aes(k, tot.withinss)) +
+  geom_line(alpha = 0.5, size = 1.2, color = "midnightblue") +
+  geom_point(size = 2, color = "midnightblue")
+```
+
+## Segmentação de Clientes
+
+Clusterização:
+
+-   Marketing: *Segmentação de Clientes*
+
+-   [Setor imobiliário: *grupos de imóveis*](https://medium.com/@tenzkunsang648/k-means-clustering-of-homes-and-neighborhoods-in-minneapolis-6b4fb02bc308)
+
+-   [Identificar locais suscetíveis a crimes](https://periodicos.ufpb.br/ojs/index.php/tpa/article/view/50891/31372)
+
+-   Clusterizar mensagens de redes sociais (twitters)
+
+-   <https://shiny.rstudio.com/gallery/kmeans-example.html>
+
+## Análise Financeira
+
+## Análise Financeira
+
+![O pacote tidyQuant permite realizar análise financeira no R.](img/tidyquant.png){fig-align="center"}
+
+## Análise Financeira
+
+```{r finance-dados}
+# instalar o pacote tidyquant
+# install.packages("tidyquant")
+
+# carregar o pacote
+library(tidyquant)
+
+tickers <- c("ITSA3.SA", "PETR3.SA", "VALE3.SA", "ABEV3.SA",
+             "BBAS3.SA", "JBSS3.SA")
+
+preco_acoes <- tickers |> 
+  tq_get(get  = "stock.prices",
+         from = "2021-01-02",
+         to   = "2022-10-11") 
+
+```
+
+## Análise Financeira
+
+```{r finance-dados2}
+#| echo=FALSE
+font.size <- "14pt"
+
+preco_acoes |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Análise Financeira {.smaller}
+
+```{r finance-precos}
+preco_acoes |> 
+  filter(symbol == "PETR3.SA") |> 
+  filter(date > as.Date("2022-07-01")) |> 
+  ggplot(aes(x = date, y = close)) +
+  geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
+  labs(x = "", y = "Preço de Fechamento") 
+```
+
+## Análise Financeira
+
+```{r finance-retorno}
+Ra <- preco_acoes %>% 
+  select(date, symbol, close) %>% 
+  group_by(symbol) %>% 
+  tq_transmute(select = close,
+               mutate_fun = periodReturn,
+               period = "monthly",
+               col_rename = "Ra")
+```
+
+## Análise Financeira {.smaller}
+
+```{r finance-grafico}
+Ra |> 
+  ggplot(aes(x = date, y = Ra, color = symbol)) +
+  geom_line(size = 1) + 
+  facet_wrap(~symbol) + guides(color = "none") +
+  labs(title = "Retorno Mensal de Ativos Selecionados, 2021 - 2022",
+       y = "Retorno Mensal (%)", x = "")
+```
+
+## Análise Financeira
+
+```{r finance-graficoacumulado}
+Ra %>% 
+  group_by(symbol) %>% 
+  mutate(retorno_acumulado = cumsum(Ra)) %>% 
+  ggplot(aes(x = date, y = retorno_acumulado, color = symbol)) +
+  geom_line() + 
+  geom_hline(yintercept = 0, linetype = 2) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "", 
+       y = "Retorno acumulado", 
+       title = "Retorno acumulado por empresa selecionada, 2021-2022",
+       caption = "Fonte: Elaborado pelo autor.") +
+  facet_wrap(~symbol, scales = "free_y", ncol = 2) +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle=45, size = 8))
+```
+
+## Análise Financeira
+
+```{r}
+# mean = retorno médio do ativo
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = mean
+    )
+```
+
+## Análise Financeira
+
+```{r}
+# sd = desvio-padrão (medida de volatilidade)
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = sd
+    )
+```
+
+## Análise Financeira
+
+```{r}
+# VaR indica a percentagem máxima esperada com 95% de confiança
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    performance_fun = VaR
+    )
+```
+
+## Análise Financeira
+
+A Razão de Sharpe é comumente utilizada como uma medida de retorno por unidade de risco, e tem a seguinte fórmula:
+
+$$
+ \text{Sharpe} = \frac{r_P - r_F}{\sigma_P}
+$$
+
+Uma razão de Sharpe maior, indica uma melhor combinação risco-retorno.
+
+## Análise Financeira
+
+```{r finance-sharpe}
+Ra |> 
+  tq_performance(
+    Ra = Ra, 
+    Rb = NULL, 
+    Rf = 0,
+    p = 0.95,
+    performance_fun = SharpeRatio
+    )
+```
+
+## Análise Financeira {.smaller}
+
+Podemos estimar o modelo CAPM para as ações. No modelo CAPM podemos fatorar a taxa livre de risco e calcular a seguinte equação:
+
+$$ r_p - r_F = \alpha + \beta(b - r_F) + \epsilon$$
+
+onde o $\beta$ representa a volatilidade de uma ação comparada com o risco sistêmico do mercado:
+
+-   $\beta = 1: \text{ação relacionada com o mercado}$
+
+-   $\beta < 1: \text{ação menos volátil que a média do mercado}$
+
+-   $\beta<1: \text{ativo mais volátil que o mercado}$
+
+-   $\beta <0: \text{ativo tende a aumentar de preço quando o mercado cai}$
+
+## Análise Financeira
+
+```{r finance-bovespa}
+#| output-location: column
+Rb <- "^BVSP" |> 
+  tq_get(get = "stock.prices", 
+         from = "2021-01-02", 
+         to   = "2022-10-11") |> 
+  tq_transmute(adjusted, periodReturn, 
+               period = "monthly", 
+               col_rename = "Rb")
+
+Rb |> 
+  ggplot(aes(x = date, y = Rb)) +
+  geom_line(size = 1) + 
+  labs(title = "Retorno Mensal da Bovespa, 2021 - 2022",
+       y = "Retorno Mensal (%)", x = "")
+```
+
+## Análise Financeira
+
+```{r finance-beta}
+Ra |> 
+  left_join(Rb) |> 
+  tq_performance(
+    Ra = Ra, 
+    Rb = Rb, 
+    Rf = 0,
+    performance_fun = CAPM.beta
+    )
+```
+
+## Análise Financeira
+
+![Podemos otimizar portfólios com pacote PortfolioAnalytics](img/otimizacao.png)
+
+## Análise Financeira
+
+![](img/plot-pesos-1.png)
+
+## Análise Financeira
+
+Para mais informações
+
+<https://robsonolima.com.br/post/analise-de-portfolio-com-r/>
+
+<https://robsonolima.com.br/post/tidyquant-analise-financeira-no-r/>
+
+<https://business-science.github.io/tidyquant/>
+
+## Análise Fatorial {.smaller}
+
+## Análise Fatorial {.smaller}
+
+| Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
+|-------------|-----------------------|-------------|-------------|-------------|
+| y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
+| y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
+| y3  | Eleições livres e justas (1960)                        | x               |                 |       |
+| y4  | Efetividade do congresso eleito (1960)                 | x               |                 |       |
+| y5  | Score dado por experts em liberdade de imprensa (1965) |                 | x               |       |
+| y6  | Liberdade dos partidos políticos (1965)                |                 | x               |       |
+
+## Análise Fatorial {.smaller}
+
+| Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
+|-------------|----------------------|-------------|-------------|-------------|
+| y7  | Eleições livres e justas (1965)              |                 | x               |       |
+| y8  | Eleições livres e justas (1965)              |                 | x               |       |
+| x1  | PIB per capita (1960)                        |                 |                 | x     |
+| x2  | Consumo de energia per capita (1960)         |                 |                 | x     |
+| x3  | \% da força de trabalho na industrial (1960) |                 |                 | x     |
+
+## Análise Fatorial {.smaller}
+
+![](img/sem22.png)
+
+## Análise Fatorial {.smaller}
+
+```{r pacote-lavaan}
+# Instalar pacote lavaan
+# install.packages("lavaan")
+
+# carregar pacote lavaan
+library(lavaan)
+
+# importar dados
+dados <- PoliticalDemocracy
+```
+
+## Análise Fatorial
+
+```{r lavaan-dados}
+#| echo=FALSE
+font.size <- "12pt"
+
+dados |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Análise Fatorial
+
+::: columns
+::: {.column width="50%"}
+![](img/sem22.png)
+:::
+
+::: {.column width="50%"}
+```{r lavaan-modelo}
+# Podemos especificar o modelo como:
+LVdata.model <-'# Modelo de medidas
+                  ind60 =~ x1 + x2 + x3 
+                  dem60 =~ y1 + y2 + y3 + y4
+                  dem65 =~ y5 + y6 + y7 + y8
+                # Regressão
+                  dem60 ~ ind60
+                  dem65 ~ ind60 + dem60
+                # Resíduos
+                  y1 ~~ y5
+                  y2 ~~ y4 + y6
+                  y3 ~~ y7
+                  y4 ~~ y8
+                  y6 ~~ y8'
+```
+:::
+:::
+
+## Análise Fatorial
+
+```{r lavaan-fit}
+# Especificar o modelo lavaan
+fit <- sem(LVdata.model, data = dados)
+
+# Mostrar o resultado
+fit |> tidy()
+```
+
+## Análise Fatorial
+
+```{r lavaan-resultado}
+#| echo=FALSE
+font.size <- "10pt"
+
+fit |> tidy() |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) |> 
+  DT::formatRound(columns=c('op', 'estimate', "std.error",
+                        "statistic", "p.value", "std.lv",
+                        "std.all","std.nox"), digits=1)
+```
+
+## Análise Fatorial {.smaller}
+
+```{r lavaan-plot1}
+# Instalar lavaanPlot
+# install.packages("lavaanPlot")
+
+# carregar pacote lavaanPlot
+library(lavaanPlot)
+
+# Exibir gráfico
+lavaanPlot(model = fit)
+```
+
+## Análise Fatorial {.smaller}
+
+```{r lavaan-plot2}
+# Instalar lavaanPlot
+# install.packages("lavaanPlot")
+
+# carregar pacote lavaanPlot
+library(lavaanPlot)
+
+# Exibir gráfico
+lavaanPlot(model = fit, 
+           node_options = list(style = "filled",color = "YellowGreen"), coefs = TRUE, stars = c("regress"))
+```
+
+# 5. Comunicar
+
+![](img/quarto_schematic.png)
+
+## Comunicação
+
+-   [Blogs](www.robsonolima.com.br)
+
+-   [**Relatórios**](https://housingprofiles.pschousing.org/profile/#Ashford)
+
+-   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide)
+
+-   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
+
+# Conclusão
+
+![](img/r_rollercoaster.png)
+
+## Onde Estudar?
+
+<https://www.escolavirtual.gov.br/curso/325>
+
+<https://livro.curso-r.com/index.html>
+
+<https://www.bigbookofr.com/index.html>

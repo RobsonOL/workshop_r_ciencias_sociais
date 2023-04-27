@@ -26,6 +26,16 @@ editor: visual
 
 ![https://robsonol.github.io/workshop_r\_ciencias_sociais/](img/qrcode_slides.png){fig-align="center"}
 
+## Agenda
+
+| Col1                               | Horário    | Local       |
+|------------------------------------|------------|-------------|
+| Tema                               | 27/04/2023 | Auditório   |
+| Introdução ao R                    |            | Laboratório |
+| Gráficos com `ggplot2`             |            | Laboratório |
+| Transformação de dados com `dplyr` |            | Laboratório |
+| Modelagem                          |            | Laboratório |
+
 # Contando Histórias com Dados
 
 ![](img/storytelling.png){fig-align="center" width="117"}
@@ -35,22 +45,16 @@ editor: visual
 ::: columns
 ::: {.column width="50%"}
 ![Fonte: Allison Horst](img/tidydata_5.jpg)
-:::
 
-::: {.column width="50%"}
--   Planejar
-
--   Adquirir dados
-
--   Explorar:
-
+1.  Planejar
+2.  Adquirir dados
+3.  Explorar:
     -   Transformar
 
     -   Visualizar
 
     -   Modelar
-
--   Comunicar
+4.  Comunicar
 :::
 :::
 
@@ -62,7 +66,7 @@ editor: visual
 
 ![Fonte: Allison Horst](img/reproducibility_court.png){fig-align="center"}
 
-# Pré-Requisitos
+## Pré-Requisitos
 
 ## R
 
@@ -304,7 +308,7 @@ Vamos trabalhar com dados no R no formato `tidy`:
 
 ![Fonte: Allison Horst](img/tidydata_3.jpg)
 
-# 1. Importar Dados
+# 1. Adquirindo Dados
 
 ![](img/import_r.png){fig-align="center" width="300"}
 
@@ -2263,7 +2267,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----------|------------------------------|-----------|-----------|-----------|
+|-----|--------------------------------------------------------|-----------------|-----------------|-------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |
@@ -2274,7 +2278,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----------|----------------------------|-----------|-----------|-----------|
+|-----|----------------------------------------------|-----------------|-----------------|-------|
 | y7  | Eleições livres e justas (1965)              |                 | x               |       |
 | y8  | Eleições livres e justas (1965)              |                 | x               |       |
 | x1  | PIB per capita (1960)                        |                 |                 | x     |

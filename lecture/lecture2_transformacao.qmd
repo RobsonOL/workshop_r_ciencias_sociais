@@ -1,0 +1,906 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Aula 02 - Transformação de Dados"
+author: "Dr Robson Oliveira"
+institute: "IFPB"
+logo: logo_ifpb.png
+footer: "robsonolima.com.br"
+incremental: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    chalkboard: true
+    theme: serif
+    slide-tone: false
+    auto-animate: true
+    code-fold: show
+    code-summary: ">"
+    code-link: true
+editor: visual
+---
+
+# R: Uso Básico
+
+```{r basico0}
+library(tidyverse)
+```
+
+## Rodando Código no R {auto-animate="true"}
+
+```{r basico1}
+1 + 2
+```
+
+## Rodando Código no R {auto-animate="true"}
+
+```{r basico2}
+1 / 200 * 30
+```
+
+## Rodando Código no R {auto-animate="true"}
+
+```{r basico3}
+sqrt(49)
+```
+
+## Funções
+
+R tem uma série de funções. Por exemplo, para criar uma sequência de números entre 1 e 10, usamos a função `seq()`:
+
+```{r funcao1}
+seq(1, 10)
+```
+
+## Funções
+
+Sempre chamamos uma função da seguinte forma:
+
+```{r funcao2, eval=FALSE}
+nome_funcao(argumento1 = valor1, argumento2 = valor2, ...)
+```
+
+## Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r, funcao3, `code-line-numbers`="2" }
+# somar dois valores
+sum(10, 15)
+```
+
+## Funções {auto-animate="true"}
+
+Exemplos:
+
+```{r, funcao4, `code-line-numbers`="2" }
+# somar dois valores
+sum(10, 15)
+```
+
+## Funções
+
+```{r, funcao5, `code-line-numbers`="2" }
+# encontrar raiz quadrada
+sqrt(49)
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+**Atribuimos** um valor a um objeto usando `<-`:
+
+```{r objeto1, eval=FALSE}
+nome_objeto <- valor
+
+```
+
+Dica: Podemos ler o código acima como "estamos salvando o valor como ***nome_objeto***".
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r, objeto2, `code-line-numbers`="2"}
+# podemos salvar o resultado de 3 * 4 como x
+x <- 3 * 4
+
+# para inspecionar o valor de `x` digitamos seu nome:
+x
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r, objeto3, `code-line-numbers`="5" }
+# podemos salvar o resultado de 3 * 4 como x
+x <- 3 * 4
+
+# para inspecionar o valor de `x` digitamos seu nome:
+x
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+Algumas recomendações para nomear objetos:
+
+1.  Começar com letras
+
+2.  Conter letras, números, `_` e `.`
+
+3.  Ser descritivo
+
+4.  Separar palavras com `_`: `sequencia_entre_1_10`
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r, objeto4, `code-line-numbers`="2"}
+# salvar a sequência de números como um objeto
+sequencia_entre_1_10 <- seq(1, 10)
+
+# somar todos os valores da sequência
+sum(sequencia_entre_1_10)
+```
+
+## Criando objetos com `<-` {auto-animate="true"}
+
+```{r, objeto5, `code-line-numbers`="5"}
+# salvar a sequência de números como um objeto
+sequencia_entre_1_10 <- seq(1, 10)
+
+# somar todos os valores da sequência
+sum(sequencia_entre_1_10)
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r bancodados1, eval=FALSE, `code-line-numbers`="2" }
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Um tipo especial de objeto é o `data.frame`:
+
+```{r, bancodados2, `code-line-numbers`="5" }
+# mtcars é um banco de dados com informações de veículos:
+dados_carros <- mtcars
+
+# podemos inspecionar o data frame:
+dados_carros
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+```{r bancodados3}
+#| echo=FALSE
+dados_carros <- mtcars
+#options(DT.options = list(pageLength = 4))
+font.size <- "14pt"
+
+dados_carros |> DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+![Fonte: Allison Horst](img/tidydata_2.jpg){alt="Fonte: Allison Horst"}
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+Vamos trabalhar com dados no R no formato `tidy`:
+
+![](img/tidy-1.png)
+
+## Banco de dados: `data.frame` {auto-animate="true"}
+
+![Fonte: Allison Horst](img/tidydata_3.jpg)
+
+# 1. Adquirindo Dados
+
+![](img/import_r.png){fig-align="center" width="300"}
+
+## Importando dados {.smaller}
+
+#### Sugestão de fontes de dados:
+
+-   <https://basedosdados.org/>
+
+-   <https://dados.gov.br/>
+
+-   <http://www.ipeadata.gov.br/>
+
+-   <https://datasetsearch.research.google.com/>
+
+-   <https://siconfi.tesouro.gov.br/siconfi/pages/public/consulta_finbra/finbra_list.jsf>
+
+-   <https://www.kaggle.com/>
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r importar-dados1, eval=FALSE, `code-line-numbers`="2" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "despesas"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+
+```
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r importar-dados2, eval=FALSE, `code-line-numbers`="5" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+
+```
+
+## Importando dados {auto-animate="true"}
+
+Importando dados de consumo de energia usando a função `read_csv()`:
+
+```{r, importar-dados3, `code-line-numbers`="8" }
+# importar o pacote
+library(tidyverse)
+
+# salvar o arquivo csv como o objeto "consumo_energia"
+consumo_energia <- read_csv(file = "dados/consumo_energia_brasil.csv")
+
+# mostrar apenas as primeiras linhas do banco de dados:
+consumo_energia
+```
+
+## Importando dados {auto-animate="true"}
+
+```{r tab-dinamica}
+#| echo=FALSE
+#options(DT.options = list(pageLength = 4))
+font.size <- "12pt"
+
+consumo_energia |> 
+  filter(ano == 2020) |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+```
+
+# 2. Transformação de dados
+
+![](img/hex-dplyr.png){fig-align="center" width="400"}
+
+## Funções do `dplyr`
+
+A.  `filter()` filtra apenas observações com valores específicos
+
+B.  `arrange()` reordena as linhas da base
+
+C.  `select()` seleciona apenas variáveis de interesse
+
+D.  `mutate()` cria novas variáveis como função das demais
+
+E.  `summarise()` cria estatísticas descritivas
+
+## Função `filter`
+
+![](img/filter.png)
+
+## A. Função `filter`
+
+```{r filter1, eval=FALSE}
+filter(<DADOS>, <REGRAS>)
+```
+
+## A. Função `filter`
+
+Se quisermos filtrar o consumo de energia da Paraíba:
+
+```{r filter2}
+filter(consumo_energia, sigla_uf == "PB")
+```
+
+## A. Função `filter`
+
+Se quisermos filtrar o consumo de energia da Paraíba **apenas para consumidores residenciais**:
+
+```{r filter3}
+filter(consumo_energia, sigla_uf == "PB" & tipo_consumo == "Residencial")
+```
+
+## Pipe `|>`
+
+O *pipe `|>`* é um operador que permite reescrever as expressões de outra forma. Dica: Leia o *pipe* como um **ENTÃO**:
+
+![](img/pipe1.png)
+
+## Pipe `|>`
+
+```{r pipe1, eval=FALSE}
+# ao invés de escrever assim:
+filter(consumo_energia, ano == 2020, sigla_uf == "PB")
+
+
+```
+
+```{r pipe2}
+# escrevemos assim:
+consumo_energia |> # pegue os dados
+  filter(ano == 2020 & sigla_uf == "PB") # ENTÃO filtre para...
+```
+
+## B. Função `select()`
+
+![](img/select.png)
+
+## B. Função `select()`
+
+Podemos selecionar apenas as variáveis desejadas, como `ano`, `mes`, `sigla_uf` e `consumo`:
+
+```{r select1}
+consumo_energia |> 
+  select(ano, mes, sigla_uf, consumo)
+```
+
+## B. Função `select()`
+
+Podemos usar o `|>` para concatenar `filter()` e `select()`:
+
+```{r select2}
+consumo_energia |> 
+  filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> # ENTÃO filtre os dados
+  select(ano, mes, consumo) # então selecione as colunas
+```
+
+## B. Função `select()`
+
+Vamos salvar o resultado como o objeto `energia_residencial_pb`:
+
+```{r select3}
+energia_residencial_pb <- consumo_energia |> 
+  filter(sigla_uf == "PB" & tipo_consumo == "Residencial") |> 
+  select(ano, mes, consumo) 
+```
+
+## C. Função `mutate()`
+
+![](img/mutate.png)
+
+## C. Função `mutate()`
+
+Na função `mutate()` especifique o nome da nova variável e após o sinal de `=` indique a transformação que deseja realizar:
+
+```{r mutate1, eval=FALSE}
+
+# a função abaixo cria uma variavel nova como a soma
+# da variavel_1 e variavel_2
+dados <- mutate(variavel_nova = variavel_1 + variavel_2)
+```
+
+## C. Função `mutate()`
+
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
+
+```{r mutate2, eval=FALSE,`code-line-numbers`="3"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
+
+# agora podemos observar o resultado:
+energia_residencial_pb
+```
+
+## C. Função `mutate()`
+
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
+
+```{r mutate3, eval=FALSE,`code-line-numbers`="6"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
+
+# agora podemos observar o resultado:
+energia_residencial_pb
+```
+
+## C. Função `mutate()`
+
+Podemos criar uma variável chamada `data`, ao unir dia, mês e ano. Para unir textos, usamos a função `paste0`:
+
+```{r mutate4, eval=TRUE,`code-line-numbers`="9"}
+energia_residencial_pb <- energia_residencial_pb |> 
+  # unir ano, mes e o dia "01" com a função paste0
+  mutate(data = paste0(ano,"-",mes,"-01")) |> 
+  # para o R entender que essa variável é uma data, precisamos converter
+  # com a função as.Date()
+  mutate(data = as.Date(data))
+
+# agora podemos observar o resultado:
+energia_residencial_pb
+```
+
+## C. Função `mutate()`:
+
+```{r mutate5}
+#| echo=FALSE
+font.size <- "14pt"
+
+energia_residencial_pb |> 
+  DT::datatable(
+     options=list(
+       initComplete = htmlwidgets::JS(
+          "function(settings, json) {",
+          paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+          "}")
+       )
+     ) 
+
+
+```
+
+## D. Função `arrange()`
+
+![](img/arrange.png)
+
+## D. Função `arrange()`
+
+Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
+
+```{r arrange1}
+energia_residencial_pb
+```
+
+## D. Função `arrange()`
+
+Note que a tabela está ordenada por data. E se quisermos ordenar por valor?
+
+```{r arrange2}
+energia_residencial_pb |> 
+  arrange(consumo) # ordem crescente
+```
+
+## D. Função `arrange()`
+
+Note que a tabela está ordenada por nome do município. E se quisermos ordenar por valor?
+
+```{r arrange3}
+energia_residencial_pb |> 
+  arrange(desc(consumo)) # ordem decrescente
+```
+
+## E. Função `summarise()`
+
+![](img/summarise.png)
+
+## E. Função `summarise()`
+
+-   O último verbo do `dplyr` é o `summarise()`
+
+-   Ele colapsa os dados (*resume* em uma única linha)
+
+-   O objetivo é criar medidas como média, medianas, totais e outros.
+
+## E. Função `summarise()` {auto-animate="true"}
+
+Para obter o total consumido em energia na Paraíba em 2020:
+
+```{r summ1, eval=FALSE ,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_total = sum(consumo))
+```
+
+## Função `summarise()` {auto-animate="true"}
+
+Para obter o total consumido em energia na Paraíba em 2020:
+
+```{r summ2, eval=TRUE ,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_total = sum(consumo))
+```
+
+## E. Função `summarise()` {auto-animate="true"}
+
+Se quisermos saber o valor médio consumido, só substituir a função `sum()` por `mean()`:
+
+```{r summ3, eval=TRUE ,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # filtrar os dados para o ano de 2020
+  filter(ano == 2020) |> 
+  # sumar o consumo de todos os valores de 2020
+  summarise(consumo_medio_mensal = mean(consumo))
+```
+
+## F. Função `group_by()`
+
+![](img/groupby.png)
+
+## F. Função `group_by()`
+
+-   `summarise()` é mais útil quando usamos em conjunto com `group_by()`
+
+-   `group_by()` muda a unidade de análise da base de dados completa para grupos de observações
+
+-   Por exemplo, podemos estar interessado no consumo de energia por ano.
+
+## F. Função `group_by()` {auto-animate="true"}
+
+```{r groupby1, eval=FALSE,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  # agrupamos as observações por ano
+  group_by(ano) |> 
+  # calculamos a média de gastos
+  summarise(consumo_medio_anual = mean(consumo))
+```
+
+## F. Função `group_by()` {auto-animate="true"}
+
+```{r groupby2, eval=TRUE,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  # agrupamos as observações por ano
+  group_by(ano) |> 
+  # calculamos a média de gastos
+  summarise(consumo_medio_anual = mean(consumo))
+```
+
+## Salvando resultado no computador
+
+Podemos salvar esses resultados como um arquivo \*.csv\*:
+
+```{r salvar-csv, eval=FALSE}
+energia_residencial_pb |> 
+  write_csv("dados/energia_residencial_paraiba.csv")
+```
+
+# 3. Visualização {auto-animate="true"}
+
+> "Apresentar dados com gráficos pode ajudar você a comunicar informações com clareza."
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/ggplot.png){fig-align="center" width="400"}
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot1, eval=TRUE,`code-line-numbers`="2"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot12, eval=TRUE,`code-line-numbers`="4"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot13, eval=TRUE,`code-line-numbers`="6"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/layers.png)
+
+## Geometrias
+
+![](img/geoms.png)
+
+## Geometrias
+
+-   **geom** é o objeto geométrico que um gráfico usa para representar dados.
+
+-   **Gráficos de barras** são construídos com `geom_bar`.
+
+-   **Gráficos de linhas** são construídos com `geom_line`.
+
+-   Assim, para mudar a geometria, só alterar o termo `geom_*`.
+
+## `geom_point()`
+
+```{r geom-point,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_point()
+
+```
+
+## `geom_line()`
+
+```{r geom-line,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_line()
+```
+
+## `geom_smooth()`
+
+```{r geom-smooth,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_smooth()
+```
+
+## `geom_hist`
+
+```{r geom-hist,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(x = consumo)) +
+  geom_histogram()
+
+```
+
+## `geom_boxplot`
+
+```{r geom-boxplot,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(y = consumo)) +
+  geom_boxplot()
+```
+
+## `geom_qq`
+
+```{r geom-qq,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(sample = consumo)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+## Múltiplos `geom_*`
+
+```{r geom-multiplos, echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+
+energia_residencial_pb |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_point() +
+  geom_line()
+```
+
+## `Dplyr` + `ggplot`
+
+```{r dplyr-ggplot}
+energia_residencial_pb |> 
+  group_by(ano) |> 
+  summarise(consumo_total = sum(consumo)) |> 
+  ggplot(aes(x = ano, y = consumo_total)) + 
+  geom_col()
+```
+
+## Múltiplas faces com `facet_wrap`
+
+```{r ggplot-facet,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style1, eval=FALSE}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style2}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style3, eval=FALSE,`code-line-numbers`="6"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style4}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style5, eval=FALSE,`code-line-numbers`="9"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style6}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style7, eval=FALSE,`code-line-numbers`="4"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style8}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style9, eval=FALSE,`code-line-numbers`="10"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() + 
+  guides(color="none")
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style10}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() +
+  guides(color="none")
+
+```
+:::
+:::
+
+## Mais Informações
+
+-   <https://robsonolima.com.br/post/visualizacao-com-ggplot2-e-seinfeld/>
+
+-   <https://r-graph-gallery.com/>
+
+-   <https://exts.ggplot2.tidyverse.org/gallery/>
+
+-   <https://livro.curso-r.com/8-graficos.html>
+
+-   <https://www.msperlin.com/vdr/>

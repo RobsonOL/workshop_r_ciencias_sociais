@@ -47,7 +47,7 @@ energia_residencial_pb <- read_csv("dados/energia_residencial_paraiba.csv")
 
 Vamos criar nosso primeiro gráfico:
 
-```{r ggplot1, eval=TRUE,`code-line-numbers`="2"}
+```{r ggplot1, eval=FALSE,`code-line-numbers`="2"}
 # camada de dados
 energia_residencial_pb |> 
   # camada estética (mapeamento)
@@ -60,7 +60,7 @@ energia_residencial_pb |>
 
 Vamos criar nosso primeiro gráfico:
 
-```{r ggplot12, eval=TRUE,`code-line-numbers`="4"}
+```{r ggplot12, eval=FALSE,`code-line-numbers`="4"}
 # camada de dados
 energia_residencial_pb |> 
   # camada estética (mapeamento)

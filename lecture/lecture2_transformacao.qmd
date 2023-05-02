@@ -22,10 +22,6 @@ editor: visual
 
 # R: Uso Básico
 
-```{r basico0}
-library(tidyverse)
-```
-
 ## Rodando Código no R {auto-animate="true"}
 
 ```{r basico1}
@@ -580,7 +576,7 @@ energia_residencial_pb |>
 
 ## Salvando resultado no computador
 
-Podemos salvar esses resultados como um arquivo \*.csv\*:
+Podemos salvar esses resultados como um arquivo `.csv`:
 
 ```{r salvar-csv, eval=FALSE}
 energia_residencial_pb |> 

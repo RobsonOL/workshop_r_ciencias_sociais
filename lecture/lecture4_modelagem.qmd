@@ -204,34 +204,37 @@ $$
 Y (\text{Salário}) = \beta_0 + \beta_1 \text{educação} + \beta_2 \text{exp} + \beta_3 \text{exp}^2 + u
 $$
 
-## Regressão
+## Regressão {.smaller}
 
-```{r lm1, eval=FALSE, `code-line-numbers`="2"}
+```{r lm1, eval=FALSE, `code-line-numbers`="1"}
 equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
 
 modelo <- lm(equacao, data = salario_pb) 
 modelo |> 
-  broom::tidy()
+  broom::tidy() |> 
+  knitr::kable(digits = 2)
 ```
 
-## Regressão
+## Regressão {.smaller}
 
-```{r lm-predict1, eval=FALSE, `code-line-numbers`="4"}
+```{r lm-predict1, eval=FALSE, `code-line-numbers`="3"}
 equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
 
 modelo <- lm(equacao, data = salario_pb) 
 modelo |> 
-  broom::tidy()
+  broom::tidy() |> 
+  knitr::kable(digits = 2)
 ```
 
-## Regressão
+## Regressão {.smaller}
 
-```{r lm-predict2, eval=TRUE, `code-line-numbers`="6"}
+```{r lm-predict2, eval=TRUE, `code-line-numbers`="4"}
 equacao <- "log(salario + 1) ~ sexo + idade + escolaridade + meso_trab + semiarido_trab"
 
 modelo <- lm(equacao, data = salario_pb) 
 modelo |> 
-  broom::tidy()
+  broom::tidy() |> 
+  knitr::kable(digits = 2)
 ```
 
 ## Regressão
@@ -1286,7 +1289,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-------------|-----------------------|-------------|-------------|-------------|
+|--------------|------------------|--------------|--------------|--------------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |
@@ -1297,7 +1300,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-------------|----------------------|-------------|-------------|-------------|
+|--------------|-----------------|--------------|--------------|--------------|
 | y7  | Eleições livres e justas (1965)              |                 | x               |       |
 | y8  | Eleições livres e justas (1965)              |                 | x               |       |
 | x1  | PIB per capita (1960)                        |                 |                 | x     |

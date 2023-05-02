@@ -1,0 +1,354 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Aula 03 - Visualizando Dados"
+author: "Dr Robson Oliveira"
+institute: "IFPB"
+logo: logo_ifpb.png
+footer: "robsonolima.com.br"
+incremental: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    chalkboard: true
+    theme: serif
+    slide-tone: false
+    auto-animate: true
+    code-fold: show
+    code-summary: ">"
+    code-link: true
+editor: visual
+---
+
+# 3. Visualização {auto-animate="true"}
+
+> "Apresentar dados com gráficos pode ajudar você a comunicar informações com clareza."
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/ggplot.png){fig-align="center" width="400"}
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+```{r pacote1}
+# tidyverse importa o pacote ggplot2
+library(tidyverse)
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+Vamos carregar os dados que produzimos na aula 01:
+
+```{r dados1}
+energia_residencial_pb <- read_csv("dados/energia_residencial_paraiba.csv")
+```
+
+## Pacote `ggplot2` {.smaller auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot1, eval=TRUE,`code-line-numbers`="2"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {.smaller auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot12, eval=TRUE,`code-line-numbers`="4"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {.smaller auto-animate="true"}
+
+Vamos criar nosso primeiro gráfico:
+
+```{r ggplot13, eval=TRUE,`code-line-numbers`="6"}
+# camada de dados
+energia_residencial_pb |> 
+  # camada estética (mapeamento)
+  ggplot(aes(x = data, y = consumo)) +
+  # camada de geometria
+  geom_point()
+```
+
+## Pacote `ggplot2` {auto-animate="true"}
+
+![](img/layers.png)
+
+## Geometrias
+
+![](img/geoms.png)
+
+## Geometrias
+
+-   **geom** é o objeto geométrico que um gráfico usa para representar dados.
+
+-   **Gráficos de barras** são construídos com `geom_bar`.
+
+-   **Gráficos de linhas** são construídos com `geom_line`.
+
+-   Assim, para mudar a geometria, só alterar o termo `geom_*`.
+
+## `geom_point()` {.smaller}
+
+```{r geom-point,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_point()
+
+```
+
+## `geom_line()` {.smaller}
+
+```{r geom-line,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_line()
+```
+
+## `geom_smooth()` {.smaller}
+
+```{r geom-smooth,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(mapping = aes(x = data, y = consumo)) +
+  geom_smooth()
+```
+
+## `geom_hist` {.smaller}
+
+```{r geom-hist,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(x = consumo)) +
+  geom_histogram()
+
+```
+
+## `geom_boxplot` {.smaller}
+
+```{r geom-boxplot,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(y = consumo)) +
+  geom_boxplot()
+```
+
+## `geom_qq` {.smaller}
+
+```{r geom-qq,`code-line-numbers`="3"}
+energia_residencial_pb |> 
+  ggplot(aes(sample = consumo)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+## Múltiplos `geom_*` {.smaller}
+
+```{r geom-multiplos, echo=TRUE, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+
+energia_residencial_pb |> 
+  ggplot(aes(x = data, y = consumo)) +
+  geom_point() +
+  geom_line()
+```
+
+## `Dplyr` + `ggplot` {.smaller}
+
+```{r dplyr-ggplot}
+energia_residencial_pb |> 
+  group_by(ano) |> 
+  summarise(consumo_total = sum(consumo)) |> 
+  ggplot(aes(x = ano, y = consumo_total)) + 
+  geom_col()
+```
+
+## Múltiplas faces com `facet_wrap` {.smaller}
+
+```{r ggplot-facet,`code-line-numbers`="5"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+
+## Estilizando o gráfico {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style1, eval=FALSE}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style2}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano)
+```
+:::
+:::
+
+## Estilizando o gráfico {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style3, eval=FALSE,`code-line-numbers`="6"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style4}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor")
+```
+:::
+:::
+
+## Estilizando o gráfico {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style5, eval=FALSE,`code-line-numbers`="9"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style6}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo)) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style7, eval=FALSE,`code-line-numbers`="4"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style8}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, 
+             color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light()
+```
+:::
+:::
+
+## Estilizando o gráfico {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r ggplot-style9, eval=FALSE,`code-line-numbers`="10"}
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() + 
+  guides(color="none")
+```
+:::
+
+::: {.column width="50%"}
+```{r ggplot-style10}
+#| echo: false
+energia_residencial_pb |> 
+  filter(ano > 2012) |> 
+  ggplot(aes(x = mes, y = consumo, color = as.factor(ano))) + 
+  geom_line() + 
+  facet_wrap(~ano) +
+  labs(x = "Mês", y = "Consumo mensal", 
+       title = "Consumo de energia elétrica residencial na Paraíba", 
+       caption = "Fonte: Elaborado pelo autor") +
+  theme_light() +
+  guides(color="none")
+
+```
+:::
+:::
+
+## Mais Informações
+
+-   <https://robsonolima.com.br/post/visualizacao-com-ggplot2-e-seinfeld/>
+
+-   <https://r-graph-gallery.com/>
+
+-   <https://exts.ggplot2.tidyverse.org/gallery/>
+
+-   <https://livro.curso-r.com/8-graficos.html>
+
+-   <https://www.msperlin.com/vdr/>

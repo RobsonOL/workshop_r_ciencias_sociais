@@ -28,9 +28,9 @@ editor: visual
 
 ## Agenda {.smaller}
 
-| Tema                               | Horário    | Local       | Slides                                                                                                                        | Atividade |
-|------------------------------------|------------|-------------|-------------------------------------------------------------------------------------------------------------------------------|-----------|
-| Introdução ao R                    | 27/04/2023 | Auditório   | [Aula 01 - Introdução](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture1)                               | \-        |
-| Transformação de dados com `dplyr` | À combinar | Laboratório | [Aula 02 - Transformação](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture2_transformacao#/title-slide) | \-        |
-| Gráficos com `ggplot2`             | À combinar | Laboratório | [Aula 03 - Visualização](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture3_visualizacao)                | \-        |
-| Modelagem                          | À combinar | Laboratório | [Aula 04 - Modelagem](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture4_modelagem)                      | \-        |
+| Tema                               | Horário    | Local       | Slides                                                                                                                                             | Atividade |
+|----------|----------|----------|-----------------------------------|----------|
+| Introdução ao R                    | 04/05/2023 | Auditório   | [Aula 01 - Introdução](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture1){style="color: blue"}                               | \-        |
+| Transformação de dados com `dplyr` | Combinar   | Laboratório | [Aula 02 - Transformação](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture2_transformacao#/title-slide){style="color: blue"} | \-        |
+| Gráficos com `ggplot2`             |  Combinar  | Laboratório | [Aula 03 - Visualização](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture3_visualizacao){style="color: blue"}                | \-        |
+| Modelagem                          | Combinar   | Laboratório | [Aula 04 - Modelagem](https://robsonol.github.io/workshop_r_ciencias_sociais/lecture/lecture4_modelagem){style="color: blue"}                      | \-        |

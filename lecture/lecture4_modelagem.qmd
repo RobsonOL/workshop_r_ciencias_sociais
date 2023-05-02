@@ -44,7 +44,7 @@ Uma lista (não exaustiva) de modelagem de dados que podem ser desenvolvidos nas
 library(tidyverse)
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r dados1}
 salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
@@ -52,7 +52,7 @@ salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
 salario_pb |> head()
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r tab-dinamica-salario}
 #| echo=FALSE
@@ -78,7 +78,7 @@ summary(salario_pb)
 
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r est2}
 salario_pb |> 
@@ -91,10 +91,11 @@ salario_pb |>
                names_sep = "_") |> 
   rename("Média" = media,
          "Mediana" = mediana,
-         "Desvio-Padrão" = dp)
+         "Desvio-Padrão" = dp) |> 
+  knitr::kable()
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 Calcular correlação pode ser executada com a função `cor()`:
 
@@ -107,7 +108,7 @@ matriz_corr <- salario_pb |>
 matriz_corr
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 ```{r est4}
 # install.packages("ggcorrplot")
@@ -117,7 +118,7 @@ matriz_corr |>
   ggcorrplot()
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 ```{r est5}
 # install.packages("ggcorrplot")
@@ -130,7 +131,7 @@ matriz_corr |>
              title = "Matriz de Correlação")
 ```
 
-## Estatística Básica: Distribuição Normal {.smaller}
+## Estatística: Distribuição Normal {.smaller}
 
 ```{r est6}
 salario_pb |> 
@@ -144,7 +145,7 @@ salario_pb |>
   theme_light()
 ```
 
-## Estatística Básica: Distribuição Normal {.smaller}
+## Estatística: Distribuição Normal {.smaller}
 
 ```{r est7}
 salario_pb |> 
@@ -157,7 +158,7 @@ salario_pb |>
        caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
 ```
 
-## Estatística Básica: Diferença de Médias {.smaller}
+## Estatística: Diferença de Médias {.smaller}
 
 ```{r difmedia}
 #| output-location: column
@@ -176,7 +177,7 @@ salario_pb |>
        caption = "Fonte: Elaboração do autor a partir de dados da RAIS (2013)")
 ```
 
-## Estatística Básica: Diferença de Médias {.smaller}
+## Estatística: Diferença de Médias {.smaller}
 
 ```{r stat-basico1,`code-line-numbers`="8"}
 # calcular salário das mulheres
@@ -239,7 +240,7 @@ $$
 \log(\text{Salário} ) = 5,78 - 0,13 \text{ Mulher} + 0,02 \text{ Idade} + \\[0.1in] 0.10 \text{ Escolaridade} - 0,07 \text{ Borborema} + \\[0.1in] 0.20 \text{ Zona Mata} -  0,09 \text{ Sertão} + \\[0.1in] 0,08 \text{Semiarido}
 $$
 
-## Regressão 
+## Regressão
 
 ```{r lm-predict3, `code-line-numbers`="1"}
 pessoa_ficticia <- data.frame(
@@ -253,7 +254,7 @@ pessoa_ficticia <- data.frame(
 
 ```
 
-## Regressão 
+## Regressão
 
 O modelo sugere que a renda dessa pessoa deve ser de R\$ 1298,13:
 
@@ -289,7 +290,7 @@ library(timetk)
 energia <- read_csv("dados/energia_residencial_paraiba.csv")
 ```
 
-## Séries Temporais 
+## Séries Temporais
 
 ```{r series-dados, eval=FALSE, `code-line-numbers`="3"}
 # Instalar pacote:
@@ -1285,7 +1286,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----------|------------------------------|-----------|-----------|-----------|
+|-------------|-----------------------|-------------|-------------|-------------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |
@@ -1296,7 +1297,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----------|----------------------------|-----------|-----------|-----------|
+|-------------|----------------------|-------------|-------------|-------------|
 | y7  | Eleições livres e justas (1965)              |                 | x               |       |
 | y8  | Eleições livres e justas (1965)              |                 | x               |       |
 | x1  | PIB per capita (1960)                        |                 |                 | x     |

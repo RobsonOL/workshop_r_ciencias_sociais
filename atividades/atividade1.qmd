@@ -1,0 +1,70 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Atividade 1 - Primeiros Passos"
+author: "Robson Oliveira Lima"
+theme:
+  light: flatly
+  dark: darkly
+editor: visual
+---
+
+## 1. Instalando o R e o Rstudio
+
+-   Acesse o site de download do RStudio no [posit.co/download/rstudio-desktop](posit.co/download/rstudio-desktop)
+
+-   Siga o passo-a-passo do vídeo [Transformando Dados em Informação: Instalando R e RStudio (3:35)](https://youtu.be/Iy-c6-EuzEI) para instalar o R e o Rstudio.
+
+## 2. Se familiarize com o R e o Rstudio
+
+-   Assista o vídeo [Transformando Dados em Informação: Interface do RStudio (Parte 2)](https://youtu.be/uoJixsI0Blw) para se familiarizar com a interface do R e do RStudio.
+
+-   Após instalar os programas, teste alguns comandos no `Console` e veja o resultado após clicar em `ENTER`.
+
+```{r eval=FALSE, include=TRUE}
+# Sugestões de comandos
+sqrt(49)
+
+mtcars
+
+plot(mtcars$mpg, mtcars$hp)
+```
+
+## 3. Criando um Projeto no RStudio
+
+-   Assista ao vídeo [Transformando Dados em Informação: Criando Projetos no RStudio (Parte 3)](https://youtu.be/BRvlJxaPaZA)
+
+-   Crie um projeto no RStudio e chame de `curso_r`. Encontre a pasta do projeto e crie uma pasta chamada `dados` e uma pasta chamada `figuras`.
+
+-   Faça o download dos dados apresentados no vídeo no link [Base dos Dados - IDH-M](https://basedosdados.org/dataset/mundo-onu-adh?bdm_table=municipio) e inclua o arquivo baixado na pasta de `dados`.
+
+## 4. Criando e salvando scripts
+
+-   Crie um novo `script R`pelo caminho `File -> New File -> R Script` e copie o seguinte conteúdo nele:
+
+```{r eval=FALSE, include=TRUE}
+# Instalar pacote tidyverse (vai demorar um pouco!)
+install.packages("tidyverse")
+
+# Carregar o pacote
+library(tidyverse)
+
+# Importar os dados que você acabou de fazer o download
+dados_idh = read_csv("dados/municipio.csv.gz")
+
+
+# Filtrar dados para 2010
+dados_idh2010 <- dados_idh |> filter(ano == 2010)
+
+# Figura 1: Distribuição do idh
+dados_idh2010 |> 
+  ggplot(aes(x = idhm)) +
+  geom_histogram() +
+  labs(title = "Distribuição de IDH-M, Brasil, 2010")
+
+ggsave("figuras/figura1_versao2.jpg")
+
+```
+
+-   Selecione todo o código e clique no botão `Run`. Se tudo funcionou bem, você conseguiu chegar a figura com o nome `figura1_versao2.jpg`.
+
+- Não esqueça de salvar o `R Script` com um nome sugestivo como `script_idh.R`.

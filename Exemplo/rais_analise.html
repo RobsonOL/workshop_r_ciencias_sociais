@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robson Oliveira Lima">
+
+<title>Análise da RAIS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="rais_analise_files/libs/clipboard/clipboard.min.js"></script>
+<script src="rais_analise_files/libs/quarto-html/quarto.js"></script>
+<script src="rais_analise_files/libs/quarto-html/popper.min.js"></script>
+<script src="rais_analise_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="rais_analise_files/libs/quarto-html/anchor.min.js"></script>
+<link href="rais_analise_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="rais_analise_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="rais_analise_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="rais_analise_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="rais_analise_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Análise da RAIS</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Robson Oliveira Lima </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="importar-dados" class="level2">
+<h2 class="anchored" data-anchor-id="importar-dados">1. Importar dados</h2>
+<p>Utilizando a função <code>read_csv()</code> podemos importar os dados da RAIS para o estado da Paraíba:</p>
+<div class="cell">
+
+</div>
+<p>Com a função <code>head()</code> podemos observar apenas as primeiras observações da base de dados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 4%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 2%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">ano</th>
+<th style="text-align: left;">sigla_uf</th>
+<th style="text-align: right;">id_municipio</th>
+<th style="text-align: right;">tipo_vinculo</th>
+<th style="text-align: right;">vinculo_ativo_3112</th>
+<th style="text-align: right;">tipo_admissao</th>
+<th style="text-align: right;">mes_admissao</th>
+<th style="text-align: right;">mes_desligamento</th>
+<th style="text-align: right;">motivo_desligamento</th>
+<th style="text-align: right;">causa_desligamento_1</th>
+<th style="text-align: right;">causa_desligamento_2</th>
+<th style="text-align: right;">causa_desligamento_3</th>
+<th style="text-align: right;">faixa_tempo_emprego</th>
+<th style="text-align: right;">tempo_emprego</th>
+<th style="text-align: right;">faixa_horas_contratadas</th>
+<th style="text-align: right;">quantidade_horas_contratadas</th>
+<th style="text-align: right;">id_municipio_trabalho</th>
+<th style="text-align: right;">quantidade_dias_afastamento</th>
+<th style="text-align: right;">indicador_cei_vinculado</th>
+<th style="text-align: right;">indicador_trabalho_parcial</th>
+<th style="text-align: right;">indicador_trabalho_intermitente</th>
+<th style="text-align: right;">faixa_remuneracao_media_sm</th>
+<th style="text-align: right;">valor_remuneracao_media_sm</th>
+<th style="text-align: right;">valor_remuneracao_media</th>
+<th style="text-align: right;">faixa_remuneracao_dezembro_sm</th>
+<th style="text-align: right;">valor_remuneracao_dezembro_sm</th>
+<th style="text-align: right;">valor_remuneracao_janeiro</th>
+<th style="text-align: right;">valor_remuneracao_fevereiro</th>
+<th style="text-align: right;">valor_remuneracao_marco</th>
+<th style="text-align: right;">valor_remuneracao_abril</th>
+<th style="text-align: right;">valor_remuneracao_maio</th>
+<th style="text-align: right;">valor_remuneracao_junho</th>
+<th style="text-align: right;">valor_remuneracao_julho</th>
+<th style="text-align: right;">valor_remuneracao_agosto</th>
+<th style="text-align: right;">valor_remuneracao_setembro</th>
+<th style="text-align: right;">valor_remuneracao_outubro</th>
+<th style="text-align: right;">valor_remuneracao_novembro</th>
+<th style="text-align: right;">valor_remuneracao_dezembro</th>
+<th style="text-align: left;">tipo_salario</th>
+<th style="text-align: left;">valor_salario_contratual</th>
+<th style="text-align: left;">subatividade_ibge</th>
+<th style="text-align: left;">subsetor_ibge</th>
+<th style="text-align: left;">cbo_1994</th>
+<th style="text-align: left;">cbo_2002</th>
+<th style="text-align: left;">cnae_1</th>
+<th style="text-align: left;">cnae_2</th>
+<th style="text-align: left;">cnae_2_subclasse</th>
+<th style="text-align: right;">faixa_etaria</th>
+<th style="text-align: right;">idade</th>
+<th style="text-align: left;">grau_instrucao_1985_2005</th>
+<th style="text-align: right;">grau_instrucao_apos_2005</th>
+<th style="text-align: right;">nacionalidade</th>
+<th style="text-align: right;">sexo</th>
+<th style="text-align: right;">raca_cor</th>
+<th style="text-align: right;">indicador_portador_deficiencia</th>
+<th style="text-align: right;">tipo_deficiencia</th>
+<th style="text-align: right;">ano_chegada_brasil</th>
+<th style="text-align: right;">tamanho_estabelecimento</th>
+<th style="text-align: right;">tipo_estabelecimento</th>
+<th style="text-align: right;">natureza_juridica</th>
+<th style="text-align: right;">indicador_simples</th>
+<th style="text-align: left;">bairros_sp</th>
+<th style="text-align: left;">distritos_sp</th>
+<th style="text-align: left;">bairros_fortaleza</th>
+<th style="text-align: left;">bairros_rj</th>
+<th style="text-align: left;">regioes_administrativas_df</th>
+<th style="text-align: left;">cbo_2002_descricao</th>
+<th style="text-align: left;">municipio</th>
+<th style="text-align: left;">sexo_nome</th>
+<th style="text-align: left;">grau_instrucao_apos_2005_nome</th>
+<th style="text-align: left;">raca_cor_nome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">119.5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.94</td>
+<td style="text-align: right;">5166.66</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4.78</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">70.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">5000.00</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">111410</td>
+<td style="text-align: left;">75116</td>
+<td style="text-align: left;">84116</td>
+<td style="text-align: left;">8411600</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1023</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Dirigente do serviço público estadual e distrital</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">FUND COMPL</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2504009</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">17.9</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.80</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.80</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">04</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">723330</td>
+<td style="text-align: left;">29696</td>
+<td style="text-align: left;">28691</td>
+<td style="text-align: left;">2869100</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2305</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Pintor, a pistola (exceto obras e estruturas metálicas)</td>
+<td style="text-align: left;">Campina Grande</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">MEDIO COMPL</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">99.1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3.02</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3.02</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">111410</td>
+<td style="text-align: left;">75116</td>
+<td style="text-align: left;">84116</td>
+<td style="text-align: left;">8411600</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1023</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Dirigente do serviço público estadual e distrital</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">FUND COMPL</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">59.1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">237</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3.67</td>
+<td style="text-align: right;">3842.57</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3.54</td>
+<td style="text-align: right;">4682.60</td>
+<td style="text-align: right;">4682.60</td>
+<td style="text-align: right;">3381.93</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: right;">3707.09</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">261420</td>
+<td style="text-align: left;">80977</td>
+<td style="text-align: left;">85422</td>
+<td style="text-align: left;">8542200</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1104</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Tradutor</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">SUP. COMP</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">70.9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.74</td>
+<td style="text-align: right;">4956.27</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4.57</td>
+<td style="text-align: right;">4492.03</td>
+<td style="text-align: right;">7171.73</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: right;">4781.15</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">231325</td>
+<td style="text-align: left;">75116</td>
+<td style="text-align: left;">84116</td>
+<td style="text-align: left;">8411600</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1031</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Professor de história do ensino fundamental</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">SUP. COMP</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">2504009</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9.7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">1028.06</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.77</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">1052.63</td>
+<td style="text-align: right;">807.02</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">514320</td>
+<td style="text-align: left;">70408</td>
+<td style="text-align: left;">81125</td>
+<td style="text-align: left;">8112500</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3085</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Faxineiro</td>
+<td style="text-align: left;">Campina Grande</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">MEDIO COMPL</td>
+<td style="text-align: left;">Não identificada</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="tidy" class="level2">
+<h2 class="anchored" data-anchor-id="tidy">2. Tidy</h2>
+<p>Vamos selecionar apenas algumas variáveis de interesse:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ano, sigla_uf, mes_admissao, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         id_municipio, municipio,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         quantidade_horas_contratadas, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         valor_remuneracao_media,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         cbo_2002, cbo_2002_descricao, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         idade, sexo, sexo_nome,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         raca_cor_nome, grau_instrucao_apos_2005, grau_instrucao_apos_2005_nome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vemos que a base de dados está bem menor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 3%">
+<col style="width: 21%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">ano</th>
+<th style="text-align: left;">sigla_uf</th>
+<th style="text-align: right;">mes_admissao</th>
+<th style="text-align: right;">id_municipio</th>
+<th style="text-align: left;">municipio</th>
+<th style="text-align: right;">quantidade_horas_contratadas</th>
+<th style="text-align: right;">valor_remuneracao_media</th>
+<th style="text-align: left;">cbo_2002</th>
+<th style="text-align: left;">cbo_2002_descricao</th>
+<th style="text-align: right;">idade</th>
+<th style="text-align: right;">sexo</th>
+<th style="text-align: left;">sexo_nome</th>
+<th style="text-align: left;">raca_cor_nome</th>
+<th style="text-align: right;">grau_instrucao_apos_2005</th>
+<th style="text-align: left;">grau_instrucao_apos_2005_nome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">5166.66</td>
+<td style="text-align: left;">111410</td>
+<td style="text-align: left;">Dirigente do serviço público estadual e distrital</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FUND COMPL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2504009</td>
+<td style="text-align: left;">Campina Grande</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1884.78</td>
+<td style="text-align: left;">723330</td>
+<td style="text-align: left;">Pintor, a pistola (exceto obras e estruturas metálicas)</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">MEDIO COMPL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">3162.51</td>
+<td style="text-align: left;">111410</td>
+<td style="text-align: left;">Dirigente do serviço público estadual e distrital</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Masculino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">FUND COMPL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">3842.57</td>
+<td style="text-align: left;">261420</td>
+<td style="text-align: left;">Tradutor</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">SUP. COMP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2507507</td>
+<td style="text-align: left;">João Pessoa</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">4956.27</td>
+<td style="text-align: left;">231325</td>
+<td style="text-align: left;">Professor de história do ensino fundamental</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">SUP. COMP</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2504009</td>
+<td style="text-align: left;">Campina Grande</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1028.06</td>
+<td style="text-align: left;">514320</td>
+<td style="text-align: left;">Faxineiro</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Feminino</td>
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">MEDIO COMPL</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Podemos ainda renomear algumas variáveis, por exemplo, chamar <code>grau_instrucao_apos_2005</code> de educação.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="ot">&lt;-</span> rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">salario =</span> valor_remuneracao_media,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">educacao =</span> grau_instrucao_apos_2005) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="entender-os-dados" class="level2">
+<h2 class="anchored" data-anchor-id="entender-os-dados">3. Entender os Dados</h2>
+<section id="salário-médio-em-joão-pessoa" class="level3">
+<h3 class="anchored" data-anchor-id="salário-médio-em-joão-pessoa">3.1. Salário Médio em João Pessoa</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(municipio <span class="sc">==</span> <span class="st">'Campina Grande'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">salario_medio =</span> <span class="fu">mean</span>(salario)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">salario_medio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1865.422</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="salário-por-sexo" class="level3">
+<h3 class="anchored" data-anchor-id="salário-por-sexo">3.2. Salário por Sexo</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(raca_cor_nome) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">salario =</span> <span class="fu">mean</span>(salario)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(salario) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">raca_cor_nome</th>
+<th style="text-align: right;">salario</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Parda</td>
+<td style="text-align: right;">1459.177</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Preta</td>
+<td style="text-align: right;">1476.834</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Amarela</td>
+<td style="text-align: right;">1524.816</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Indígena</td>
+<td style="text-align: right;">1633.520</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Branca</td>
+<td style="text-align: right;">1925.379</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Não identificada</td>
+<td style="text-align: right;">2650.326</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="correlação-entre-salário-e-educação" class="level3">
+<h3 class="anchored" data-anchor-id="correlação-entre-salário-e-educação">3.3. Correlação entre Salário e Educação</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>correlacao <span class="ot">&lt;-</span> rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(salario,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         idade,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         educacao) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rcorr</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>correlacao</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         salario idade educacao
+salario     1.00  0.22     0.23
+idade       0.22  1.00    -0.07
+educacao    0.23 -0.07     1.00
+
+n= 845662 
+
+
+P
+         salario idade educacao
+salario           0     0      
+idade     0             0      
+educacao  0       0            </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rais_pb2020 <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(salario,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         idade,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         educacao) <span class="sc">|&gt;</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggcorrplot</span>(<span class="at">ggtheme =</span> theme_grey, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">lab =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">"Matriz de Correlação"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="rais_analise_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="regressão-de-salário" class="level3">
+<h3 class="anchored" data-anchor-id="regressão-de-salário">Regressão de Salário</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>equacao <span class="ot">=</span> <span class="st">"log(salario + 1) ~ educacao + sexo_nome + raca_cor_nome"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(equacao, <span class="at">data =</span> rais_pb2020)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = equacao, data = rais_pb2020)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.8348 -0.1948  0.2035  0.5687  4.1348 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                   6.0448185  0.0229268 263.658  &lt; 2e-16 ***
+educacao                      0.0904701  0.0009285  97.442  &lt; 2e-16 ***
+sexo_nomeMasculino            0.0753901  0.0034969  21.559  &lt; 2e-16 ***
+raca_cor_nomeBranca           0.1424191  0.0223878   6.361 2.00e-10 ***
+raca_cor_nomeIndígena         0.1944586  0.0487998   3.985 6.75e-05 ***
+raca_cor_nomeNão identificada 0.7193892  0.0221130  32.532  &lt; 2e-16 ***
+raca_cor_nomeParda            0.1131219  0.0221184   5.114 3.15e-07 ***
+raca_cor_nomePreta            0.1276826  0.0246442   5.181 2.21e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.527 on 845654 degrees of freedom
+Multiple R-squared:  0.05095,   Adjusted R-squared:  0.05094 
+F-statistic:  6486 on 7 and 845654 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">6.0448185</td>
+<td style="text-align: right;">0.0229268</td>
+<td style="text-align: right;">263.657835</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">educacao</td>
+<td style="text-align: right;">0.0904701</td>
+<td style="text-align: right;">0.0009285</td>
+<td style="text-align: right;">97.441531</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sexo_nomeMasculino</td>
+<td style="text-align: right;">0.0753901</td>
+<td style="text-align: right;">0.0034969</td>
+<td style="text-align: right;">21.558815</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raca_cor_nomeBranca</td>
+<td style="text-align: right;">0.1424191</td>
+<td style="text-align: right;">0.0223878</td>
+<td style="text-align: right;">6.361456</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raca_cor_nomeIndígena</td>
+<td style="text-align: right;">0.1944586</td>
+<td style="text-align: right;">0.0487998</td>
+<td style="text-align: right;">3.984822</td>
+<td style="text-align: right;">6.75e-05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raca_cor_nomeNão identificada</td>
+<td style="text-align: right;">0.7193892</td>
+<td style="text-align: right;">0.0221130</td>
+<td style="text-align: right;">32.532437</td>
+<td style="text-align: right;">0.00e+00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">raca_cor_nomeParda</td>
+<td style="text-align: right;">0.1131219</td>
+<td style="text-align: right;">0.0221184</td>
+<td style="text-align: right;">5.114374</td>
+<td style="text-align: right;">3.00e-07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">raca_cor_nomePreta</td>
+<td style="text-align: right;">0.1276826</td>
+<td style="text-align: right;">0.0246442</td>
+<td style="text-align: right;">5.181032</td>
+<td style="text-align: right;">2.00e-07</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

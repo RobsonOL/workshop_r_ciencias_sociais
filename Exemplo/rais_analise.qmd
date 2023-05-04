@@ -1,0 +1,129 @@
+---
+title: "Análise da RAIS"
+author: "Robson Oliveira Lima"
+format: html
+editor: visual
+---
+
+## 1. Importar dados
+
+Utilizando a função `read_csv()` podemos importar os dados da RAIS para o estado da Paraíba:
+
+```{r}
+#| echo: false
+#| warning: false
+library(tidyverse)
+library(knitr)
+library(Hmisc)
+library(ggcorrplot)
+
+df <- read_csv("dados/rais_pb2020_completo.csv.gz")
+```
+
+Com a função `head()` podemos observar apenas as primeiras observações da base de dados:
+
+```{r}
+df |> 
+  head() |> 
+  kable()
+```
+
+## 2. Tidy
+
+Vamos selecionar apenas algumas variáveis de interesse:
+
+```{r}
+rais_pb2020 <- df |> 
+  select(ano, sigla_uf, mes_admissao, 
+         id_municipio, municipio,
+         quantidade_horas_contratadas, 
+         valor_remuneracao_media,
+         cbo_2002, cbo_2002_descricao, 
+         idade, sexo, sexo_nome,
+         raca_cor_nome, grau_instrucao_apos_2005, grau_instrucao_apos_2005_nome)
+
+
+```
+
+Vemos que a base de dados está bem menor:
+
+```{r}
+rais_pb2020 |> 
+  head() |> 
+  kable()
+```
+
+Podemos ainda renomear algumas variáveis, por exemplo, chamar `grau_instrucao_apos_2005` de educação.
+
+```{r}
+rais_pb2020 <- rais_pb2020 |> 
+    rename(salario = valor_remuneracao_media,
+           educacao = grau_instrucao_apos_2005) 
+
+```
+
+## 3. Entender os Dados
+
+### 3.1. Salário Médio em João Pessoa
+
+```{r}
+rais_pb2020 |> 
+  filter(municipio == 'Campina Grande') |> 
+  summarise(salario_medio = mean(salario)) |> 
+  kable()
+```
+
+### 3.2. Salário por Sexo
+
+```{r}
+rais_pb2020 |> 
+  group_by(raca_cor_nome) |> 
+  summarise(salario = mean(salario)) |> 
+  arrange(salario) |> 
+  kable()
+```
+
+### 3.3. Correlação entre Salário e Educação
+
+```{r}
+correlacao <- rais_pb2020 |> 
+  select(salario,
+         idade,
+         educacao) |> 
+  as.matrix() |> 
+  rcorr()
+
+correlacao
+```
+
+```{r}
+rais_pb2020 |> 
+  select(salario,
+         idade,
+         educacao) |> 
+  cor() |> 
+  ggcorrplot(ggtheme = theme_grey, 
+             sig.level = 0.05,
+             lab = TRUE, 
+             title = "Matriz de Correlação")
+```
+
+```{r}
+
+```
+
+### Regressão de Salário
+
+```{r}
+equacao = "log(salario + 1) ~ educacao + sexo_nome + raca_cor_nome"
+
+reg <- lm(equacao, data = rais_pb2020)
+summary(reg)
+  
+```
+
+```{r}
+reg |> 
+  broom::tidy() |> 
+  kable()
+```

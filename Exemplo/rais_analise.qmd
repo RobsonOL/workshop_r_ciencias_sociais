@@ -83,7 +83,17 @@ rais_pb2020 |>
   kable()
 ```
 
-### 3.3. Correlação entre Salário e Educação
+### 3.3. Salário do Administrador por Município
+
+```{r}
+rais_pb2020 |> 
+  filter(cbo_2002_descricao == 'Administrador') |> 
+  group_by(municipio) |> 
+  summarise(salario = mean(salario)) |> 
+  arrange(desc(salario))
+```
+
+### 3.4. Correlação entre Salário e Educação
 
 ```{r}
 correlacao <- rais_pb2020 |> 
@@ -112,7 +122,7 @@ rais_pb2020 |>
 
 ```
 
-### Regressão de Salário
+### 3.5. Regressão de Salário
 
 ```{r}
 equacao = "log(salario + 1) ~ educacao + sexo_nome + raca_cor_nome"

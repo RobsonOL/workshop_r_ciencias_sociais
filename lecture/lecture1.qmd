@@ -26,16 +26,6 @@ editor: visual
 
 ![https://robsonol.github.io/workshop_r\_ciencias_sociais/](img/qrcode_slides.png){fig-align="center"}
 
-## Agenda
-
-| Col1                               | Horário    | Local       |
-|------------------------------------|------------|-------------|
-| Tema                               | 27/04/2023 | Auditório   |
-| Introdução ao R                    |            | Laboratório |
-| Gráficos com `ggplot2`             |            | Laboratório |
-| Transformação de dados com `dplyr` |            | Laboratório |
-| Modelagem                          |            | Laboratório |
-
 # Contando Histórias com Dados
 
 ![](img/storytelling.png){fig-align="center" width="117"}
@@ -68,7 +58,7 @@ editor: visual
 
 ![](img/data-science.png){fig-align="center"}
 
-## Pré-Requisitos
+# Pré-Requisitos
 
 ## R
 
@@ -90,13 +80,11 @@ editor: visual
 
 ![](img/rstudio.png){fig-align="center" width="400"}
 
-## RStudio Cloud
-
-![](img/rstudio_cloud.png){fig-align="center"}
-
 ## Pacotes {auto-animate="true"}
 
 ![](img/tidyverse.png){fig-align="center" width="173"}
+
+# Conceitos Básicos
 
 ## Banco de dados: `data.frame` {auto-animate="true"}
 
@@ -512,7 +500,7 @@ salario_pb <- read_rds("dados/salario-pb-Rais2013.rds")
 salario_pb |> head()
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r tab-dinamica-salario}
 #| echo=FALSE
@@ -531,14 +519,14 @@ salario_pb |>
      ) 
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r est-basica2}
 summary(salario_pb)
 
 ```
 
-## Estatística Básica: Estatísticas Descritivas
+## Estatística: Estatísticas Descritivas
 
 ```{r est-basica3}
 salario_pb |> 
@@ -555,7 +543,7 @@ salario_pb |>
   knitr::kable()
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 Calcular correlação pode ser executada com a função `cor()`:
 
@@ -568,7 +556,7 @@ matriz_corr <- salario_pb |>
 matriz_corr
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 ```{r corr2}
 # install.packages("ggcorrplot")
@@ -578,7 +566,7 @@ matriz_corr |>
   ggcorrplot()
 ```
 
-## Estatística Básica: Correlação {.smaller}
+## Estatística: Correlação {.smaller}
 
 ```{r corr3}
 # install.packages("ggcorrplot")
@@ -591,7 +579,7 @@ matriz_corr |>
              title = "Matriz de Correlação")
 ```
 
-## Estatística Básica: Distribuição Normal {.smaller}
+## Estatística: Distribuição Normal {.smaller}
 
 ```{r normal1}
 salario_pb |> 
@@ -605,7 +593,7 @@ salario_pb |>
   theme_light()
 ```
 
-## Estatística Básica: Distribuição Normal {.smaller}
+## Estatística: Distribuição Normal {.smaller}
 
 ```{r normal2}
 salario_pb |> 
@@ -618,7 +606,7 @@ salario_pb |>
        caption = "Fonte: Elaborado pelo autor a partir de dados da RAIS (2013)")
 ```
 
-## Estatística Básica: Diferença de Médias {.smaller}
+## Estatística: Diferença de Médias {.smaller}
 
 ```{r diff-media1}
 #| output-location: column
@@ -637,7 +625,7 @@ salario_pb |>
        caption = "Fonte: Elaboração do autor a partir de dados da RAIS (2013)")
 ```
 
-## Estatística Básica: Diferença de Médias {.smaller}
+## Estatística: Diferença de Médias {.smaller}
 
 ```{r stat-basico1,`code-line-numbers`="8"}
 # calcular salário das mulheres
@@ -1742,7 +1730,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                              | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----|--------------------------------------------------------|-----------------|-----------------|-------|
+|-------------|-----------------------|-------------|-------------|-------------|
 | y1  | Score dado por experts em liberdade de imprensa (1960) | x               |                 |       |
 | y2  | Liberdade dos partidos políticos (1960)                | x               |                 |       |
 | y3  | Eleições livres e justas (1960)                        | x               |                 |       |
@@ -1753,7 +1741,7 @@ Para mais informações
 ## Análise Fatorial {.smaller}
 
 | Var | Descrição                                    | Fator 1 (Dem60) | Fator 2 (Dem65) | Ind60 |
-|-----|----------------------------------------------|-----------------|-----------------|-------|
+|-------------|----------------------|-------------|-------------|-------------|
 | y7  | Eleições livres e justas (1965)              |                 | x               |       |
 | y8  | Eleições livres e justas (1965)              |                 | x               |       |
 | x1  | PIB per capita (1960)                        |                 |                 | x     |
@@ -1884,13 +1872,13 @@ lavaanPlot(model = fit,
 
 ## Comunicação
 
--   [Blogs](www.robsonolima.com.br)
+-   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide){style="color: blue"}
 
--   [**Relatórios**](https://housingprofiles.pschousing.org/profile/#Ashford)
+-   [**Blogs**](www.robsonolima.com.br){style="color: blue"}
 
--   [**Slides**](https://mine-cetinkaya-rundel.github.io/tidyperspective/talks/dagstat-2022.html#/title-slide)
+-   [**Relatórios**](https://housingprofiles.pschousing.org/profile/#Ashford){style="color: blue"}
 
--   [**Sites dinâmicos** com *Shiny*](https://shiny.rstudio.com/gallery/)
+-   [**Sites dinâmicos**](https://shiny.rstudio.com/gallery/){style="color: blue"}
 
 # Conclusão
 

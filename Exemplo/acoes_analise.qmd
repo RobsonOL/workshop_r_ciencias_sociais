@@ -1,0 +1,102 @@
+---
+title: "Análise de Ações"
+format: html
+editor: visual
+---
+
+# 1. Importar Dados
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+### Pacotes
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(knitr)
+
+acoes <- read_excel(path = "dados/acoes_2017_2022.xlsx", skip = 3)
+
+acoes |> 
+  head()
+```
+
+# 2. Tidy
+
+#### Limpar o nome das colunas com a função `clean_names():`
+
+```{r}
+acoes <- acoes |> 
+  clean_names()
+
+acoes |> 
+  head() |> 
+  kable()
+```
+
+#### Substituir o termo `-` por `NA`:
+
+```{r}
+acoes <- acoes |> 
+  na_if("-")
+```
+
+#### Corrigir nome das colunas
+
+```{r}
+acoes <- acoes |> 
+  rename_with(~str_sub(.,1,18), starts_with("fechamento")) |> 
+  rename_with(~str_sub(.,1,19), starts_with("patrim_liq")) |> 
+  rename_with(~str_sub(.,1,32), starts_with("valor_mercado")) |> 
+  rename_with(~str_sub(.,1,20), starts_with("ren_pat_med"))
+```
+
+#### Converter colunas para numéricas
+
+```{r}
+acoes <- acoes |> 
+  mutate(across(fechamento_26abr23:fcl_dez_2022_em_moeda_orig_em_milhares_de_12_meses_consolid_sim, as.numeric))
+```
+
+#### Selecionar apenas colunas de interesse
+
+```{r}
+acoes <- acoes |> 
+  select(nome, classe, bolsa_fonte, tipo_de_ativo, ativo_cancelado, codigo, starts_with("fechamento_31dez"), starts_with("valor_mercado"), starts_with("patrim_liq_dez"))
+
+```
+
+```{r}
+write_csv(acoes, "dados/acoes_2017_2020_tidy.csv")
+```
+
+# 3.Análise
+
+```{r}
+acoes = read_csv("dados/acoes_2017_2020_tidy.csv")
+```
+
+#### Calcular o retorno
+
+```{r}
+acoes_analise <- acoes |> 
+  mutate(retorno_2021 = (fechamento_31dez21 - fechamento_31dez20) / fechamento_31dez20) |> 
+  mutate(retorno_2020 = (fechamento_31dez20 - fechamento_31dez19)/fechamento_31dez19) |> 
+  mutate(retorno_2019 = (fechamento_31dez19 - fechamento_31dez18) /fechamento_31dez18) |> 
+  mutate(retorno_2018 = (fechamento_31dez18 - fechamento_31dez17) /fechamento_31dez17) |> 
+  mutate(retorno_2017 = (fechamento_31dez17 - fechamento_31dez16) /fechamento_31dez16) 
+```
+
+#### Criar colunas de book-to-market
+
+```{r}
+acoes_analise <- acoes_analise |> 
+  mutate(book_to_market_2022 = patrim_liq_dez_2022 / valor_mercado_da_empresa_31dez22) |> 
+  mutate(book_to_market_2021 = patrim_liq_dez_2021 / valor_mercado_da_empresa_31dez21) |> 
+  mutate(book_to_market_2020 = patrim_liq_dez_2020 / valor_mercado_da_empresa_31dez20) |> 
+  mutate(book_to_market_2019 = patrim_liq_dez_2019 / valor_mercado_da_empresa_31dez19) |> 
+  mutate(book_to_market_2018 = patrim_liq_dez_2018 / valor_mercado_da_empresa_31dez18) |> 
+  mutate(book_to_market_2017 = patrim_liq_dez_2017 / valor_mercado_da_empresa_31dez17) 
+```

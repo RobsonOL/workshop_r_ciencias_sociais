@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robson Oliveira Lima">
+
+<title>Transformando Dados em Informações</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="atividade2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atividade2_files/libs/quarto-html/quarto.js"></script>
+<script src="atividade2_files/libs/quarto-html/popper.min.js"></script>
+<script src="atividade2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="atividade2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="atividade2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atividade2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="atividade2_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="atividade2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="atividade2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="atividade2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="atividade2_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Transformando Dados em Informações</h1>
+<p class="subtitle lead">Atividade 2 - Tratando Dados de IDH</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Robson Oliveira Lima </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Nesta atividade vamos analisar o Índice de Desenvolvimento Humano (IDH), uma medida de bem-estar que inclui aspectos não materiais, e fazer comparações com o PIB per capita (uma medida de bem-estar material). O PIB per capita é um índice simples calculado como a soma de seus elementos, enquanto o IDH é mais complexo. Em vez de utilizar diferentes tipos de despesas ou produção para medir o bem-estar ou os padrões de vida, o IDH é composto por três dimensões associadas ao bem-estar:</p>
+<ul>
+<li><p><strong>Saúde:</strong> uma vida longa e saudável</p></li>
+<li><p><strong>Educação:</strong> conhecimento</p></li>
+<li><p><strong>Renda:</strong> Padrão de vida adequado.</p></li>
+</ul>
+</section>
+<section id="download-e-importação-dos-dados" class="level2">
+<h2 class="anchored" data-anchor-id="download-e-importação-dos-dados">1. Download e Importação dos Dados</h2>
+<p>Os dados do IDH que analisaremos são do Relatório de Desenvolvimento Humano de 2016 do Programa das Nações Unidas para o Desenvolvimento (PNUD). Para responder às perguntas abaixo, faça o download dos dados e das notas técnicas do relatório (elas estão em inglês, mas não se preocupe).</p>
+<ol type="1">
+<li>Vá para <a href="https://hdr.undp.org/data-center/documentation-and-downloads">o site do PNUD</a>.</li>
+<li>Clique em <code>Table 1: Human Development Index and its components</code> para baixar uma tabela em formado Excel (<code>.xlsx</code>).</li>
+<li>Salve o arquivo dentro da pasta <code>dados</code> do seu projeto (criado na atividade anterior). Dê um nome mais intuitivo para ele como <code>dados_idh.xlsx</code>.</li>
+<li>As <a href="https://hdr.undp.org/sites/default/files/data/2020/hdr2016_technical_notes.pdf">notas técnicas</a> fornecem uma apresentação diagramática de como o IDH é construído a partir dos quatro indicadores.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/idh.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Diagrama de construção do IDH</figcaption><p></p>
+</figure>
+</div>
+<ol start="5" type="1">
+<li>Abra seu projeto no RStudio e crie um novo script no RStudio com o nome <code>atividade2.R</code>.</li>
+<li>Carregue os pacotes <code>library(tidyverse)</code> e <code>library(readxl)</code>. Caso eles não estejam instalados, instale-os com o comando <code>install.package("tidyverse")</code> e <code>install.package("readxl").</code></li>
+<li>Importe os dados com a função <code>read_excel()</code>, chamando o objeto de <code>df_idh</code>. Lembre que usando o argumento <code>skip=7</code> podemos ignorar as primeiras 7 linhas.</li>
+<li>Visualize as primeiras linhas do banco de dados com a função <code>head()</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_idh <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados/dados_idh.xlsx"</span>, <span class="at">skip =</span> <span class="dv">7</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df_idh <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+   ...1 VERY HIGH HUMAN DEVELO…¹ ...3  ...4   ...5 ...6  ...7  ...8  ...9  ...10
+  &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt; &lt;lgl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1     1 Switzerland              0.96… NA     84.0 &lt;NA&gt;  16.5… &lt;NA&gt;  13.8… &lt;NA&gt; 
+2     2 Norway                   0.96… NA     83.2 &lt;NA&gt;  18.1… c     13.0… &lt;NA&gt; 
+3     3 Iceland                  0.95… NA     82.7 &lt;NA&gt;  19.1… c     13.7… &lt;NA&gt; 
+4     4 Hong Kong, China (SAR)   0.95… NA     85.5 d     17.2… &lt;NA&gt;  12.2… &lt;NA&gt; 
+5     5 Australia                0.95… NA     84.5 &lt;NA&gt;  21.0… c     12.7… &lt;NA&gt; 
+6     6 Denmark                  0.94… NA     81.4 &lt;NA&gt;  18.7… c     12.9… &lt;NA&gt; 
+# ℹ abbreviated name: ¹​`VERY HIGH HUMAN DEVELOPMENT`
+# ℹ 5 more variables: ...11 &lt;chr&gt;, ...12 &lt;chr&gt;, ...13 &lt;chr&gt;, ...14 &lt;lgl&gt;,
+#   ...15 &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="tidy-arrumando-os-dados" class="level2">
+<h2 class="anchored" data-anchor-id="tidy-arrumando-os-dados">2. Tidy: arrumando os dados</h2>
+<p>É possível perceber que os dados possuem alguns problemas para resolvermos: (1) nomes de colunas incorretas; (2) colunas sem informação; (3) colunas numéricas no formato <code>chr</code>. Vamos consertar todos estes problemas.</p>
+<ol start="8" type="1">
+<li><code>SELECT</code>: Vamos remover as colunas que não possuem valores. Como os nomes de colunas não estão legíveis, podemos usar a posição das colunas para seleciona-las. Selecione as colunas nas posições 1, 2, 3, 5, 7, 9, 11, 13 e 15 usando a função <code>select()</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_idh <span class="ot">&lt;-</span> df_idh <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">15</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_idh <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+   ...1 `VERY HIGH HUMAN DEVELOPMENT` ...3    ...5 ...7  ...9  ...11 ...13 ...15
+  &lt;dbl&gt; &lt;chr&gt;                         &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1     1 Switzerland                   0.961…  84.0 16.5… 13.8… 6693… 5     3    
+2     2 Norway                        0.960…  83.2 18.1… 13.0… 6466… 6     1    
+3     3 Iceland                       0.958…  82.7 19.1… 13.7… 5578… 11    2    
+4     4 Hong Kong, China (SAR)        0.951…  85.5 17.2… 12.2… 6260… 6     4    
+5     5 Australia                     0.950…  84.5 21.0… 12.7… 4923… 18    5    
+6     6 Denmark                       0.947…  81.4 18.7… 12.9… 6036… 6     5    </code></pre>
+</div>
+</div>
+<ol start="8" type="1">
+<li><code>RENAME</code>: Agora renomeie as colunas utilizando a função <code>rename()</code>. Utilize os novos nomes a seguir:
+<ol type="i">
+<li><p>Coluna 1: <code>rank_idh_2021</code></p></li>
+<li><p>Coluna 2: <code>nome_pais</code></p></li>
+<li><p>Coluna 3: <code>idh</code></p></li>
+<li><p>Coluna 4: <code>expectativa_vida</code></p></li>
+<li><p>Coluna 5: <code>escolaridade_esperada</code></p></li>
+<li><p>Coluna 6: <code>escolaridade_media</code></p></li>
+<li><p>Coluna 7: <code>pib_percapita</code></p></li>
+<li><p>Coluna 8: <code>rank_pib_menos_rank_idh</code></p></li>
+<li><p>Coluna 9: <code>rank_idh_2020</code></p></li>
+</ol></li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_idh <span class="ot">&lt;-</span> df_idh <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">rank_idh_2021 =</span> <span class="dv">1</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">nome_pais =</span> <span class="dv">2</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">idh =</span> <span class="dv">3</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">expectativa_vida =</span> <span class="dv">4</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">escolaridade_esperada =</span> <span class="dv">5</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">escolaridade_media =</span> <span class="dv">6</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">pib_percapita =</span> <span class="dv">7</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">rank_pib_menos_rank_idh =</span> <span class="dv">8</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">rank_idh_2020 =</span> <span class="dv">9</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df_idh <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+  rank_idh_2021 nome_pais           idh   expectativa_vida escolaridade_esperada
+          &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;                
+1             1 Switzerland         0.96…             84.0 16.50029945          
+2             2 Norway              0.96…             83.2 18.185199740000002   
+3             3 Iceland             0.95…             82.7 19.163059230000002   
+4             4 Hong Kong, China (… 0.95…             85.5 17.278169630000001   
+5             5 Australia           0.95…             84.5 21.054590229999999   
+6             6 Denmark             0.94…             81.4 18.714799880000001   
+# ℹ 4 more variables: escolaridade_media &lt;chr&gt;, pib_percapita &lt;chr&gt;,
+#   rank_pib_menos_rank_idh &lt;chr&gt;, rank_idh_2020 &lt;chr&gt;</code></pre>
+</div>
+</div>
+<ol start="9" type="1">
+<li><p><code>FILTER</code>: Algumas linhas da planilha excel possuiam uma indicação para países a classificação dos países, como vemos na imagem abaixo. Essas linhas não nos interessam e vamos elimina-la. Perceba que estas linhas não possuem valores de rank (Thailand é rank 66 e Albania rank 67). Assim, podemos filtrar toda linha que não tenha valores na coluna <code>rank_idh_2021</code>. Faça isto utilizando a função <code>filter()</code>. Dica: utilize a função <code>is.na().</code></p>
+<p><img src="img/linha_idh.png" class="img-fluid"></p></li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_idh <span class="ot">&lt;-</span> df_idh <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(rank_idh_2021))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="10" type="1">
+<li><code>MUTATE</code>: Por fim, vamos converter o tipo de coluna das variáveis numéricas (<code>rank_idh_2021</code>, <code>idh</code>, etc). Algumas delas estão como texto (<code>chr</code>). Use a função <code>mutate()</code> para converter as colunas para valor numérico utilizando a função <code>as.numeric()</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_idh <span class="ot">&lt;-</span> df_idh <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank_idh_2021 =</span> <span class="fu">as.numeric</span>(rank_idh_2021),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">idh =</span> <span class="fu">as.numeric</span>(idh),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">expectativa_vida =</span> <span class="fu">as.numeric</span>(expectativa_vida),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">escolaridade_esperada =</span> <span class="fu">as.numeric</span>(escolaridade_esperada),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">escolaridade_media =</span> <span class="fu">as.numeric</span>(escolaridade_media),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">pib_percapita =</span> <span class="fu">as.numeric</span>(pib_percapita),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">rank_pib_menos_rank_idh =</span> <span class="fu">as.numeric</span>(rank_pib_menos_rank_idh),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">rank_idh_2020 =</span> <span class="fu">as.numeric</span>(rank_idh_2020))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df_idh <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+  rank_idh_2021 nome_pais             idh expectativa_vida escolaridade_esperada
+          &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;            &lt;dbl&gt;                 &lt;dbl&gt;
+1             1 Switzerland         0.962             84.0                  16.5
+2             2 Norway              0.961             83.2                  18.2
+3             3 Iceland             0.959             82.7                  19.2
+4             4 Hong Kong, China (… 0.952             85.5                  17.3
+5             5 Australia           0.951             84.5                  21.1
+6             6 Denmark             0.948             81.4                  18.7
+# ℹ 4 more variables: escolaridade_media &lt;dbl&gt;, pib_percapita &lt;dbl&gt;,
+#   rank_pib_menos_rank_idh &lt;dbl&gt;, rank_idh_2020 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ol start="11" type="1">
+<li>Salve seus resultados na pasta de dados com a função <code>write_csv()</code> e dê um nome como <code>dados_idh_tratados.csv</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Mostrar código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_idh <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"dados/dados_idh_tratados.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

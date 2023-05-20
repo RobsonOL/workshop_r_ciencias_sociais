@@ -1,0 +1,138 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Atividade 2 - Tratando Dados de IDH"
+author: "Robson Oliveira Lima"
+theme:
+  light: flatly
+  dark: darkly
+editor: visual
+format:
+  html:
+    code-fold: true
+    code-summary: "Mostrar código"
+---
+
+## Introdução
+
+Nesta atividade vamos analisar o Índice de Desenvolvimento Humano (IDH), uma medida de bem-estar que inclui aspectos não materiais, e fazer comparações com o PIB per capita (uma medida de bem-estar material). O PIB per capita é um índice simples calculado como a soma de seus elementos, enquanto o IDH é mais complexo. Em vez de utilizar diferentes tipos de despesas ou produção para medir o bem-estar ou os padrões de vida, o IDH é composto por três dimensões associadas ao bem-estar:
+
+-   **Saúde:** uma vida longa e saudável
+
+-   **Educação:** conhecimento
+
+-   **Renda:** Padrão de vida adequado.
+
+## 1. Download e Importação dos Dados
+
+Os dados do IDH que analisaremos são do Relatório de Desenvolvimento Humano de 2016 do Programa das Nações Unidas para o Desenvolvimento (PNUD). Para responder às perguntas abaixo, faça o download dos dados e das notas técnicas do relatório (elas estão em inglês, mas não se preocupe).
+
+1.  Vá para [o site do PNUD](https://hdr.undp.org/data-center/documentation-and-downloads).
+2.  Clique em `Table 1: Human Development Index and its components` para baixar uma tabela em formado Excel (`.xlsx`).
+3.  Salve o arquivo dentro da pasta `dados` do seu projeto (criado na atividade anterior). Dê um nome mais intuitivo para ele como `dados_idh.xlsx`.
+4.  As [notas técnicas](https://hdr.undp.org/sites/default/files/data/2020/hdr2016_technical_notes.pdf) fornecem uma apresentação diagramática de como o IDH é construído a partir dos quatro indicadores.
+
+![Diagrama de construção do IDH](img/idh.png)
+
+5.  Abra seu projeto no RStudio e crie um novo script no RStudio com o nome `atividade2.R`.
+6.  Carregue os pacotes `library(tidyverse)` e `library(readxl)`. Caso eles não estejam instalados, instale-os com o comando `install.package("tidyverse")` e `install.package("readxl").`
+7.  Importe os dados com a função `read_excel()`, chamando o objeto de `df_idh`. Lembre que usando o argumento `skip=7` podemos ignorar as primeiras 7 linhas.
+8.  Visualize as primeiras linhas do banco de dados com a função `head()`.
+
+```{r}
+#| warning: false
+#| message: false
+library(readxl)
+library(tidyverse)
+
+df_idh <- read_excel("dados/dados_idh.xlsx", skip = 7)
+df_idh |> head()
+```
+
+## 2. Tidy: arrumando os dados
+
+É possível perceber que os dados possuem alguns problemas para resolvermos: (1) nomes de colunas incorretas; (2) colunas sem informação; (3) colunas numéricas no formato `chr`. Vamos consertar todos estes problemas.
+
+8.  `SELECT`: Vamos remover as colunas que não possuem valores. Como os nomes de colunas não estão legíveis, podemos usar a posição das colunas para seleciona-las. Selecione as colunas nas posições 1, 2, 3, 5, 7, 9, 11, 13 e 15 usando a função `select()`.
+
+```{r}
+#| warning: false
+#| message: false
+#| 
+df_idh <- df_idh |> 
+    select(1, 2, 3, 5, 7, 9, 11, 13, 15)
+df_idh |> head()
+
+```
+
+8.  `RENAME`: Agora renomeie as colunas utilizando a função `rename()`. Utilize os novos nomes a seguir:
+    i.  Coluna 1: `rank_idh_2021`
+
+    ii. Coluna 2: `nome_pais`
+
+    iii. Coluna 3: `idh`
+
+    iv. Coluna 4: `expectativa_vida`
+
+    v.  Coluna 5: `escolaridade_esperada`
+
+    vi. Coluna 6: `escolaridade_media`
+
+    vii. Coluna 7: `pib_percapita`
+
+    viii. Coluna 8: `rank_pib_menos_rank_idh`
+
+    ix. Coluna 9: `rank_idh_2020`
+
+```{r}
+#| warning: false
+#| message: false
+
+df_idh <- df_idh |> 
+  rename(rank_idh_2021 = 1,
+         nome_pais = 2,
+         idh = 3,
+         expectativa_vida = 4,
+         escolaridade_esperada = 5,
+         escolaridade_media = 6,
+         pib_percapita = 7,
+         rank_pib_menos_rank_idh = 8,
+         rank_idh_2020 = 9)
+df_idh |> head()
+```
+
+9.  `FILTER`: Algumas linhas da planilha excel possuiam uma indicação para países a classificação dos países, como vemos na imagem abaixo. Essas linhas não nos interessam e vamos elimina-la. Perceba que estas linhas não possuem valores de rank (Thailand é rank 66 e Albania rank 67). Assim, podemos filtrar toda linha que não tenha valores na coluna `rank_idh_2021`. Faça isto utilizando a função `filter()`. Dica: utilize a função `is.na().`
+
+    ![](img/linha_idh.png)
+
+```{r}
+#| warning: false
+#| message: false
+
+df_idh <- df_idh |> 
+  filter(!is.na(rank_idh_2021))
+```
+
+10. `MUTATE`: Por fim, vamos converter o tipo de coluna das variáveis numéricas (`rank_idh_2021`, `idh`, etc). Algumas delas estão como texto (`chr`). Use a função `mutate()` para converter as colunas para valor numérico utilizando a função `as.numeric()`.
+
+```{r}
+#| warning: false
+#| message: false
+
+df_idh <- df_idh |> 
+  mutate(rank_idh_2021 = as.numeric(rank_idh_2021),
+         idh = as.numeric(idh),
+         expectativa_vida = as.numeric(expectativa_vida),
+         escolaridade_esperada = as.numeric(escolaridade_esperada),
+         escolaridade_media = as.numeric(escolaridade_media),
+         pib_percapita = as.numeric(pib_percapita),
+         rank_pib_menos_rank_idh = as.numeric(rank_pib_menos_rank_idh),
+         rank_idh_2020 = as.numeric(rank_idh_2020))
+
+df_idh |> head()
+```
+
+11. Salve seus resultados na pasta de dados com a função `write_csv()` e dê um nome como `dados_idh_tratados.csv`.
+
+```{r}
+df_idh |> write_csv("dados/dados_idh_tratados.csv")
+```

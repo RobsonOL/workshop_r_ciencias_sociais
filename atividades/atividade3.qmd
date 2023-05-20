@@ -1,0 +1,82 @@
+---
+title: "Transformando Dados em Informações"
+subtitle: "Atividade 3 - Construindo IDH"
+author: "Robson Oliveira Lima"
+theme:
+  light: flatly
+  dark: darkly
+editor: visual
+format:
+  html:
+    code-fold: true
+    code-summary: "Mostrar código"
+---
+
+## Introdução
+
+Antes de mais nada, vamos importar os dados construídos na atividade 2. Para tanto, usamos a função `read_csv()`. Lembre-se de carregar os pacotes necessários.
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+
+df_idh <- read_csv("dados/dados_idh_tratados.csv")
+```
+
+## Construindo os Três Índices do IDH
+
+De acordo com a [Nota Técnica](https://hdr.undp.org/sites/default/files/data/2020/hdr2016_technical_notes.pdf), para construir o IDH, precisamos primeiro criar os índices para as três dimensões (educação, saúde e renda). Mas antes precisamos calcular os valores mínimos e máximos para cada medida, para garantir que os indicadores são expressos em uma escala que vai de 0 a 1.
+
+1.  `SUMMARISE`: Vamos calcular os valores mínimos e máximos para `expectativa_vida`, `escolaridade_media,` `escolaridade_esperada` e `pib_percapita`. Os valores que você obteve fazem sentido?
+
+    ```{r}
+    df_idh |>    summarise(escolaridade_min = min(escolaridade_media),             escolaridade_max = max(escolaridade_media),             expectativa_vida_min = min(expectativa_vida),             expectativa_vida_max = max(expectativa_vida),             escolaridade_e_min = min(escolaridade_esperada),             escolaridade_e_max = max(escolaridade_esperada),             pib_percapita_min = min(pib_percapita),             pib_percapita_max = max(pib_percapita))
+    ```
+
+2.  **ÍNDICE DE SAÚDE**: Crie uma nova variável chamada `indice_saude` com a função `mutate()`. Sua fórmula será:
+
+    ```         
+     $$ \text{Índice de Saúde} = \frac{\text{EV} - \min(EV)}{\max(EV) - \min(EV)} $$
+
+     onde \$EV\$ é o valor da expectativa de vida do país, e \$\\min\$ e \$\\max\$ são seus valores mínimo e máximos calculados no item 12.
+    ```
+
+```{r}
+
+df_idh <- df_idh |>    mutate(indice_saude = (expectativa_vida - min(expectativa_vida)) / (max(expectativa_vida) - min(expectativa_vida))) 
+
+df_idh |> select(indice_saude) |> head()
+```
+
+3.  **ÍNDICE DE EDUCAÇÃO:** Construa agora os índices de `escolaridade_esperada` e `escolaridade_media`. A fórmula é a mesma utilizada para o índice de saúde. Chame as variáveis de `indice_ee` e `indice_em`.
+
+    ```{r}
+    df_idh <- df_idh |>    
+      mutate(indice_ee = (escolaridade_esperada - min(escolaridade_esperada)) / (max(escolaridade_esperada) - min(escolaridade_esperada))) |>
+      mutate(indice_em = (escolaridade_media - min(escolaridade_esperada)) / (max(escolaridade_media) - min(escolaridade_media))) 
+
+    df_idh |> select(indice_ee, indice_em) |> head()
+    ```
+
+    4.  **ÍNDICE DE EDUCAÇÃO:** Construa o índice de escolaridade. Ele é a média aritmética do `indice_ee` e `indice_em`. Chame a nova variável de `indice_educacao`.
+
+    ```{r}
+    df_idh <- df_idh |> 
+      mutate(indice_educacao = (indice_ee + indice_em) / 2)
+
+    df_idh |> 
+      select(indice_ee, indice_em, indice_educacao) |> head()
+    ```
+
+4.  **ÍNDICE DE RENDA:** Por fim, construa o índice de renda. Para construí-lo, precisamos primeiro transformar os dados de renda per capita de dólares para logarítimo natural. Para tanto, usamos a função `log().` Por exemplo, para construir o \$\\ln\$ da renda per capita podemos usar o comando `mutate(ln_pib_percapita = log(pib_percapita)`. A fórmula é a mesma dos casos anteriores, mas você precisa transformar todos os valores (incluíndo mínimos e máximos) em \$\\ln\$. Chame essa coluna de `indice_renda`.
+
+    ```{r}
+    df_idh <- df_idh |> 
+      mutate(indice_renda = (log(pib_percapita) - log(min(pib_percapita))) / (log(max(pib_percapita)) - log(min(pib_percapita))))
+
+    df_idh |> select(indice_renda) |> head()
+    ```
+
+5.  **ÍNDICE DE DESENVOLVIMENTO HUMANO:**
